@@ -7,17 +7,18 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-
 import com.daniloff.adanagramlite.proc.WordsHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Context;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
@@ -29,7 +30,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private TextView taskTxt;
 	private TextView levelTxt;
 	private TextView stepTxt;
-	private TextView errorTxt;
+	private TextView attemptTxt;
 	private TextView scoreTxt;
 	private TextView recordTxt;
 	private Button buttonOK;
@@ -37,9 +38,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private Button buttonNext;
 	private TextView answerTxt;
 
-	// private OnClickListener listener;
+	private final int WORD_LENGTH_MIN = 4;
+	private int level = 0;
 
-	private WordsHandler handler;
+	private WordsHandler wordsHandler;
 	public Context context;
 
 	@Override
@@ -49,9 +51,9 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		inicializeViews();
 		readFile();
 
-		handler = new WordsHandler();
-		handler.setView(this);
-		handler.start(resString);
+		wordsHandler = new WordsHandler();
+		wordsHandler.setView(this);
+		wordsHandler.start(resString);
 
 		// showTask();
 	}
@@ -67,16 +69,33 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		buttonNext = (Button) findViewById(R.id.button_next);
 		buttonNext.setOnClickListener(this);
 
-		answerTxt = (TextView) findViewById(R.id.txt_answer);
+		taskTxt = (TextView) findViewById(R.id.view_task);
+		levelTxt = (TextView) findViewById(R.id.info_level);
 
+		answerTxt = (TextView) findViewById(R.id.txt_answer);
+		stepTxt = (TextView) findViewById(R.id.info_step);
+		attemptTxt=(TextView) findViewById(R.id.info_attempt);
 	}
 
 	public void showTask(final String shuffledWord) {
-
-		taskTxt = (TextView) findViewById(R.id.view_task);
+		hintLimit = 1;// ///////
+		buttonHint.setText("Hint (" + hintLimit + ")");
+		buttonHint.setEnabled(true);
 		runOnUiThread(new Runnable() {
 			public void run() {
+
 				taskTxt.setText(shuffledWord);
+				levelTxt.setText("level: " + level);
+				stepTxt.setText("step: " + wordsHandler.getStepRemainCount());
+				attemptTxt.setText("att: " + wordsHandler.getAttempt());
+
+			}
+		});
+
+		attemptTxt = (TextView) findViewById(R.id.info_attempt);
+		runOnUiThread(new Runnable() {
+			public void run() {
+				attemptTxt.setText("attempt: " + wordsHandler.getAttempt());
 			}
 		});
 
@@ -112,21 +131,27 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_ok:
-			StringBuilder sb=new StringBuilder(answerTxt.getText());
-			String answer=sb.toString();
-			handler.checkAnswer(answer);
-			answerTxt.setText("");
-
-			handler.newTask();
+			StringBuilder sb = new StringBuilder(answerTxt.getText());
+			String answer = sb.toString();
+			if (answer.length() == WORD_LENGTH_MIN + level) {
+				wordsHandler.analyzeAnswer(answer);
+				answerTxt.setText("");
+				wordsHandler.newTask();
+			} else {
+				Toast toast = Toast.makeText(getApplicationContext(),
+						("it must be " + (WORD_LENGTH_MIN + level) + " chars"), Toast.LENGTH_SHORT);
+				toast.setGravity(Gravity.CENTER, 0, 0);
+				toast.show();
+			}
 			break;
 
 		case R.id.button_next:
 			answerTxt.setText("");
-			handler.newTask();
+			wordsHandler.newTask();
 			break;
 
 		case R.id.button_hint:
-			handler.hint(1);// ////
+			wordsHandler.hint(1);// ////
 			hintLimit--;
 			buttonHint.setText("Hint (" + hintLimit + ")");
 			if (hintLimit == 0) {
@@ -152,7 +177,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 	@Override
 	public void appendChar(final char c) {
-		final 	StringBuilder sb=new StringBuilder(answerTxt.getText());
+		final StringBuilder sb = new StringBuilder(answerTxt.getText());
 		sb.append(c);
 		runOnUiThread(new Runnable() {
 			public void run() {

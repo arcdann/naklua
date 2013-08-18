@@ -18,6 +18,11 @@ public class WordsHandler {
 	private AnagramView image;
 	private Random rnd = new Random();
 
+	private int stepRemainCount = 20;
+	private int attemptRemainCount = 3;
+	private int step=20;
+	private int attempt=3;
+
 	public void start(String resString) {
 		list = parseWords(resString);
 		set = new HashSet<Integer>();
@@ -34,7 +39,12 @@ public class WordsHandler {
 	}
 
 	public void newTask() {
+		
 		supplyTask(list, rnd);
+	}
+
+	public int getAttemptRemainCount() {
+		return attemptRemainCount;
 	}
 
 	public void supplyTask(List<String> list, Random rnd) {
@@ -76,15 +86,43 @@ public class WordsHandler {
 	}
 
 	public void hint(int i) {
-		char c=word.charAt(i-1);
+		char c = word.charAt(i - 1);
 		image.appendChar(c);
 	}
 
-	public void checkAnswer(String answer) {
-	if(answer.equals(word)){
-//		image.t
+	public void analyzeAnswer(String answer) {
+		if (answer.equals(word)) {
+//			image.toast("Right!");
+			stepRemainCount--;
+			newTask();
+		}else{
+			attemptRemainCount--;
+			if(attemptRemainCount==0){
+//				image.toast("New attempt");
+				stepRemainCount--;
+			}
+		}
+
 	}
-		
+
+	public int getStep() {
+		return step;
+	}
+
+	public void setStep(int step) {
+		this.step = step;
+	}
+
+	public int getAttempt() {
+		return attempt;
+	}
+
+	public void setAttempt(int attempt) {
+		this.attempt = attempt;
+	}
+
+	public int getStepRemainCount() {
+		return stepRemainCount;
 	}
 
 }
