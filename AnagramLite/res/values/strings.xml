@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AD Anagram lite</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="button_txt_ok">Ok</string>
+    <string name="button_txt_hint">Hint</string>
+    <string name="button_txt_next">Next word</string>
+
+</resources>
