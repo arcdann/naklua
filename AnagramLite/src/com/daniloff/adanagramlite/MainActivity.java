@@ -1,17 +1,9 @@
 package com.daniloff.adanagramlite;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.List;
-
-import com.daniloff.adanagramlite.proc.WordsHandler;
-
-import android.os.Bundle;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -19,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+import com.daniloff.adanagramlite.proc.WordsHandler;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
@@ -49,13 +42,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		inicializeViews();
-		readFile();
+		resString = FileUtils.readFile(getBaseContext());
 
 		wordsHandler = new WordsHandler();
 		wordsHandler.setView(this);
 		wordsHandler.start(resString);
-
-		// showTask();
 	}
 
 	private void inicializeViews() {
@@ -74,7 +65,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 		answerTxt = (TextView) findViewById(R.id.txt_answer);
 		stepTxt = (TextView) findViewById(R.id.info_step);
-		attemptTxt=(TextView) findViewById(R.id.info_attempt);
+		attemptTxt = (TextView) findViewById(R.id.info_attempt);
+		scoreTxt = (TextView) findViewById(R.id.view_score);
+		recordTxt = (TextView) findViewById(R.id.view_record);
+
 	}
 
 	public void showTask(final String shuffledWord) {
@@ -86,19 +80,13 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 				taskTxt.setText(shuffledWord);
 				levelTxt.setText("level: " + level);
-				stepTxt.setText("step: " + wordsHandler.getStepRemainCount());
-				attemptTxt.setText("att: " + wordsHandler.getAttempt());
-
-			}
-		});
-
-		attemptTxt = (TextView) findViewById(R.id.info_attempt);
-		runOnUiThread(new Runnable() {
-			public void run() {
+				stepTxt.setText("step: " + wordsHandler.getStep());
 				attemptTxt.setText("attempt: " + wordsHandler.getAttempt());
+				scoreTxt.setText("Score: " + wordsHandler.getScore());
+				recordTxt.setText("Record: " + wordsHandler.getRecord());
+
 			}
 		});
-
 	}
 
 	@Override
@@ -108,46 +96,27 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		return true;
 	}
 
-	private void readFile() {
-		Context context = getBaseContext();
-		InputStream inputStream = context.getResources().openRawResource(R.raw.b4);
-		InputStreamReader inputreader = new InputStreamReader(inputStream);
-		BufferedReader buffreader = new BufferedReader(inputreader);
-		String line;
-		StringBuilder text = new StringBuilder();
-
-		try {
-			while ((line = buffreader.readLine()) != null) {
-				text.append(line);
-				text.append('\n');
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		resString = text.toString();
-	}
-
+	@SuppressLint("DefaultLocale")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_ok:
-			StringBuilder sb = new StringBuilder(answerTxt.getText());
-			String answer = sb.toString();
+			// StringBuilder sb = new StringBuilder(answerTxt.getText());
+			String answer = answerTxt.getText().toString();
 			if (answer.length() == WORD_LENGTH_MIN + level) {
+				answer=answer.toLowerCase();
 				wordsHandler.analyzeAnswer(answer);
 				answerTxt.setText("");
-				wordsHandler.newTask();
+				// wordsHandler.newTask();
 			} else {
-				Toast toast = Toast.makeText(getApplicationContext(),
-						("it must be " + (WORD_LENGTH_MIN + level) + " chars"), Toast.LENGTH_SHORT);
-				toast.setGravity(Gravity.CENTER, 0, 0);
-				toast.show();
+				toast("it must be " + (WORD_LENGTH_MIN + level) + " chars");
+
 			}
 			break;
 
 		case R.id.button_next:
 			answerTxt.setText("");
-			wordsHandler.newTask();
+			wordsHandler.nextWord();
 			break;
 
 		case R.id.button_hint:
@@ -157,8 +126,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			if (hintLimit == 0) {
 				buttonHint.setEnabled(false);
 			}
-
-			// handler.newTask();
 			break;
 
 		}
@@ -169,11 +136,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		this.taskTxt = word;
 	}
 
-	@Override
-	public void setTaskTxt() {
-		// TODO Auto-generated method stub
-
-	}
 
 	@Override
 	public void appendChar(final char c) {
@@ -182,9 +144,24 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		runOnUiThread(new Runnable() {
 			public void run() {
 				answerTxt.setText(sb);
+				// answerTxt. //как бы курсор поставить справа?
 			}
 		});
 
+	}
+
+	@Override
+	public void toast(String message) {
+		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
+		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.show();
+
+	}
+
+	@Override
+	public void updateTextView(int viewTextID,String text) {
+		TextView tv=(TextView) findViewById(viewTextID);
+		tv.setText(text);
 	}
 
 }

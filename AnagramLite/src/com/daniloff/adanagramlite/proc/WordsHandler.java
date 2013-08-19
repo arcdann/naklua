@@ -7,7 +7,7 @@ import java.util.Random;
 import java.util.Set;
 
 import com.daniloff.adanagramlite.AnagramView;
-import com.daniloff.adanagramlite.MainActivity;
+import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
 
@@ -18,10 +18,12 @@ public class WordsHandler {
 	private AnagramView image;
 	private Random rnd = new Random();
 
-	private int stepRemainCount = 20;
-	private int attemptRemainCount = 3;
-	private int step=20;
-	private int attempt=3;
+	private final int STEPS = 20;
+	private final int ATTEMPTS = 3;
+	private int step = 1;
+	private int attempt = 1;
+	private int score;
+	private int record;
 
 	public void start(String resString) {
 		list = parseWords(resString);
@@ -33,18 +35,20 @@ public class WordsHandler {
 		List<String> list = new ArrayList<String>();
 		String[] words = resString.split("%");
 		for (String word : words) {
-			list.add(word);
+			if (!word.isEmpty()) {
+				list.add(word);
+			}
 		}
 		return list;
 	}
 
 	public void newTask() {
-		
+		attempt = 1;
 		supplyTask(list, rnd);
 	}
 
 	public int getAttemptRemainCount() {
-		return attemptRemainCount;
+		return ATTEMPTS;
 	}
 
 	public void supplyTask(List<String> list, Random rnd) {
@@ -92,18 +96,34 @@ public class WordsHandler {
 
 	public void analyzeAnswer(String answer) {
 		if (answer.equals(word)) {
-//			image.toast("Right!");
-			stepRemainCount--;
-			newTask();
-		}else{
-			attemptRemainCount--;
-			if(attemptRemainCount==0){
-//				image.toast("New attempt");
-				stepRemainCount--;
-			}
+			onCorrectAnswer();
+		} else {
+			onMistake();
 		}
-
 	}
+	
+	private void onCorrectAnswer() {
+		image.toast("Correct!");
+		step++;
+		if(step>STEPS)image.toast("You have passed this level");
+		score = score + 5;
+		if (score > record)
+			record = score;
+		newTask();
+	}
+
+	private void onMistake() {
+		attempt++;
+		image.updateTextView(R.id.info_attempt, "attempt: "+attempt);
+		if (attempt <= ATTEMPTS) {
+			image.toast("Try again");
+		} else {
+			penalty();
+			image.toast("The word: " + word);
+			newTask();
+		}
+	}
+
 
 	public int getStep() {
 		return step;
@@ -121,8 +141,27 @@ public class WordsHandler {
 		this.attempt = attempt;
 	}
 
-	public int getStepRemainCount() {
-		return stepRemainCount;
+//	public int getStepRemainCount() {
+//		return STEPS;
+//	}
+
+	public int getScore() {
+		return score;
+	}
+
+	public int getRecord() {
+		return record;
+	}
+
+	public void penalty() {
+		score = score - 5;
+
+	}
+
+	public void nextWord() {
+		penalty();
+		image.toast("The word: " + word);
+		newTask();
 	}
 
 }
