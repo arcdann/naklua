@@ -18,14 +18,19 @@ public class WordsHandler {
 	private AnagramView image;
 	private Random rnd = new Random();
 
+	private int level = 1;
+
 	private final int STEPS = 20;
 	private final int ATTEMPTS = 3;
+	private final int WORD_LENGTH = 4;
 	private int step = 1;
 	private int attempt = 1;
 	private int score;
 	private int record;
+	private int stepPenalty;
 
 	public void start(String resString) {
+		LevelParams params = AnagramConstants.LEVEL_PARAMS.get(level);
 		list = parseWords(resString);
 		set = new HashSet<Integer>();
 		supplyTask(list, rnd);
@@ -35,7 +40,7 @@ public class WordsHandler {
 		List<String> list = new ArrayList<String>();
 		String[] words = resString.split("%");
 		for (String word : words) {
-			if (!word.isEmpty()) {
+			if (word.length() == WORD_LENGTH) {
 				list.add(word);
 			}
 		}
@@ -90,6 +95,8 @@ public class WordsHandler {
 	}
 
 	public void hint(int i) {
+		stepPenalty(1);
+		image.updateTextView(R.id.view_score, "score: " + score);
 		char c = word.charAt(i - 1);
 		image.appendChar(c);
 	}
@@ -101,11 +108,12 @@ public class WordsHandler {
 			onMistake();
 		}
 	}
-	
+
 	private void onCorrectAnswer() {
 		image.toast("Correct!");
 		step++;
-		if(step>STEPS)image.toast("You have passed this level");
+		if (step > STEPS)
+			image.toast("You have passed this level");
 		score = score + 5;
 		if (score > record)
 			record = score;
@@ -114,16 +122,32 @@ public class WordsHandler {
 
 	private void onMistake() {
 		attempt++;
-		image.updateTextView(R.id.info_attempt, "attempt: "+attempt);
+		image.updateTextView(R.id.info_attempt, "attempt: " + attempt);
 		if (attempt <= ATTEMPTS) {
 			image.toast("Try again");
 		} else {
-			penalty();
+			penalty(5);
 			image.toast("The word: " + word);
 			newTask();
 		}
 	}
 
+	public void nextWord() {
+		penalty(5);
+		image.toast("The word: " + word);
+		newTask();
+	}
+
+	private void stepPenalty(int sp) {
+		stepPenalty = stepPenalty + sp;
+	}
+
+	public void penalty(int penalty) {
+		if (stepPenalty > penalty)
+			penalty = stepPenalty;
+		score = score - penalty;
+		stepPenalty = 0;
+	}
 
 	public int getStep() {
 		return step;
@@ -141,9 +165,9 @@ public class WordsHandler {
 		this.attempt = attempt;
 	}
 
-//	public int getStepRemainCount() {
-//		return STEPS;
-//	}
+	// public int getStepRemainCount() {
+	// return STEPS;
+	// }
 
 	public int getScore() {
 		return score;
@@ -151,17 +175,6 @@ public class WordsHandler {
 
 	public int getRecord() {
 		return record;
-	}
-
-	public void penalty() {
-		score = score - 5;
-
-	}
-
-	public void nextWord() {
-		penalty();
-		image.toast("The word: " + word);
-		newTask();
 	}
 
 }

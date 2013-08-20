@@ -11,6 +11,8 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.daniloff.adanagramlite.proc.FileUtils;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
@@ -42,11 +44,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		inicializeViews();
-		resString = FileUtils.readFile(getBaseContext());
+		resString = FileUtils.readFile(getBaseContext());////////////
 
 		wordsHandler = new WordsHandler();
 		wordsHandler.setView(this);
-		wordsHandler.start(resString);
+		wordsHandler.start(resString);//////////////////////////////////
 	}
 
 	private void inicializeViews() {
@@ -54,6 +56,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		buttonOK.setOnClickListener(this);
 
 		buttonHint = (Button) findViewById(R.id.button_hint);
+		
 		buttonHint.setText("Hint (" + hintLimit + ")");
 		buttonHint.setOnClickListener(this);
 
@@ -79,11 +82,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			public void run() {
 
 				taskTxt.setText(shuffledWord);
-				levelTxt.setText("level: " + level);
+				levelTxt.setText("level: " + level);//не надо менять каждый раз
 				stepTxt.setText("step: " + wordsHandler.getStep());
 				attemptTxt.setText("attempt: " + wordsHandler.getAttempt());
-				scoreTxt.setText("Score: " + wordsHandler.getScore());
-				recordTxt.setText("Record: " + wordsHandler.getRecord());
+				scoreTxt.setText("score: " + wordsHandler.getScore());
+				recordTxt.setText("record: " + wordsHandler.getRecord());
 
 			}
 		});
