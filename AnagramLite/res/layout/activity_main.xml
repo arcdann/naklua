@@ -62,7 +62,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Input answer here"
-        android:inputType="text" >
+        android:inputType="text"
+        android:textSize="32sp" >
 
         <requestFocus />
     </EditText>

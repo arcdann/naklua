@@ -3,6 +3,7 @@ package com.daniloff.adanagramlite;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -20,7 +21,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	public static MainActivity image;
 
 	private String resString;
-	private int hintLimit = 1;
+	private int hintLimit;
 
 	private TextView taskTxt;
 	private TextView levelTxt;
@@ -44,11 +45,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		inicializeViews();
-		resString = FileUtils.readFile(getBaseContext());////////////
+		resString = FileUtils.readFile(getBaseContext());// //////////
 
 		wordsHandler = new WordsHandler();
 		wordsHandler.setView(this);
-		wordsHandler.start(resString);//////////////////////////////////
+		wordsHandler.start(resString);// ////////////////////////////////
 	}
 
 	private void inicializeViews() {
@@ -56,7 +57,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		buttonOK.setOnClickListener(this);
 
 		buttonHint = (Button) findViewById(R.id.button_hint);
-		
+
 		buttonHint.setText("Hint (" + hintLimit + ")");
 		buttonHint.setOnClickListener(this);
 
@@ -70,19 +71,21 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		stepTxt = (TextView) findViewById(R.id.info_step);
 		attemptTxt = (TextView) findViewById(R.id.info_attempt);
 		scoreTxt = (TextView) findViewById(R.id.view_score);
+		scoreTxt.setTextColor(Color.GREEN);
 		recordTxt = (TextView) findViewById(R.id.view_record);
+		recordTxt.setTextColor(Color.BLUE);
 
 	}
 
 	public void showTask(final String shuffledWord) {
-		hintLimit = 1;// ///////
+		hintLimit = wordsHandler.getHintLimit();
 		buttonHint.setText("Hint (" + hintLimit + ")");
 		buttonHint.setEnabled(true);
 		runOnUiThread(new Runnable() {
 			public void run() {
 
 				taskTxt.setText(shuffledWord);
-				levelTxt.setText("level: " + level);//не надо менять каждый раз
+				levelTxt.setText("level: " + level);// не надо менять каждый раз
 				stepTxt.setText("step: " + wordsHandler.getStep());
 				attemptTxt.setText("attempt: " + wordsHandler.getAttempt());
 				scoreTxt.setText("score: " + wordsHandler.getScore());
@@ -107,7 +110,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			// StringBuilder sb = new StringBuilder(answerTxt.getText());
 			String answer = answerTxt.getText().toString();
 			if (answer.length() == WORD_LENGTH_MIN + level) {
-				answer=answer.toLowerCase();
+				answer = answer.toLowerCase();
 				wordsHandler.analyzeAnswer(answer);
 				answerTxt.setText("");
 				// wordsHandler.newTask();
@@ -123,7 +126,8 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			break;
 
 		case R.id.button_hint:
-			wordsHandler.hint(1);// ////
+			int charsCount = answerTxt.getText().length();
+			wordsHandler.hint(charsCount + 1);// позиция символа в строке
 			hintLimit--;
 			buttonHint.setText("Hint (" + hintLimit + ")");
 			if (hintLimit == 0) {
@@ -138,7 +142,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	public void setTask(TextView word) {
 		this.taskTxt = word;
 	}
-
 
 	@Override
 	public void appendChar(final char c) {
@@ -162,9 +165,18 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	}
 
 	@Override
-	public void updateTextView(int viewTextID,String text) {
-		TextView tv=(TextView) findViewById(viewTextID);
+	public void updateTextView(int viewTextID, String text) {
+		TextView tv = (TextView) findViewById(viewTextID);
 		tv.setText(text);
+	}
+
+	@Override
+	public void updateScoreColors(int score, int record) {
+		if (record > score) {
+			scoreTxt.setTextColor(Color.GREEN);
+		} else {
+			scoreTxt.setTextColor(Color.BLUE);
+		}
 	}
 
 }

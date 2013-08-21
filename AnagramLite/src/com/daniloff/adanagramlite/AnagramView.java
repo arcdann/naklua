@@ -9,5 +9,7 @@ public interface AnagramView {
 	void toast(String message);
 
 	void updateTextView(int viewID, String text);
+
+	void updateScoreColors(int score, int record);
 	
 }

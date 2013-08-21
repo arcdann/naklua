@@ -1,32 +1,32 @@
 package com.daniloff.adanagramlite.proc;
 
 public class LevelParams {
-	private final int stepsCount;
+	private final int stepsLimit;
 	private final int resource;
 	private final int wordLength;
 	private final int wordPrice;
-	private final int hintCount;
+	private final int hintLimit;
 	private final int hintPrice;
-	private final int attemptCount;
+	private final int attemptLimit;
 	private final int attemptPrice;
 
-	public LevelParams(int stepsCount, int wordLength, int resource, int wordPrice, int hintCount, int hintPrice,
-			int attemptCount, int attemptPrice) {
-		this.stepsCount = stepsCount;
+	public LevelParams(int stepsLimit, int wordLength, int resource, int wordPrice, int hintLimit, int hintPrice,
+			int attemptLimit, int attemptPrice) {
+		this.stepsLimit = stepsLimit;
 		this.resource = resource;
 		this.wordLength = wordLength;
 		this.wordPrice = wordPrice;
-		this.hintCount = hintCount;
+		this.hintLimit = hintLimit;
 		this.hintPrice = hintPrice;
-		this.attemptCount = attemptCount;
+		this.attemptLimit = attemptLimit;
 		this.attemptPrice = attemptPrice;
 	}
 
-	public int getStepsCount() {
-		return stepsCount;
+	public int getStepsLimit() {
+		return stepsLimit;
 	}
 
-	public int getResourcel() {
+	public int getResource() {
 		return resource;
 	}
 
@@ -38,16 +38,16 @@ public class LevelParams {
 		return wordPrice;
 	}
 
-	public int getHintCount() {
-		return hintCount;
+	public int getHintLimit() {
+		return hintLimit;
 	}
 
 	public int getHintPrice() {
 		return hintPrice;
 	}
 
-	public int getAttemptCount() {
-		return attemptCount;
+	public int getAttemptLimit() {
+		return attemptLimit;
 	}
 
 	public int getAttemptPrice() {

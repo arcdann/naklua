@@ -8,8 +8,8 @@ import com.daniloff.adanagramlite.R;
 public class AnagramConstants {
 	public static final Map<Integer, LevelParams> LEVEL_PARAMS = new HashMap<Integer, LevelParams>();
 
-	// LevelParams(int stepsCount, int wordLength, int resource, int wordPrice,
-	// int hintCount, int hintPrice,int attemptCount, int attemptPrice)
+	// LevelParams(int stepsLimit, int wordLength, int resource, int wordPrice,
+	// int hintLimit, int hintPrice,int attemptLimit, int attemptPrice)
 
 	static {
 		LEVEL_PARAMS.put(1, new LevelParams(30, 4, R.raw.b4, 5, 1, 1, 2, 2));

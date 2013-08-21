@@ -20,27 +20,46 @@ public class WordsHandler {
 
 	private int level = 1;
 
-	private final int STEPS = 20;
-	private final int ATTEMPTS = 3;
-	private final int WORD_LENGTH = 4;
+	private int stepsLimit;
+	private int attemptLimit;
+	private int wordLength;
 	private int step = 1;
 	private int attempt = 1;
 	private int score;
 	private int record;
-	private int stepPenalty;
+	private int stepCost;
+	private LevelParams params;
+	private int hintLimit;
+	private int hintPrice;
+	private int attemptPrice;
+	private int wordPrice;
+	private int resource;// ////////////////////////////////////////
 
 	public void start(String resString) {
-		LevelParams params = AnagramConstants.LEVEL_PARAMS.get(level);
+		params = AnagramConstants.LEVEL_PARAMS.get(level);
+		applyParams();
 		list = parseWords(resString);
 		set = new HashSet<Integer>();
 		supplyTask(list, rnd);
+	}
+
+	private void applyParams() {
+		stepsLimit = params.getStepsLimit();
+		resource = params.getResource();
+		wordLength = params.getWordLength();
+		wordPrice = params.getWordPrice();
+		attemptLimit = params.getAttemptLimit();
+		attemptPrice = params.getAttemptPrice();
+		hintLimit = (params.getHintLimit());
+		hintPrice = params.getHintPrice();
+
 	}
 
 	private List<String> parseWords(String resString) {
 		List<String> list = new ArrayList<String>();
 		String[] words = resString.split("%");
 		for (String word : words) {
-			if (word.length() == WORD_LENGTH) {
+			if (word.length() == wordLength) {
 				list.add(word);
 			}
 		}
@@ -49,11 +68,8 @@ public class WordsHandler {
 
 	public void newTask() {
 		attempt = 1;
+		stepCost = 0;
 		supplyTask(list, rnd);
-	}
-
-	public int getAttemptRemainCount() {
-		return ATTEMPTS;
 	}
 
 	public void supplyTask(List<String> list, Random rnd) {
@@ -95,8 +111,9 @@ public class WordsHandler {
 	}
 
 	public void hint(int i) {
-		stepPenalty(1);
+		score = score - hintPrice;
 		image.updateTextView(R.id.view_score, "score: " + score);
+		countStepCost(hintPrice);
 		char c = word.charAt(i - 1);
 		image.appendChar(c);
 	}
@@ -112,41 +129,57 @@ public class WordsHandler {
 	private void onCorrectAnswer() {
 		image.toast("Correct!");
 		step++;
-		if (step > STEPS)
-			image.toast("You have passed this level");
-		score = score + 5;
-		if (score > record)
+		if (step > stepsLimit) {
+
+			level++;
+			step = 1;
+			image.toast("you passed to level " + level);
+			// update level and step info
+			// start(
+			// resString);//////////////////////////////////////////////////////////////////////////////
+		}
+		image.updateTextView(R.id.info_step, "step: " + step+"/"+stepsLimit);
+
+		score = score + wordPrice;
+		if (score > record) {
 			record = score;
+			image.updateScoreColors(score, record);
+		}
+
 		newTask();
 	}
 
 	private void onMistake() {
 		attempt++;
-		image.updateTextView(R.id.info_attempt, "attempt: " + attempt);
-		if (attempt <= ATTEMPTS) {
+		image.updateTextView(R.id.info_attempt, "attempt: " + attempt + "/" + attemptLimit);
+		if (attempt <= attemptLimit) {
+			score = score - attemptPrice;
+			image.updateTextView(R.id.view_score, "score: " + score);
+
+			countStepCost(attemptPrice);
 			image.toast("Try again");
 		} else {
-			penalty(5);
+			penalty(wordPrice);
 			image.toast("The word: " + word);
 			newTask();
 		}
 	}
 
 	public void nextWord() {
-		penalty(5);
+		penalty(wordPrice);
 		image.toast("The word: " + word);
 		newTask();
 	}
 
-	private void stepPenalty(int sp) {
-		stepPenalty = stepPenalty + sp;
+	private void countStepCost(int cost) {
+		stepCost = stepCost + cost;
 	}
 
 	public void penalty(int penalty) {
-		if (stepPenalty > penalty)
-			penalty = stepPenalty;
+		if (stepCost > penalty)
+			penalty = stepCost;
 		score = score - penalty;
-		stepPenalty = 0;
+		stepCost = 0;
 	}
 
 	public int getStep() {
@@ -165,16 +198,16 @@ public class WordsHandler {
 		this.attempt = attempt;
 	}
 
-	// public int getStepRemainCount() {
-	// return STEPS;
-	// }
-
 	public int getScore() {
 		return score;
 	}
 
 	public int getRecord() {
 		return record;
+	}
+
+	public int getHintLimit() {
+		return hintLimit;
 	}
 
 }
