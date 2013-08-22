@@ -8,12 +8,10 @@ import java.io.InputStreamReader;
 import android.annotation.SuppressLint;
 import android.content.Context;
 
-import com.daniloff.adanagramlite.R;
-
 public class FileUtils {
 	@SuppressLint("DefaultLocale")
-	public static String readFile(Context context) {
-		InputStream inputStream = context.getResources().openRawResource(R.raw.ch04);
+	public static String readFile(Context context, int resource) {
+		InputStream inputStream = context.getResources().openRawResource(resource);
 		InputStreamReader inputreader = new InputStreamReader(inputStream);
 		BufferedReader buffreader = new BufferedReader(inputreader);
 		String line;

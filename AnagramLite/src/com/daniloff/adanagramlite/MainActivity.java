@@ -13,13 +13,11 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daniloff.adanagramlite.proc.FileUtils;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
-	private String resString;
-	private int hintLimit;
+	private int hintLimit;   ////////////////////////////////////////////////////////////
 
 	private TextView taskTxt;
 	private TextView levelTxt;
@@ -40,11 +38,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
 		inicializeViews();
-		resString = FileUtils.readFile(getBaseContext());// //////////
 
 		wordsHandler = new WordsHandler();
 		wordsHandler.setView(this);
-		wordsHandler.start(resString);// ////////////////////////////////
+		wordsHandler.setContext(getBaseContext());
+		wordsHandler.start();
 	}
 
 	private void inicializeViews() {

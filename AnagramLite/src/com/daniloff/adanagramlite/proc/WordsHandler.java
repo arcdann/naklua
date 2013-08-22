@@ -5,11 +5,14 @@ import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
+import android.content.Context;
+
 import com.daniloff.adanagramlite.AnagramView;
 import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
 
+	private Context context;
 	private Set<String> wordsForLevel;
 	private String word;
 	private String wordShuffled;
@@ -26,9 +29,12 @@ public class WordsHandler {
 	private LevelParams params;
 //	private int resource;// ////////////////////////////////////////
 
-	public void start(String resString) {
+	public void start() {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
-		wordsForLevel = parseWords(resString);
+		
+		String resourseString = FileUtils.readFile(context,params.getResource());
+		
+		wordsForLevel = parseWords(resourseString);
 		supplyTask();
 	}
 
@@ -179,6 +185,10 @@ public class WordsHandler {
 
 	public LevelParams getParams() {
 		return params;
+	}
+
+	public void setContext(Context baseContext) {
+		context=baseContext;
 	}
 
 }
