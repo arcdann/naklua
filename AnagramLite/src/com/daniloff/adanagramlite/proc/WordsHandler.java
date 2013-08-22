@@ -1,8 +1,7 @@
 package com.daniloff.adanagramlite.proc;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Random;
 import java.util.Set;
 
@@ -11,8 +10,7 @@ import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
 
-	private List<String> list;
-	private Set<Integer> set;
+	private Set<String> wordsForLevel;
 	private String word;
 	private String wordShuffled;
 	private AnagramView image;
@@ -20,71 +18,48 @@ public class WordsHandler {
 
 	private int level = 1;
 
-	private int stepsLimit;
-	private int attemptLimit;
-	private int wordLength;
 	private int step = 1;
 	private int attempt = 1;
 	private int score;
 	private int record;
 	private int stepCost;
 	private LevelParams params;
-	private int hintLimit;
-	private int hintPrice;
-	private int attemptPrice;
-	private int wordPrice;
-	private int resource;// ////////////////////////////////////////
+//	private int resource;// ////////////////////////////////////////
 
 	public void start(String resString) {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
-		applyParams();
-		list = parseWords(resString);
-		set = new HashSet<Integer>();
-		supplyTask(list, rnd);
+		wordsForLevel = parseWords(resString);
+		supplyTask();
 	}
 
-	private void applyParams() {
-		stepsLimit = params.getStepsLimit();
-		resource = params.getResource();
-		wordLength = params.getWordLength();
-		wordPrice = params.getWordPrice();
-		attemptLimit = params.getAttemptLimit();
-		attemptPrice = params.getAttemptPrice();
-		hintLimit = (params.getHintLimit());
-		hintPrice = params.getHintPrice();
-
-	}
-
-	private List<String> parseWords(String resString) {
-		List<String> list = new ArrayList<String>();
+	private Set<String> parseWords(String resString) {
+		 wordsForLevel = new HashSet<String>();
 		String[] words = resString.split("%");
 		for (String word : words) {
-			if (word.length() == wordLength) {
-				list.add(word);
+			if (word.length() == params.getWordLength()) {
+				wordsForLevel.add(word);
 			}
 		}
-		return list;
+		return wordsForLevel;
 	}
 
 	public void newTask() {
 		attempt = 1;
 		stepCost = 0;
-		supplyTask(list, rnd);
+		supplyTask();
 	}
 
-	public void supplyTask(List<String> list, Random rnd) {
-		int s = set.size();
-		int s1;
-		int index;
-		do {
-			index = rnd.nextInt(list.size());
-			set.add(index);
-			s1 = set.size();
-		} while (s == s1);
-		word = list.get(index);
-
+	public void supplyTask() {
+		int size = wordsForLevel.size();
+		int item = rnd.nextInt(size); 
+		Iterator<String> itr=wordsForLevel.iterator();
+		for(int i=0;i<item-1;i++){
+			itr.next();
+		}
+		word=itr.next();
+		itr.remove();
+		
 		shuffleChars(word);
-
 		System.out.println(word);
 		image.showTask(wordShuffled);
 	}
@@ -111,9 +86,9 @@ public class WordsHandler {
 	}
 
 	public void hint(int i) {
-		score = score - hintPrice;
+		score = score - params.getHintPrice();
 		image.updateTextView(R.id.view_score, "score: " + score);
-		countStepCost(hintPrice);
+		countStepCost(params.getHintPrice());
 		char c = word.charAt(i - 1);
 		image.appendChar(c);
 	}
@@ -129,7 +104,7 @@ public class WordsHandler {
 	private void onCorrectAnswer() {
 		image.toast("Correct!");
 		step++;
-		if (step > stepsLimit) {
+		if (step > params.getStepsLimit()) {
 
 			level++;
 			step = 1;
@@ -138,9 +113,9 @@ public class WordsHandler {
 			// start(
 			// resString);//////////////////////////////////////////////////////////////////////////////
 		}
-		image.updateTextView(R.id.info_step, "step: " + step+"/"+stepsLimit);
+		image.updateTextView(R.id.info_step, "step: " + step+"/"+params.getStepsLimit());
 
-		score = score + wordPrice;
+		score = score + params.getWordPrice();
 		if (score > record) {
 			record = score;
 			image.updateScoreColors(score, record);
@@ -151,22 +126,22 @@ public class WordsHandler {
 
 	private void onMistake() {
 		attempt++;
-		image.updateTextView(R.id.info_attempt, "attempt: " + attempt + "/" + attemptLimit);
-		if (attempt <= attemptLimit) {
-			score = score - attemptPrice;
+		image.updateTextView(R.id.info_attempt, "attempt: " + attempt + "/" + params.getAttemptLimit());
+		if (attempt <= params.getAttemptLimit()) {
+			score = score - params.getAttemptPrice();
 			image.updateTextView(R.id.view_score, "score: " + score);
 
-			countStepCost(attemptPrice);
+			countStepCost(params.getAttemptPrice());
 			image.toast("Try again");
 		} else {
-			penalty(wordPrice);
+			penalty(params.getWordPrice());
 			image.toast("The word: " + word);
 			newTask();
 		}
 	}
 
 	public void nextWord() {
-		penalty(wordPrice);
+		penalty(params.getWordPrice());
 		image.toast("The word: " + word);
 		newTask();
 	}
@@ -186,16 +161,8 @@ public class WordsHandler {
 		return step;
 	}
 
-	public void setStep(int step) {
-		this.step = step;
-	}
-
 	public int getAttempt() {
 		return attempt;
-	}
-
-	public void setAttempt(int attempt) {
-		this.attempt = attempt;
 	}
 
 	public int getScore() {
@@ -206,8 +173,12 @@ public class WordsHandler {
 		return record;
 	}
 
-	public int getHintLimit() {
-		return hintLimit;
+	public int getLevel() {
+		return level;
+	}
+
+	public LevelParams getParams() {
+		return params;
 	}
 
 }

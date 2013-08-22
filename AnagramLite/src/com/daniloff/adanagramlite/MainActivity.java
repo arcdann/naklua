@@ -18,8 +18,6 @@ import com.daniloff.adanagramlite.proc.WordsHandler;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
-	public static MainActivity image;
-
 	private String resString;
 	private int hintLimit;
 
@@ -33,9 +31,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private Button buttonHint;
 	private Button buttonNext;
 	private TextView answerTxt;
-
-	private final int WORD_LENGTH_MIN = 4;
-	private int level = 0;
 
 	private WordsHandler wordsHandler;
 	public Context context;
@@ -58,7 +53,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 		buttonHint = (Button) findViewById(R.id.button_hint);
 
-		buttonHint.setText("Hint (" + hintLimit + ")");
+	//	buttonHint.setText("Hint (" + hintLimit + ")");
 		buttonHint.setOnClickListener(this);
 
 		buttonNext = (Button) findViewById(R.id.button_next);
@@ -78,14 +73,14 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	}
 
 	public void showTask(final String shuffledWord) {
-		hintLimit = wordsHandler.getHintLimit();
+		hintLimit = wordsHandler.getParams().getHintLimit();
 		buttonHint.setText("Hint (" + hintLimit + ")");
 		buttonHint.setEnabled(true);
 		runOnUiThread(new Runnable() {
 			public void run() {
 
 				taskTxt.setText(shuffledWord);
-				levelTxt.setText("level: " + level);// не надо менять каждый раз
+				levelTxt.setText("level: " +wordsHandler.getLevel());// не надо менять каждый раз
 				stepTxt.setText("step: " + wordsHandler.getStep());
 				attemptTxt.setText("attempt: " + wordsHandler.getAttempt());
 				scoreTxt.setText("score: " + wordsHandler.getScore());
@@ -109,13 +104,13 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		case R.id.button_ok:
 			// StringBuilder sb = new StringBuilder(answerTxt.getText());
 			String answer = answerTxt.getText().toString();
-			if (answer.length() == WORD_LENGTH_MIN + level) {
+			if (answer.length() == wordsHandler.getParams().getWordLength()) {
 				answer = answer.toLowerCase();
 				wordsHandler.analyzeAnswer(answer);
 				answerTxt.setText("");
 				// wordsHandler.newTask();
 			} else {
-				toast("it must be " + (WORD_LENGTH_MIN + level) + " chars");
+				toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
 
 			}
 			break;
