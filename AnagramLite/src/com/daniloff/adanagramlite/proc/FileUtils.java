@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -26,6 +29,19 @@ public class FileUtils {
 			e.printStackTrace();
 		}
 		return text.toString().toLowerCase();
+	}
+
+	public static Queue<String> receiveWords(Context context, LevelParams params) {
+		String resourceString = FileUtils.readFile(context, params.getResource());
+		LinkedList<String> wordsForLevel = new LinkedList<String>();
+		String[] words = resourceString.split("%");
+		for (String word : words) {
+			if (word.length() == params.getWordLength()) {
+				wordsForLevel.add(word);
+			}
+		}
+		Collections.shuffle(wordsForLevel);
+		return wordsForLevel;
 	}
 
 }

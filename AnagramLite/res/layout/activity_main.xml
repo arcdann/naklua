@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="left"
-            android:text="Level"
+            android:text="@string/level"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="16sp" />
 
@@ -39,7 +39,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="1"
-            android:text="Step"
+            android:gravity="center_horizontal"
+            android:text="@string/step"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="16sp" />
 
@@ -49,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="right"
             android:layout_weight="1"
-            android:gravity="left"
-            android:text="try"
+            android:gravity="center_horizontal"
+            android:text="@string/attempt"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:textSize="16sp" />
 
@@ -60,8 +61,9 @@
         android:id="@+id/txt_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/single_space"
         android:ems="10"
-        android:hint="Input answer here"
+        android:hint="@string/input_answer"
         android:inputType="text"
         android:textSize="32sp" >
 
@@ -110,7 +112,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Medium Text"
+            android:text="@string/score_info"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
         <TextView
@@ -118,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Medium Text"
+            android:text="@string/record"
             android:textAppearance="?android:attr/textAppearanceMedium" />
 
     </LinearLayout>

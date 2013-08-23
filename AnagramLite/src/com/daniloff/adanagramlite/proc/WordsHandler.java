@@ -1,9 +1,7 @@
 package com.daniloff.adanagramlite.proc;
 
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.Queue;
 import java.util.Random;
-import java.util.Set;
 
 import android.content.Context;
 
@@ -13,7 +11,7 @@ import com.daniloff.adanagramlite.R;
 public class WordsHandler {
 
 	private Context context;
-	private Set<String> wordsForLevel;
+	private Queue<String> wordsForLevel;
 	private String word;
 	private String wordShuffled;
 	private AnagramView image;
@@ -27,26 +25,17 @@ public class WordsHandler {
 	private int record;
 	private int stepCost;
 	private LevelParams params;
-//	private int resource;// ////////////////////////////////////////
+	private boolean godMode;// = true;
 
 	public void start() {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
-		
-		String resourseString = FileUtils.readFile(context,params.getResource());
-		
-		wordsForLevel = parseWords(resourseString);
+		wordsForLevel = FileUtils.receiveWords(context, params);
+		updateLevelInfo();
 		supplyTask();
 	}
 
-	private Set<String> parseWords(String resString) {
-		 wordsForLevel = new HashSet<String>();
-		String[] words = resString.split("%");
-		for (String word : words) {
-			if (word.length() == params.getWordLength()) {
-				wordsForLevel.add(word);
-			}
-		}
-		return wordsForLevel;
+	private void updateLevelInfo() {
+		image.updateTextView(R.id.info_level, "level: " + level);
 	}
 
 	public void newTask() {
@@ -55,22 +44,15 @@ public class WordsHandler {
 		supplyTask();
 	}
 
-	public void supplyTask() {
-		int size = wordsForLevel.size();
-		int item = rnd.nextInt(size); 
-		Iterator<String> itr=wordsForLevel.iterator();
-		for(int i=0;i<item-1;i++){
-			itr.next();
-		}
-		word=itr.next();
-		itr.remove();
-		
-		shuffleChars(word);
+	private void supplyTask() {
+		word = wordsForLevel.poll();
+
+		shuffleChars();
 		System.out.println(word);
 		image.showTask(wordShuffled);
 	}
 
-	private String shuffleChars(String word) {
+	private void shuffleChars() {
 		char[] chars = word.toCharArray();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < chars.length; i++) {
@@ -81,22 +63,21 @@ public class WordsHandler {
 			} else
 				i--;
 		}
-
 		wordShuffled = sb.toString();
-		return wordShuffled;
-
-	}
-
-	public void setView(AnagramView image) {
-		this.image = image;
 	}
 
 	public void hint(int i) {
 		score = score - params.getHintPrice();
-		image.updateTextView(R.id.view_score, "score: " + score);
+		updateScoreInfo();
+
 		countStepCost(params.getHintPrice());
 		char c = word.charAt(i - 1);
 		image.appendChar(c);
+	}
+
+	private void updateScoreInfo() {
+		image.updateTextView(R.id.view_score, "score: " + score);
+		image.updateScoreColors(score, record);
 	}
 
 	public void analyzeAnswer(String answer) {
@@ -111,23 +92,22 @@ public class WordsHandler {
 		image.toast("Correct!");
 		step++;
 		if (step > params.getStepsLimit()) {
-
-			level++;
-			step = 1;
-			image.toast("you passed to level " + level);
-			// update level and step info
-			// start(
-			// resString);//////////////////////////////////////////////////////////////////////////////
+			updateLevel();
 		}
-		image.updateTextView(R.id.info_step, "step: " + step+"/"+params.getStepsLimit());
-
 		score = score + params.getWordPrice();
 		if (score > record) {
 			record = score;
-			image.updateScoreColors(score, record);
 		}
-
+		updateScoreInfo();
 		newTask();
+	}
+
+	private void updateLevel() {
+		level++;
+		step = 1;
+		image.toast("you passed to level " + level);
+		updateLevelInfo();
+		start();
 	}
 
 	private void onMistake() {
@@ -135,8 +115,7 @@ public class WordsHandler {
 		image.updateTextView(R.id.info_attempt, "attempt: " + attempt + "/" + params.getAttemptLimit());
 		if (attempt <= params.getAttemptLimit()) {
 			score = score - params.getAttemptPrice();
-			image.updateTextView(R.id.view_score, "score: " + score);
-
+			updateScoreInfo();
 			countStepCost(params.getAttemptPrice());
 			image.toast("Try again");
 		} else {
@@ -160,7 +139,16 @@ public class WordsHandler {
 		if (stepCost > penalty)
 			penalty = stepCost;
 		score = score - penalty;
+		updateScoreInfo();
 		stepCost = 0;
+	}
+
+	public void inputWholeWord() {
+		image.updateTextView(R.id.txt_answer, word);
+	}
+
+	public void setView(AnagramView image) {
+		this.image = image;
 	}
 
 	public int getStep() {
@@ -188,7 +176,14 @@ public class WordsHandler {
 	}
 
 	public void setContext(Context baseContext) {
-		context=baseContext;
+		context = baseContext;
 	}
 
+	public boolean isGodMode() {
+		return godMode;
+	}
+
+	public void setGodMode(boolean godMode) {
+		this.godMode = godMode;
+	}
 }

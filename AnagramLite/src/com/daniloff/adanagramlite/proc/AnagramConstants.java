@@ -10,9 +10,6 @@ public class AnagramConstants {
 	@SuppressLint("UseSparseArrays")
 	public static final Map<Integer, LevelParams> LEVEL_PARAMS = new HashMap<Integer, LevelParams>();
 
-	// LevelParams(int stepsLimit, int wordLength, int resource, int wordPrice,
-	// int hintLimit, int hintPrice,int attemptLimit, int attemptPrice)
-
 	static {
 		LEVEL_PARAMS.put(1, new LevelParams(30, 4, R.raw.ch04, 5, 1, 1, 2, 2));
 		LEVEL_PARAMS.put(2, new LevelParams(20, 5, R.raw.ch05, 10, 1, 1, 2, 2));
