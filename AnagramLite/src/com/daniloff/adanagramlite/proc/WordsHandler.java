@@ -135,12 +135,15 @@ public class WordsHandler {
 		stepCost = stepCost + cost;
 	}
 
-	public void penalty(int penalty) {
-		if (stepCost > penalty)
-			penalty = stepCost;
-		score = score - penalty;
+	public void penalty(int price) {
+		int penaltyScore;
+		if (stepCost > price) {
+			penaltyScore = stepCost;
+		} else {
+			penaltyScore = price - stepCost;
+		}
+		score = score - penaltyScore;
 		updateScoreInfo();
-		stepCost = 0;
 	}
 
 	public void inputWholeWord() {

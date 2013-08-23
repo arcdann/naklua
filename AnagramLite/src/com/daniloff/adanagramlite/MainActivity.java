@@ -76,7 +76,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 				stepTxt.setText("step: " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
 				attemptTxt.setText("attempt: " + wordsHandler.getAttempt() + "/"
 						+ wordsHandler.getParams().getAttemptLimit());
-				// scoreTxt.setText("score: " + wordsHandler.getScore());
 				recordTxt.setText("record: " + wordsHandler.getRecord());
 			}
 		});
@@ -121,6 +120,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 					buttonHint.setEnabled(false);
 				}
 			}
+			answerTxt.setSelection(answerTxt.length());
 			break;
 		}
 	}
@@ -136,7 +136,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		runOnUiThread(new Runnable() {
 			public void run() {
 				answerTxt.setText(sb);
-				answerTxt.setSelection(answerTxt.length());
 			}
 		});
 	}
