@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.View;
@@ -132,10 +133,13 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	@Override
 	public void appendChar(final char c) {
 		final StringBuilder sb = new StringBuilder(answerTxt.getText());
+		sb.append("<font color='#0000FF'>");//blue
 		sb.append(c);
+		sb.append("</font>");
+
 		runOnUiThread(new Runnable() {
 			public void run() {
-				answerTxt.setText(sb);
+				answerTxt.setText(Html.fromHtml(sb.toString()));
 			}
 		});
 	}
