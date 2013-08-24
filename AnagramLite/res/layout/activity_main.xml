@@ -125,4 +125,14 @@
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/god_mode_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/activity_vertical_margin"
+        android:gravity="center"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:textColor="@color/red" />
+
 </LinearLayout>

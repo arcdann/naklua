@@ -13,5 +13,6 @@
     <string name="step">step</string>
     <string name="attempt">attempt</string>
     <string name="record">record</string>
+    <color name="red">#FF0000</color>
 
 </resources>

@@ -25,7 +25,7 @@ public class WordsHandler {
 	private int record;
 	private int stepCost;
 	private LevelParams params;
-	private boolean godMode;// = true;
+	private boolean godMode;
 
 	public void start() {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
@@ -73,6 +73,18 @@ public class WordsHandler {
 		countStepCost(params.getHintPrice());
 		char c = word.charAt(i - 1);
 		image.appendChar(c);
+	}
+
+	public void toggleGodMode() {
+		String godModeInfo;
+		if (!godMode) {
+			godMode = true;
+			godModeInfo = "god mode";
+		} else {
+			godMode = false;
+			godModeInfo = "";
+		}
+		image.updateTextView(R.id.god_mode_info, godModeInfo);
 	}
 
 	private void updateScoreInfo() {
@@ -189,4 +201,5 @@ public class WordsHandler {
 	public void setGodMode(boolean godMode) {
 		this.godMode = godMode;
 	}
+
 }

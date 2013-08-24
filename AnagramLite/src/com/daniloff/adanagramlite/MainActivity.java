@@ -100,7 +100,12 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 				wordsHandler.analyzeAnswer(answer);
 				answerTxt.setText("");
 			} else {
-				toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
+				if (answer.equalsIgnoreCase("godmode")) {
+					wordsHandler.toggleGodMode();
+					answerTxt.setText("");
+				} else {
+					toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
+				}
 			}
 			break;
 
@@ -133,7 +138,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	@Override
 	public void appendChar(final char c) {
 		final StringBuilder sb = new StringBuilder(answerTxt.getText());
-		sb.append("<font color='#0000FF'>");//blue
+		sb.append("<font color='#0000FF'>");// blue
 		sb.append(c);
 		sb.append("</font>");
 
