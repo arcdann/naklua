@@ -11,5 +11,7 @@ public interface AnagramView {
 	void updateTextView(int viewID, String text);
 
 	void updateScoreColors(int score, int record);
+
+	void updateMode(boolean godMode);
 	
 }

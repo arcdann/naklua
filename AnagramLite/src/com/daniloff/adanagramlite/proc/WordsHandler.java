@@ -28,6 +28,7 @@ public class WordsHandler {
 	private LevelParams params;
 	private boolean godMode;
 	private final String LOG_TAG = "autor";
+	private final int MAX_LEVEL=4;
 
 	public void start() {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
@@ -85,7 +86,9 @@ public class WordsHandler {
 			godMode = false;
 			godModeInfo = "";
 		}
-		image.updateTextView(R.id.god_mode_info, godModeInfo);
+//		image.updateTextView(R.id.god_mode_info, godModeInfo);
+		image.updateMode(godMode);
+		
 	}
 
 	private void updateScoreInfo() {
@@ -116,11 +119,15 @@ public class WordsHandler {
 	}
 
 	private void updateLevel() {
-		level++;
-		step = 1;
-		image.toast("you passed to level " + level);
-		updateLevelInfo();
-		start();
+		if(level<MAX_LEVEL){
+			level++;
+			step = 1;
+			image.toast("you passed to level " + level);
+			updateLevelInfo();
+			start();
+		}else{
+			image.toast("No more levels");
+		}
 	}
 
 	private void onMistake() {

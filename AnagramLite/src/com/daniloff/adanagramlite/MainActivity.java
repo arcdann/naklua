@@ -7,11 +7,15 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,7 +49,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		wordsHandler.setContext(getBaseContext());
 		wordsHandler.start();
 	}
- 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
@@ -72,9 +76,21 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		scoreTxt.setTextColor(Color.GREEN);
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
-		godModeTxt = (TextView) findViewById(R.id.god_mode_info);
-		godModeTxt.setText("");
+//		godModeTxt = (TextView) findViewById(R.id.god_mode_info);
+//		godModeTxt.setText("");
 
+		answerTxt.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+					submitAnswer();
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
 	}
 
 	public void showTask(final String shuffledWord) {
@@ -92,24 +108,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		});
 	}
 
-	@SuppressLint("DefaultLocale")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_ok:
-			String answer = answerTxt.getText().toString();
-			if (answer.length() == wordsHandler.getParams().getWordLength()) {
-				answer = answer.toLowerCase();
-				wordsHandler.analyzeAnswer(answer);
-				answerTxt.setText("");
-			} else {
-				if (answer.equalsIgnoreCase("godmode")) {
-					wordsHandler.toggleGodMode();
-					answerTxt.setText("");
-				} else {
-					toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
-				}
-			}
+			submitAnswer();
 			break;
 
 		case R.id.button_next:
@@ -131,6 +134,23 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			}
 			answerTxt.setSelection(answerTxt.length());
 			break;
+		}
+	}
+
+	@SuppressLint("DefaultLocale")
+	private void submitAnswer() {
+		String answer = answerTxt.getText().toString();
+		if (answer.length() == wordsHandler.getParams().getWordLength()) {
+			answer = answer.toLowerCase();
+			wordsHandler.analyzeAnswer(answer);
+			answerTxt.setText("");
+		} else {
+			if (answer.equalsIgnoreCase("godmode")) {
+				wordsHandler.toggleGodMode();
+				answerTxt.setText("");
+			} else {
+				toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
+			}
 		}
 	}
 
@@ -172,6 +192,23 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		} else {
 			scoreTxt.setTextColor(Color.BLUE);
 		}
+	}
+
+	@Override
+	public void updateMode(boolean godMode) {
+		if (godMode) {
+			LinearLayout wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
+			LayoutParams lpView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+			godModeTxt = new TextView(this);
+			godModeTxt.setText("god mode");
+			godModeTxt.setTextColor(getResources().getColor(R.color.purple));
+			godModeTxt.setLayoutParams(lpView);
+			wrapLayout.addView(godModeTxt);
+			
+			answerTxt.setTextColor(getResources().getColor(R.color.purple));
+			buttonHint.setTextColor(getResources().getColor(R.color.purple));
+		}
+
 	}
 
 }
