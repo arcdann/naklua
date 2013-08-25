@@ -132,7 +132,8 @@
         android:layout_gravity="end"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:gravity="center"
+        android:text="@string/god_mode"
         android:textAppearance="?android:attr/textAppearanceMedium"
-        android:textColor="@color/red" />
+        android:textColor="@color/purple" />
 
 </LinearLayout>

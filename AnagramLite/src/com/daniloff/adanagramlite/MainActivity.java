@@ -24,6 +24,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private TextView attemptTxt;
 	private TextView scoreTxt;
 	private TextView recordTxt;
+	private TextView godModeTxt;
 	private Button buttonOK;
 	private Button buttonHint;
 	private Button buttonNext;
@@ -43,6 +44,13 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		wordsHandler.setView(this);
 		wordsHandler.setContext(getBaseContext());
 		wordsHandler.start();
+	}
+ 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.main, menu);
+		return true;
 	}
 
 	private void inicializeViews() {
@@ -64,6 +72,8 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		scoreTxt.setTextColor(Color.GREEN);
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
+		godModeTxt = (TextView) findViewById(R.id.god_mode_info);
+		godModeTxt.setText("");
 
 	}
 
@@ -80,13 +90,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 				recordTxt.setText("record: " + wordsHandler.getRecord());
 			}
 		});
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -152,7 +155,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	@Override
 	public void toast(String message) {
 		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.CENTER, 0, 0);
+		toast.setGravity(Gravity.CENTER, 0, 12);
 		toast.show();
 	}
 

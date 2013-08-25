@@ -4,6 +4,7 @@ import java.util.Queue;
 import java.util.Random;
 
 import android.content.Context;
+import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
 import com.daniloff.adanagramlite.R;
@@ -26,6 +27,7 @@ public class WordsHandler {
 	private int stepCost;
 	private LevelParams params;
 	private boolean godMode;
+	private final String LOG_TAG = "autor";
 
 	public void start() {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
@@ -46,9 +48,8 @@ public class WordsHandler {
 
 	private void supplyTask() {
 		word = wordsForLevel.poll();
-
 		shuffleChars();
-		System.out.println(word);
+		Log.i(LOG_TAG, word+" => "+wordShuffled);
 		image.showTask(wordShuffled);
 	}
 
