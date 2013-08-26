@@ -17,5 +17,7 @@ public interface AnagramView {
 	public abstract int loadRecord();
 
 	public abstract void saveRecord(int record);
+
+	public abstract void moveToFinishView();
 	
 }

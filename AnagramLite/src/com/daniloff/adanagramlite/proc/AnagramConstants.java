@@ -11,7 +11,7 @@ public class AnagramConstants {
 	public static final Map<Integer, LevelParams> LEVEL_PARAMS = new HashMap<Integer, LevelParams>();
 
 	static {
-		LEVEL_PARAMS.put(1, new LevelParams(30, 3, R.raw.ch03en, 3, 1, 1, 1, 1));
+		LEVEL_PARAMS.put(1, new LevelParams(30, 3, R.raw.ch03en, 3, 1, 1, 2, 1));
 		LEVEL_PARAMS.put(2, new LevelParams(30, 4, R.raw.ch04en, 5, 1, 1, 2, 2));
 		LEVEL_PARAMS.put(3, new LevelParams(30, 5, R.raw.ch05en, 8, 1, 1, 2, 2));
 		LEVEL_PARAMS.put(4, new LevelParams(25, 6, R.raw.ch06en, 10, 1, 1, 2, 2));

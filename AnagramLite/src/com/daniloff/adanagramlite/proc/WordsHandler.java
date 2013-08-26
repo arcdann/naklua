@@ -4,9 +4,12 @@ import java.util.Queue;
 import java.util.Random;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
+import com.daniloff.adanagramlite.FinishActivity;
+import com.daniloff.adanagramlite.MainActivity;
 import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
@@ -28,13 +31,13 @@ public class WordsHandler {
 	private LevelParams params;
 	private boolean godMode;
 	private final String LOG_TAG = "autor";
-	private final int MAX_LEVEL=4;
+	private final int MAX_LEVEL = 10;
 
 	public void start() {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
 		wordsForLevel = FileUtils.receiveWords(context, params);
 		updateLevelInfo();
-		record=image.loadRecord();
+		record = image.loadRecord();
 		supplyTask();
 	}
 
@@ -51,7 +54,7 @@ public class WordsHandler {
 	private void supplyTask() {
 		word = wordsForLevel.poll();
 		shuffleChars();
-		Log.i(LOG_TAG, word+" => "+wordShuffled);
+		Log.i(LOG_TAG, word + " => " + wordShuffled);
 		image.showTask(wordShuffled);
 	}
 
@@ -116,14 +119,14 @@ public class WordsHandler {
 	}
 
 	private void updateLevel() {
-		if(level<MAX_LEVEL){
+		if (level < MAX_LEVEL) {
 			level++;
 			step = 1;
 			image.toast("you passed to level " + level);
 			updateLevelInfo();
 			start();
-		}else{
-			image.toast("No more levels");
+		} else {
+			image.moveToFinishView();
 		}
 	}
 

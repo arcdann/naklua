@@ -3,6 +3,7 @@ package com.daniloff.adanagramlite;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
@@ -22,6 +23,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.daniloff.adanagramlite.proc.WordsHandler;
+
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
@@ -232,4 +234,12 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 		return settings.getInt(PARAM_NAME_RECORD, 0);
 	}
+	
+	@Override
+	public void moveToFinishView(){
+		 Intent intent = new Intent(MainActivity.this, FinishActivity.class);
+		    startActivity(intent);
+	}
+	
+	
 }

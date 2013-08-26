@@ -13,8 +13,17 @@
     <string name="step">step</string>
     <string name="attempt">attempt</string>
     <string name="record">record</string>
+
     <color name="red">#FF0000</color>
     <color name="purple">#800080</color>
+
     <string name="god_mode">god mode</string>
+
+    <color name="blue">#0000FF</color>
+
+    <string name="congratulation">Congratulations!</string>
+    <string name="you_finished">You have finished this game!</string>
+    <string name="your_score">Your score is</string>
+    <string name="title_activity_finish">FinishActivity</string>
 
 </resources>
