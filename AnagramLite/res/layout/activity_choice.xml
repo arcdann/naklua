@@ -1,0 +1,51 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ChoiceActivity" >
+
+    <Button
+        android:id="@+id/button_newGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32dp"
+        android:text="@string/button_txt_newGame" />
+
+    <Button
+        android:id="@+id/button_resumeGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_newGame"
+        android:layout_below="@+id/button_newGame"
+        android:text="@string/button_txt_resumeGame" />
+
+    <Button
+        android:id="@+id/button_rules"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_resumeGame"
+        android:layout_below="@+id/button_resumeGame"
+        android:text="@string/button_txt_rules" />
+
+    <Button
+        android:id="@+id/button_about"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/button_rules"
+        android:layout_below="@+id/button_rules"
+        android:text="@string/button_txt_about" />
+
+    <Button
+        android:id="@+id/button_exit"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_about"
+        android:layout_marginTop="22dp"
+        android:text="@string/button_txt_exit" />
+
+</RelativeLayout>

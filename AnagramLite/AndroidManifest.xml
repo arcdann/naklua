@@ -27,6 +27,10 @@
             android:name="com.daniloff.adanagramlite.FinishActivity"
             android:label="@string/title_activity_finish" >
         </activity>
+        <activity
+            android:name="com.daniloff.adanagramlite.ChoiceActivity"
+            android:label="@string/title_activity_choice" >
+        </activity>
     </application>
 
 </manifest>

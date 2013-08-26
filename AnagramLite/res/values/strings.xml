@@ -25,5 +25,11 @@
     <string name="you_finished">You have finished this game!</string>
     <string name="your_score">Your score is</string>
     <string name="title_activity_finish">FinishActivity</string>
+    <string name="title_activity_choice">ChoiceActivity</string>
+    <string name="button_txt_exit">Exit</string>
+    <string name="button_txt_newGame">New Game</string>
+    <string name="button_txt_resumeGame">Resume Game</string>
+    <string name="button_txt_rules">Rules</string>
+    <string name="button_txt_about">About</string>
 
 </resources>
