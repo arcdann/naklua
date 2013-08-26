@@ -27,6 +27,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 	private static final String PARAM_NAME_RECORD = "record";
 	private static final String SETTINGS_FILENAME = "settings.ini";
+
 	private TextView taskTxt;
 	private TextView stepTxt;
 	private TextView attemptTxt;
@@ -40,7 +41,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private int hintRemain;
 
 	private WordsHandler wordsHandler;
-	public Context context;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
