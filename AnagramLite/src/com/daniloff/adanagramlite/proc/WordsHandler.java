@@ -78,17 +78,12 @@ public class WordsHandler {
 	}
 
 	public void toggleGodMode() {
-		String godModeInfo;
 		if (!godMode) {
 			godMode = true;
-			godModeInfo = "god mode";
 		} else {
 			godMode = false;
-			godModeInfo = "";
 		}
-//		image.updateTextView(R.id.god_mode_info, godModeInfo);
 		image.updateMode(godMode);
-		
 	}
 
 	private void updateScoreInfo() {

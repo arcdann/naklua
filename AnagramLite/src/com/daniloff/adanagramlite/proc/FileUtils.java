@@ -34,7 +34,7 @@ public class FileUtils {
 	public static Queue<String> receiveWords(Context context, LevelParams params) {
 		String resourceString = FileUtils.readFile(context, params.getResource());
 		LinkedList<String> wordsForLevel = new LinkedList<String>();
-		String[] words = resourceString.split("%");
+		String[] words = resourceString.split("\\n");
 		for (String word : words) {
 			if (word.length() == params.getWordLength()) {
 				wordsForLevel.add(word);
