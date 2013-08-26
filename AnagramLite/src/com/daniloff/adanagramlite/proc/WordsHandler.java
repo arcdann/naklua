@@ -34,6 +34,7 @@ public class WordsHandler {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
 		wordsForLevel = FileUtils.receiveWords(context, params);
 		updateLevelInfo();
+		record=image.loadRecord();
 		supplyTask();
 	}
 
@@ -108,6 +109,7 @@ public class WordsHandler {
 		score = score + params.getWordPrice();
 		if (score > record) {
 			record = score;
+			image.saveRecord(record);
 		}
 		updateScoreInfo();
 		newTask();

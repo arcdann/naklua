@@ -13,5 +13,9 @@ public interface AnagramView {
 	void updateScoreColors(int score, int record);
 
 	void updateMode(boolean godMode);
+
+	public abstract int loadRecord();
+
+	public abstract void saveRecord(int record);
 	
 }
