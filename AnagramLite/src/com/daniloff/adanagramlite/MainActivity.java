@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.daniloff.adanagramlite.proc.WordsHandler;
 
-
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
 	private static final String PARAM_NAME_RECORD = "record";
@@ -43,6 +42,9 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private int hintRemain;
 
 	private WordsHandler wordsHandler;
+
+	private Button button1;
+	private Button button2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -82,8 +84,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		scoreTxt.setTextColor(Color.GREEN);
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
-		// godModeTxt = (TextView) findViewById(R.id.god_mode_info);
-		// godModeTxt.setText("");
+
+		button1 = (Button) findViewById(R.id.button1);
+		button1.setOnClickListener(this);
+		button2 = (Button) findViewById(R.id.button2);
+		button2.setOnClickListener(this);
 
 		answerTxt.setOnKeyListener(new OnKeyListener() {
 
@@ -140,8 +145,20 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			}
 			answerTxt.setSelection(answerTxt.length());
 			break;
-		}
-	}
+		
+		
+			case R.id.button1:
+				moveToFinishView() ;
+			break;
+			
+			case R.id.button2:
+				moveToChoiceView() ;
+			break;
+			
+			
+			
+			
+	}}
 
 	@SuppressLint("DefaultLocale")
 	private void submitAnswer() {
@@ -234,12 +251,19 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 		return settings.getInt(PARAM_NAME_RECORD, 0);
 	}
-	
+
 	@Override
-	public void moveToFinishView(){
-		 Intent intent = new Intent(MainActivity.this, FinishActivity.class);
-		    startActivity(intent);
+	public void moveToFinishView() {
+		Intent intent = new Intent(MainActivity.this, FinishActivity.class);
+		startActivity(intent);
+	}
+	
+	public void moveToChoiceView() {
+		Intent intent = new Intent(MainActivity.this, ChoiceActivity.class);
+		startActivity(intent);
 	}
 	
 	
+	
+
 }

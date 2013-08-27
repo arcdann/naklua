@@ -26,7 +26,12 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		buttonRules = (Button) findViewById(R.id.button_rules);
 		buttonAbout = (Button) findViewById(R.id.button_about);
 		buttonExit = (Button) findViewById(R.id.button_exit);
-
+		
+		buttonNewGame.setOnClickListener(this);
+		buttonResumeGame.setOnClickListener(this);
+		buttonRules.setOnClickListener(this);
+		buttonAbout.setOnClickListener(this);
+		buttonExit.setOnClickListener(this);
 	}
 
 	@Override

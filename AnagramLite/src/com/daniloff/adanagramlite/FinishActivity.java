@@ -2,14 +2,23 @@ package com.daniloff.adanagramlite;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 
-public class FinishActivity extends Activity {
+public class FinishActivity extends Activity implements OnClickListener{
+	
+	private Button buttonOK;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_finish);
+		
+		buttonOK=(Button) findViewById(R.id.button_finish);
+		buttonOK.setOnClickListener(this);
 	}
 
 	@Override
@@ -17,6 +26,13 @@ public class FinishActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.finish, menu);
 		return true;
+	}
+
+	@Override
+	public void onClick(View v) {
+		Intent intent=new Intent(FinishActivity.this, ChoiceActivity.class);
+		startActivity(intent);
+		
 	}
 
 }
