@@ -31,5 +31,7 @@
     <string name="button_txt_resumeGame">Resume Game</string>
     <string name="button_txt_rules">Rules</string>
     <string name="button_txt_about">About</string>
+    <string name="title_activity_rules">MainActivity</string>
+    <string name="rules_txt">"Rules rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules "</string>
 
 </resources>

@@ -45,9 +45,18 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_newGame:
-			Intent intent = new Intent(ChoiceActivity.this, MainActivity.class);
-			startActivity(intent);
+			Intent intentMain = new Intent(ChoiceActivity.this, MainActivity.class);
+			startActivity(intentMain);
 			break;
+			
+				case R.id.button_rules:
+			Intent intentRules = new Intent(ChoiceActivity.this, RulesActivity.class);
+			startActivity(intentRules);
+			break;
+			
+			
+			
+			
 
 		default:
 			break;

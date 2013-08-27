@@ -85,7 +85,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
 
-		button1 = (Button) findViewById(R.id.button1);
+		button1 = (Button) findViewById(R.id.button_rulesOk);
 		button1.setOnClickListener(this);
 		button2 = (Button) findViewById(R.id.button2);
 		button2.setOnClickListener(this);
@@ -147,7 +147,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			break;
 		
 		
-			case R.id.button1:
+			case R.id.button_rulesOk:
 				moveToFinishView() ;
 			break;
 			

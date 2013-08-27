@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/RelativeLayout1"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical" >
@@ -8,57 +9,59 @@
         android:id="@+id/textCongratulations"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
         android:layout_margin="@dimen/activity_horizontal_margin"
         android:gravity="center"
         android:text="@string/congratulation"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/blue"
-        android:textSize="36sp" />
+        android:textSize="36sp"
+        android:textStyle="bold" />
 
     <TextView
         android:id="@+id/textFinish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textCongratulations"
         android:layout_marginTop="@dimen/activity_vertical_margin"
         android:gravity="center"
         android:text="@string/you_finished"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/blue" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_vertical_margin" >
-
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="@string/your_score"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/blue" />
-    </LinearLayout>
+        android:layout_alignLeft="@+id/textCongratulations"
+        android:layout_below="@+id/textFinish"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp"
+        android:text="@string/your_score"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/blue" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/record"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/blue" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/button_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="27dp"
+        android:text="@string/button_txt_ok" />
 
-        <Button
-            android:id="@+id/button_finish"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/button_txt_ok" />
-    </LinearLayout>
-
-</LinearLayout>
+</RelativeLayout>
