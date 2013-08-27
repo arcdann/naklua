@@ -33,5 +33,8 @@
     <string name="button_txt_about">About</string>
     <string name="title_activity_rules">MainActivity</string>
     <string name="rules_txt">"Rules rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules  rules "</string>
+    <string name="title_activity_about">MainActivity</string>
+    <string name="author_txt">The Author:</string>
+    <string name="author_name">Arkady Danilov</string>
 
 </resources>

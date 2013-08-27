@@ -87,8 +87,8 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 		button1 = (Button) findViewById(R.id.button_rulesOk);
 		button1.setOnClickListener(this);
-		button2 = (Button) findViewById(R.id.button2);
-		button2.setOnClickListener(this);
+//		button2 = (Button) findViewById(R.id.button2);
+//		button2.setOnClickListener(this);
 
 		answerTxt.setOnKeyListener(new OnKeyListener() {
 
@@ -145,20 +145,16 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			}
 			answerTxt.setSelection(answerTxt.length());
 			break;
-		
-		
-			case R.id.button_rulesOk:
-				moveToFinishView() ;
+
+		case R.id.button_rulesOk:
+			moveToFinishView();
 			break;
-			
-			case R.id.button2:
-				moveToChoiceView() ;
-			break;
-			
-			
-			
-			
-	}}
+
+//		case R.id.button2:
+//			moveToChoiceView();
+//			break;
+		}
+	}
 
 	@SuppressLint("DefaultLocale")
 	private void submitAnswer() {
@@ -257,13 +253,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		Intent intent = new Intent(MainActivity.this, FinishActivity.class);
 		startActivity(intent);
 	}
-	
+
 	public void moveToChoiceView() {
 		Intent intent = new Intent(MainActivity.this, ChoiceActivity.class);
 		startActivity(intent);
 	}
-	
-	
-	
 
 }

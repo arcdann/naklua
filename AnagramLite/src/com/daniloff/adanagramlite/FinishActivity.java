@@ -8,16 +8,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class FinishActivity extends Activity implements OnClickListener{
-	
+public class FinishActivity extends Activity implements OnClickListener {
+
 	private Button buttonOK;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_finish);
-		
-		buttonOK=(Button) findViewById(R.id.button_finish);
+
+		buttonOK = (Button) findViewById(R.id.button_finish);
 		buttonOK.setOnClickListener(this);
 	}
 
@@ -30,9 +30,16 @@ public class FinishActivity extends Activity implements OnClickListener{
 
 	@Override
 	public void onClick(View v) {
-		Intent intent=new Intent(FinishActivity.this, ChoiceActivity.class);
+		moveToChoice();
+	}
+
+	public void onBackPressed() {
+		moveToChoice();
+	}
+
+	private void moveToChoice() {
+		Intent intent = new Intent(FinishActivity.this, ChoiceActivity.class);
 		startActivity(intent);
-		
 	}
 
 }

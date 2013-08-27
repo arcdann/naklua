@@ -26,7 +26,7 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		buttonRules = (Button) findViewById(R.id.button_rules);
 		buttonAbout = (Button) findViewById(R.id.button_about);
 		buttonExit = (Button) findViewById(R.id.button_exit);
-		
+
 		buttonNewGame.setOnClickListener(this);
 		buttonResumeGame.setOnClickListener(this);
 		buttonRules.setOnClickListener(this);
@@ -48,15 +48,16 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 			Intent intentMain = new Intent(ChoiceActivity.this, MainActivity.class);
 			startActivity(intentMain);
 			break;
-			
-				case R.id.button_rules:
+
+		case R.id.button_rules:
 			Intent intentRules = new Intent(ChoiceActivity.this, RulesActivity.class);
 			startActivity(intentRules);
 			break;
-			
-			
-			
-			
+
+		case R.id.button_about:
+			Intent intentAbout = new Intent(ChoiceActivity.this, AboutActivity.class);
+			startActivity(intentAbout);
+			break;
 
 		default:
 			break;

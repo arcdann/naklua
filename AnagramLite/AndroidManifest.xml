@@ -16,7 +16,7 @@
         <activity
             android:name="com.daniloff.adanagramlite.ChoiceActivity"
             android:label="@string/title_activity_choice" >
-            android:screenOrientation="portrait" >
+            android:screenOrientation="portrait" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -34,6 +34,10 @@
         <activity
             android:name="com.daniloff.adanagramlite.RulesActivity"
             android:label="@string/title_activity_rules" >
+        </activity>
+        <activity
+            android:name="com.daniloff.adanagramlite.AboutActivity"
+            android:label="@string/title_activity_about" >
         </activity>
     </application>
 

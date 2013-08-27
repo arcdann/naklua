@@ -4,12 +4,9 @@ import java.util.Queue;
 import java.util.Random;
 
 import android.content.Context;
-import android.content.Intent;
 import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
-import com.daniloff.adanagramlite.FinishActivity;
-import com.daniloff.adanagramlite.MainActivity;
 import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
