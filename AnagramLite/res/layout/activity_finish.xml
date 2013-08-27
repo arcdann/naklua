@@ -32,23 +32,24 @@
         android:textColor="@color/blue" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
+        android:id="@+id/textScore"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textCongratulations"
+        android:layout_alignParentLeft="true"
         android:layout_below="@+id/textFinish"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="24dp"
+        android:gravity="center"
         android:text="@string/your_score"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textColor="@color/blue" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textRecord"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
-        android:layout_below="@+id/textView3"
+        android:layout_below="@+id/textScore"
         android:layout_marginTop="24dp"
         android:gravity="center"
         android:text="@string/record"

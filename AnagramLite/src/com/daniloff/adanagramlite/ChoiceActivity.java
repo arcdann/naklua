@@ -59,10 +59,16 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 			startActivity(intentAbout);
 			break;
 
+		case R.id.button_exit:
+			finish();
+			break;
+
 		default:
 			break;
 		}
-
 	}
 
+	public void onBackPressed() {
+		finish();
+	}
 }

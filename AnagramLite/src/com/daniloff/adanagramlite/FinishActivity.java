@@ -7,10 +7,15 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class FinishActivity extends Activity implements OnClickListener {
 
 	private Button buttonOK;
+	private int score;
+	private int record;
+	private TextView textScore;
+	private TextView textRecord;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -19,6 +24,24 @@ public class FinishActivity extends Activity implements OnClickListener {
 
 		buttonOK = (Button) findViewById(R.id.button_finish);
 		buttonOK.setOnClickListener(this);
+
+		score = getIntent().getIntExtra("score", 0);
+		record = getIntent().getIntExtra("record", 0);
+
+		textScore = (TextView) findViewById(R.id.textScore);
+		textRecord = (TextView) findViewById(R.id.textRecord);
+
+		updateMessage();
+
+	}
+
+	private void updateMessage() {
+		textScore.setText("Your score is " + score + "!");
+		if (score < record) {
+			textRecord.setText("The record is " + record);
+		} else {
+			textRecord.setText("It's a RECORD!");
+		}
 	}
 
 	@Override

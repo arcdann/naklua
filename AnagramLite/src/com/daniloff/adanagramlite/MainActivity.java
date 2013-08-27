@@ -44,7 +44,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private WordsHandler wordsHandler;
 
 	private Button button1;
-	private Button button2;
+//	private Button button2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -244,13 +244,18 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	@Override
 	public int loadRecord() {
 		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-
 		return settings.getInt(PARAM_NAME_RECORD, 0);
 	}
 
 	@Override
 	public void moveToFinishView() {
 		Intent intent = new Intent(MainActivity.this, FinishActivity.class);
+		intent.putExtra("score", wordsHandler.getScore());
+		intent.putExtra("record", wordsHandler.getRecord());
+		
+		
+		
+		
 		startActivity(intent);
 	}
 
