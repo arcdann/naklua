@@ -34,7 +34,12 @@ public class WordsHandler {
 		params = AnagramConstants.LEVEL_PARAMS.get(level);
 		wordsForLevel = FileUtils.receiveWords(context, params);
 		updateLevelInfo();
-		record = image.loadRecord();
+		record = image.loadParams("PARAM_NAME_RECORD");
+
+//		record = image.loadParams("PARAM_NAME_LEVEL");
+//		record = image.loadParams("PARAM_NAME_STEP");
+//		record = image.loadParams("PARAM_NAME_SCORE");
+
 		supplyTask();
 	}
 
@@ -43,6 +48,8 @@ public class WordsHandler {
 	}
 
 	public void newTask() {
+		image.saveParams("PARAM_NAME_STEP", step);
+		image.saveParams("PARAM_NAME_SCORE", score);
 		attempt = 1;
 		stepCost = 0;
 		supplyTask();
@@ -109,7 +116,7 @@ public class WordsHandler {
 		score = score + params.getWordPrice();
 		if (score > record) {
 			record = score;
-			image.saveRecord(record);
+			image.saveParams("PARAM_NAME_RECORD", record);
 		}
 		updateScoreInfo();
 		newTask();
@@ -120,7 +127,8 @@ public class WordsHandler {
 			level++;
 			step = 1;
 			image.toast("you passed to level " + level);
-			updateLevelInfo();
+			// updateLevelInfo();
+			image.saveParams("PARAM_NAME_LEVEL", level);
 			start();
 		} else {
 			image.moveToFinishView();

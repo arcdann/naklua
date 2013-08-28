@@ -26,8 +26,13 @@ import com.daniloff.adanagramlite.proc.WordsHandler;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
-	private static final String PARAM_NAME_RECORD = "record";
-	private static final String SETTINGS_FILENAME = "settings.ini";
+	private static final String SETTINGS_FILENAME = "gamestate";
+//	private static final String PARAM_NAME_RECORD = "record";
+//	private static final String PARAM_NAME_SCORE = "score";
+//	private static final String PARAM_NAME_LEVEL = "level";
+//	private static final String PARAM_NAME_STEP = "step";
+	
+	
 
 	private TextView taskTxt;
 	private TextView stepTxt;
@@ -231,20 +236,20 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	}
 
 	@Override
-	public void saveRecord(int record) {
+	public void saveParams(String paramName, int paramValue) {
 
 		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
 
 		Editor editor = settings.edit();
-		editor.putInt(PARAM_NAME_RECORD, record);
+		editor.putInt(paramName, paramValue);
 		editor.commit();
 
 	}
 
 	@Override
-	public int loadRecord() {
+	public int loadParams(String paramName) {
 		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-		return settings.getInt(PARAM_NAME_RECORD, 0);
+		return settings.getInt(paramName, 0);
 	}
 
 	@Override
