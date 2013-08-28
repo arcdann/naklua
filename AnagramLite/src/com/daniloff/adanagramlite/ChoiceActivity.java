@@ -14,7 +14,6 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 	private Button buttonResumeGame;
 	private Button buttonRules;
 	private Button buttonAbout;
-	private Button buttonExit;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -25,13 +24,11 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		buttonResumeGame = (Button) findViewById(R.id.button_resumeGame);
 		buttonRules = (Button) findViewById(R.id.button_rules);
 		buttonAbout = (Button) findViewById(R.id.button_about);
-		buttonExit = (Button) findViewById(R.id.button_exit);
 
 		buttonNewGame.setOnClickListener(this);
 		buttonResumeGame.setOnClickListener(this);
 		buttonRules.setOnClickListener(this);
 		buttonAbout.setOnClickListener(this);
-		buttonExit.setOnClickListener(this);
 	}
 
 	@Override
@@ -45,8 +42,14 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_newGame:
-			Intent intentMain = new Intent(ChoiceActivity.this, MainActivity.class);
-			startActivity(intentMain);
+			Intent intentNewGame = new Intent(ChoiceActivity.this, MainActivity.class);
+			startActivity(intentNewGame);
+			break;
+
+		case R.id.button_resumeGame:
+			Intent intentResume = new Intent(ChoiceActivity.this, MainActivity.class);
+			intentResume.putExtra("resumed", true);
+			startActivity(intentResume);
 			break;
 
 		case R.id.button_rules:
@@ -57,10 +60,6 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		case R.id.button_about:
 			Intent intentAbout = new Intent(ChoiceActivity.this, AboutActivity.class);
 			startActivity(intentAbout);
-			break;
-
-		case R.id.button_exit:
-			finish();
 			break;
 
 		default:

@@ -19,5 +19,7 @@ public interface AnagramView {
 	public abstract void saveParams(String paramName, int paramValue);
 
 	public abstract void moveToFinishView();
+
+//	boolean isResumed();
 	
 }

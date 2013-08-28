@@ -27,12 +27,10 @@ import com.daniloff.adanagramlite.proc.WordsHandler;
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
 	private static final String SETTINGS_FILENAME = "gamestate";
-//	private static final String PARAM_NAME_RECORD = "record";
-//	private static final String PARAM_NAME_SCORE = "score";
-//	private static final String PARAM_NAME_LEVEL = "level";
-//	private static final String PARAM_NAME_STEP = "step";
-	
-	
+	// private static final String PARAM_NAME_RECORD = "record";
+	// private static final String PARAM_NAME_SCORE = "score";
+	// private static final String PARAM_NAME_LEVEL = "level";
+	// private static final String PARAM_NAME_STEP = "step";
 
 	private TextView taskTxt;
 	private TextView stepTxt;
@@ -45,11 +43,13 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private Button buttonNext;
 	private EditText answerTxt;
 	private int hintRemain;
+//	private boolean resumed;
 
 	private WordsHandler wordsHandler;
 
-	private Button button1;
-//	private Button button2;
+//	private Button button1;
+
+	// private Button button2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +60,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		wordsHandler = new WordsHandler();
 		wordsHandler.setView(this);
 		wordsHandler.setContext(getBaseContext());
+		wordsHandler.setResumed(getIntent().getBooleanExtra("resumed", false));
 		wordsHandler.start();
 	}
 
@@ -90,10 +91,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
 
-		button1 = (Button) findViewById(R.id.button_rulesOk);
-		button1.setOnClickListener(this);
-//		button2 = (Button) findViewById(R.id.button2);
-//		button2.setOnClickListener(this);
+//		button1 = (Button) findViewById(R.id.button_rulesOk);
+//		button1.setOnClickListener(this);
+		// button2 = (Button) findViewById(R.id.button2);
+		// button2.setOnClickListener(this);
 
 		answerTxt.setOnKeyListener(new OnKeyListener() {
 
@@ -155,9 +156,9 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			moveToFinishView();
 			break;
 
-//		case R.id.button2:
-//			moveToChoiceView();
-//			break;
+		// case R.id.button2:
+		// moveToChoiceView();
+		// break;
 		}
 	}
 
@@ -257,10 +258,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		Intent intent = new Intent(MainActivity.this, FinishActivity.class);
 		intent.putExtra("score", wordsHandler.getScore());
 		intent.putExtra("record", wordsHandler.getRecord());
-		
-		
-		
-		
+
 		startActivity(intent);
 	}
 
@@ -268,5 +266,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		Intent intent = new Intent(MainActivity.this, ChoiceActivity.class);
 		startActivity(intent);
 	}
+
+//	@Override
+//	public boolean isResumed() {
+//		return false;
+//	}
 
 }

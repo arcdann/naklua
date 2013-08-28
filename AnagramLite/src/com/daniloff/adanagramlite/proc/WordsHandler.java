@@ -11,6 +11,9 @@ import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
 
+	private final String LOG_TAG = "autor";
+	private final int MAX_LEVEL = 10;
+
 	private Context context;
 	private Queue<String> wordsForLevel;
 	private String word;
@@ -27,24 +30,27 @@ public class WordsHandler {
 	private int stepCost;
 	private LevelParams params;
 	private boolean godMode;
-	private final String LOG_TAG = "autor";
-	private final int MAX_LEVEL = 10;
+	private boolean resumed;
 
 	public void start() {
-		params = AnagramConstants.LEVEL_PARAMS.get(level);
-		wordsForLevel = FileUtils.receiveWords(context, params);
-		updateLevelInfo();
-		record = image.loadParams("PARAM_NAME_RECORD");
 
-//		record = image.loadParams("PARAM_NAME_LEVEL");
-//		record = image.loadParams("PARAM_NAME_STEP");
-//		record = image.loadParams("PARAM_NAME_SCORE");
+		record = image.loadParams("PARAM_NAME_RECORD");
+		if (resumed) {
+			level = image.loadParams("PARAM_NAME_LEVEL");
+			if (level == 0)
+				level = 1;
+			step = image.loadParams("PARAM_NAME_STEP");
+			score = image.loadParams("PARAM_NAME_SCORE");
+		}
+
+		params = AnagramConstants.LEVEL_PARAMS.get(level);
+		image.saveParams("PARAM_NAME_LEVEL", level);
+		wordsForLevel = FileUtils.receiveWords(context, params);
+
+		image.updateTextView(R.id.info_level, "level: " + level);
+		updateScoreInfo();
 
 		supplyTask();
-	}
-
-	private void updateLevelInfo() {
-		image.updateTextView(R.id.info_level, "level: " + level);
 	}
 
 	public void newTask() {
@@ -213,6 +219,14 @@ public class WordsHandler {
 
 	public void setGodMode(boolean godMode) {
 		this.godMode = godMode;
+	}
+
+	// public boolean isResumed() {
+	// return resumed;
+	// }
+
+	public void setResumed(boolean resumed) {
+		this.resumed = resumed;
 	}
 
 }
