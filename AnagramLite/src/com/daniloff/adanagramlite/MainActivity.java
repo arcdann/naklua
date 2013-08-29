@@ -9,6 +9,7 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -27,11 +28,8 @@ import com.daniloff.adanagramlite.proc.WordsHandler;
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
 	private static final String SETTINGS_FILENAME = "gamestate";
-	// private static final String PARAM_NAME_RECORD = "record";
-	// private static final String PARAM_NAME_SCORE = "score";
-	// private static final String PARAM_NAME_LEVEL = "level";
-	// private static final String PARAM_NAME_STEP = "step";
 
+	private LinearLayout wrapLayout;
 	private TextView taskTxt;
 	private TextView stepTxt;
 	private TextView attemptTxt;
@@ -43,13 +41,8 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private Button buttonNext;
 	private EditText answerTxt;
 	private int hintRemain;
-//	private boolean resumed;
 
 	private WordsHandler wordsHandler;
-
-//	private Button button1;
-
-	// private Button button2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,6 +65,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	}
 
 	private void inicializeViews() {
+
+		wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
+		wrapLayout.setBackgroundColor(getResources().getColor(R.color.brown_light));
+
 		buttonOK = (Button) findViewById(R.id.button_ok);
 		buttonOK.setOnClickListener(this);
 
@@ -91,8 +88,8 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
 
-//		button1 = (Button) findViewById(R.id.button_rulesOk);
-//		button1.setOnClickListener(this);
+		// button1 = (Button) findViewById(R.id.button_rulesOk);
+		// button1.setOnClickListener(this);
 		// button2 = (Button) findViewById(R.id.button2);
 		// button2.setOnClickListener(this);
 
@@ -213,7 +210,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	@Override
 	public void updateScoreColors(int score, int record) {
 		if (record > score) {
-			scoreTxt.setTextColor(Color.GREEN);
+			scoreTxt.setTextColor(getResources().getColor(R.color.brown_deep));
 		} else {
 			scoreTxt.setTextColor(Color.BLUE);
 		}
@@ -222,7 +219,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	@Override
 	public void updateMode(boolean godMode) {
 		if (godMode) {
-			LinearLayout wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
+			wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
 			LayoutParams lpView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			godModeTxt = new TextView(this);
 			godModeTxt.setText("god mode");
@@ -232,8 +229,11 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 			answerTxt.setTextColor(getResources().getColor(R.color.purple));
 			buttonHint.setTextColor(getResources().getColor(R.color.purple));
+		} else {
+			wrapLayout.removeView(godModeTxt);
+			answerTxt.setTextColor(Color.BLACK);
+			buttonHint.setTextColor(Color.BLACK);
 		}
-
 	}
 
 	@Override
@@ -267,9 +267,9 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		startActivity(intent);
 	}
 
-//	@Override
-//	public boolean isResumed() {
-//		return false;
-//	}
+	// @Override
+	// public boolean isResumed() {
+	// return false;
+	// }
 
 }
