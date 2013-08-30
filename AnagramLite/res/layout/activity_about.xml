@@ -33,4 +33,36 @@
         android:layout_marginBottom="36dp"
         android:text="@string/button_txt_ok" />
 
+    <TextView
+        android:id="@+id/textDesign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@+id/author_txt_id"
+        android:layout_below="@+id/author_txt_id"
+        android:layout_marginTop="16dp"
+        android:text="@string/design_txt"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textDesignName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textDesign"
+        android:layout_below="@+id/textDesign"
+        android:text="@string/design_name"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/blue" />
+
+    <TextView
+        android:id="@+id/textDesignEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textDesignName"
+        android:layout_alignBottom="@+id/textDesignName"
+        android:layout_marginLeft="14dp"
+        android:layout_toRightOf="@+id/textDesign"
+        android:text="@string/design_email"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/blue" />
+
 </RelativeLayout>

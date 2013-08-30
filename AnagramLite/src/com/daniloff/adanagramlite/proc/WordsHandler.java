@@ -7,6 +7,7 @@ import android.content.Context;
 import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
+import com.daniloff.adanagramlite.EntryActivity;
 import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
@@ -43,7 +44,12 @@ public class WordsHandler {
 			score = image.loadParams("PARAM_NAME_SCORE");
 		}
 
-		params = AnagramConstants.LEVEL_PARAMS.get(level);
+		if (EntryActivity.lang.equals("ru")) {
+			params = AnagramConstants.LEVEL_PARAMS_RU.get(level);
+		} else {
+			params = AnagramConstants.LEVEL_PARAMS_EN.get(level);
+		}
+
 		image.saveParams("PARAM_NAME_LEVEL", level);
 		wordsForLevel = FileUtils.receiveWords(context, params);
 

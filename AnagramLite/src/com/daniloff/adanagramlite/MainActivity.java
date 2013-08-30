@@ -9,7 +9,6 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
-import android.text.Layout;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -266,10 +265,5 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		Intent intent = new Intent(MainActivity.this, ChoiceActivity.class);
 		startActivity(intent);
 	}
-
-	// @Override
-	// public boolean isResumed() {
-	// return false;
-	// }
 
 }

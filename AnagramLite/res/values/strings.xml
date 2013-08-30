@@ -36,7 +36,19 @@
     <string name="title_activity_about">AD Anagram lite: about</string>
     <string name="author_txt">The Author:</string>
     <string name="author_name">Arkady Danilov</string>
+
     <color name="brown_light">#C6A36A</color>
     <color name="brown_deep">#5F3A12</color>
+
+    <string name="title_activity_entry">AD Anagram lite: entry</string>
+
+    <string name="selectEnglish">Interface language//nSelect English</string>
+
+    <string name="selectRussian">Выберите Русский</string>
+
+    <string name="enrty_checkbox_txt">Show this screen next time</string>
+    <string name="design_name">Sergey Ptaha</string>
+    <string name="design_email">ptaha-dip@ya.ru</string>
+    <string name="design_txt"> logo design by</string>
 
 </resources>
