@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AD Anagram lite</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="button_txt_ok">OK</string>
+    <string name="button_txt_hint">Подсказка</string>
+    <string name="button_txt_next">Пропустить</string>
+    <string name="button_txt_exit">Exit</string><string name="button_txt_newGame">Новая игра</string><string name="button_txt_resumeGame">Продолжить игру</string><string name="button_txt_rules">Правила</string><string name="button_txt_about">О программе</string><color name="red">#FF0000</color><color name="purple">#800080</color><color name="blue">#0000FF</color><color name="brown_light">#C6A36A</color><color name="brown_deep">#5F3A12</color><string name="score_info">счет:</string>
+    <string name="input_answer">Введите ответ</string>
+    <string name="level">уровень</string>
+    <string name="step">шаг</string>
+    <string name="attempt">попытка</string>
+    <string name="record">рекорд</string>
+
+    
+    
+
+    <string name="god_mode">god mode</string>
+
+    
+
+    <string name="congratulation">Поздравляем!</string>
+    <string name="you_finished">Вы завершили игру!</string>
+    <string name="your_score">Ваш счет</string>
+    <string name="title_activity_finish">AD Anagram lite: finish</string>
+    <string name="title_activity_choice">AD Anagram lite: choice</string>
+    
+    
+    
+    
+    
+    <string name="title_activity_rules">AD Anagram lite: rules</string>
+    <string name="title_activity_about">AD Anagram lite: about</string><string name="title_activity_entry">AD Anagram lite: entry</string><string name="rules_txt">Составьте слово из предложенных букв. Вы можете использовать несколько подсказок и попыток, их количество зависит от проходимого уровня</string>
+    
+    <string name="author_txt">Автор:</string>
+    <string name="author_name">Аркадий Данилов</string>
+
+    
+    
+
+    
+
+    <string name="selectEnglish">Select English</string>
+
+    <string name="selectRussian">Выберите Русский</string>
+
+    <string name="enrty_checkbox_txt">Показывать в следующий раз</string>
+    <string name="design_name">Сергей Птаха</string>
+    <string name="design_email">ptaha-dip@ya.ru</string>
+    <string name="design_txt">Дизайн логотипа</string>
+
+</resources>
