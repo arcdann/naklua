@@ -65,4 +65,14 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/blue" />
 
+    <ImageView
+        android:id="@+id/imageLogoAtAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/anagramLogo"
+        android:scaleType="fitXY"
+        android:src="@drawable/logo_at_about" />
+
 </RelativeLayout>

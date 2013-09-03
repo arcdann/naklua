@@ -50,5 +50,6 @@
     <string name="design_name">Sergey Ptaha</string>
     <string name="design_email">ptaha-dip@ya.ru</string>
     <string name="design_txt"> logo design by</string>
+    <string name="anagramLogo">Anagram logo</string>
 
 </resources>
