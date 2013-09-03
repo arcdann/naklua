@@ -9,20 +9,34 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".AboutActivity" >
 
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/author_txt" />
+    <LinearLayout
+        android:id="@+id/aboutTopLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
 
-    <TextView
-        android:id="@+id/author_txt_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:text="@string/author_name"
-        android:textColor="@color/blue" />
+        <TextView
+            android:id="@+id/about_productName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_name"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/about_versionTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/single_space"
+            android:layout_marginRight="@dimen/single_space"
+            android:text="@string/about_version_title"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+        <TextView
+            android:id="@+id/about_versionNumber"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/about_button_ok"
@@ -32,26 +46,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
         android:text="@string/button_txt_ok" />
-
-    <TextView
-        android:id="@+id/textDesign"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/author_txt_id"
-        android:layout_below="@+id/author_txt_id"
-        android:layout_marginTop="16dp"
-        android:text="@string/design_txt"
-        android:textAppearance="?android:attr/textAppearanceSmall" />
-
-    <TextView
-        android:id="@+id/textDesignName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textDesign"
-        android:layout_below="@+id/textDesign"
-        android:text="@string/design_name"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:textColor="@color/blue" />
 
     <TextView
         android:id="@+id/textDesignEmail"
@@ -65,14 +59,53 @@
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@color/blue" />
 
+    <TextView
+        android:id="@+id/aboutAuthorTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/aboutTopLayout"
+        android:layout_below="@+id/aboutTopLayout"
+        android:layout_marginTop="24dp"
+        android:text="@string/author_txt" />
+
+    <TextView
+        android:id="@+id/author_txt_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/aboutAuthorTitle"
+        android:layout_below="@+id/aboutAuthorTitle"
+        android:text="@string/author_name"
+        android:textColor="@color/blue" />
+
     <ImageView
         android:id="@+id/imageLogoAtAbout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
+        android:layout_above="@+id/about_button_ok"
+        android:layout_alignRight="@+id/textDesignEmail"
+        android:layout_marginBottom="43dp"
         android:contentDescription="@string/anagramLogo"
         android:scaleType="fitXY"
         android:src="@drawable/logo_at_about" />
+
+    <TextView
+        android:id="@+id/textDesign"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/author_txt_id"
+        android:layout_below="@+id/author_txt_id"
+        android:layout_marginTop="6dp"
+        android:text="@string/design_txt"
+        android:textAppearance="?android:attr/textAppearanceSmall" />
+
+    <TextView
+        android:id="@+id/textDesignName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textDesign"
+        android:layout_below="@+id/textDesign"
+        android:text="@string/design_name"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:textColor="@color/blue" />
 
 </RelativeLayout>

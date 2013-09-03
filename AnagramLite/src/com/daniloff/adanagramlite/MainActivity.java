@@ -152,9 +152,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			moveToFinishView();
 			break;
 
-		// case R.id.button2:
-		// moveToChoiceView();
-		// break;
 		}
 	}
 

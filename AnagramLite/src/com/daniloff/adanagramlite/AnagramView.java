@@ -20,6 +20,4 @@ public interface AnagramView {
 
 	public abstract void moveToFinishView();
 
-//	boolean isResumed();
-	
 }

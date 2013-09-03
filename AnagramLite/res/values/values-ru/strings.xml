@@ -50,5 +50,6 @@
     <string name="design_name">Сергей Птаха</string>
     <string name="design_email">ptaha-dip@ya.ru</string>
     <string name="design_txt">Дизайн логотипа</string>
+    <string name="about_version_title">   версия </string>
 
 </resources>
