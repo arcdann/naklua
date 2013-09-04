@@ -4,9 +4,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.Collections;
-import java.util.LinkedList;
-import java.util.List;
 
 public class FileUtils {
 
@@ -26,19 +23,7 @@ public class FileUtils {
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
-		// System.out.println("File '"+fileName+"' have read");
 		return sb.toString();
-	}
-
-	public static List<String> receiveWordsCouples(String fileName) {
-		String resStr = FileUtils.readFile("config/words.txt");
-		List<String> wordsCouples = new LinkedList<String>();
-		String[] words = resStr.split("\\n");
-		for (String wordsCouple : words) {
-			wordsCouples.add(wordsCouple);
-		}
-		Collections.shuffle(wordsCouples);
-		return wordsCouples;
 	}
 
 }
