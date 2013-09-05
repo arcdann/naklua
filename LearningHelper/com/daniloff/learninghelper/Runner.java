@@ -16,9 +16,9 @@ public class Runner {
 
 	public static void main(String[] args) {
 
-		String resStr = FileUtils.readFile("config/words.txt");
-		String[] words = resStr.split("\\n");
-		wordsCouples = Arrays.asList(words);
+		String fileAsString = FileUtils.readFile("config/words.txt");
+		String[] sharpSeparatedWords = fileAsString.split("\\n");
+		wordsCouples = Arrays.asList(sharpSeparatedWords);
 
 		for (int count = 0; count < 4; count++) {
 			Collections.shuffle(wordsCouples);
@@ -32,7 +32,6 @@ public class Runner {
 	private static void showTask(String wordCouple) {
 
 		Task task = new Task(wordCouple);
-		// System.out.println(task.getPhrase());
 		System.out.print(task.getMeaninig() + " = ");
 
 		String answer = "";

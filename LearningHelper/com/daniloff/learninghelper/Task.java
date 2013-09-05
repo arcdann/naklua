@@ -2,8 +2,8 @@ package com.daniloff.learninghelper;
 
 public class Task {
 
-	private String phrase;
-	private String meaninig;
+	private final String phrase;
+	private final String meaninig;
 
 	public Task(String wordCouple) {
 		int separatorIndex = wordCouple.indexOf('#');
