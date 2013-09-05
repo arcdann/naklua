@@ -1,8 +1,10 @@
 package com.daniloff.adanagramlite;
 
-import android.os.Bundle;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -29,6 +31,30 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		buttonResumeGame.setOnClickListener(this);
 		buttonRules.setOnClickListener(this);
 		buttonAbout.setOnClickListener(this);
+
+	}
+
+	private void createAlertDialog() {
+		new AlertDialog.Builder(getApplicationContext());
+		String buttonOkTitle = "OK";
+		String[] items = { "English", "Русский" };
+
+		new AlertDialog.Builder(this).setSingleChoiceItems(items, 0, null)
+				.setPositiveButton(buttonOkTitle, new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog, int whichButton) {
+						dialog.dismiss();
+						int selectedPosition = ((AlertDialog) dialog).getListView().getCheckedItemPosition();
+						String lang = "en";
+						if (selectedPosition == 1) {
+							lang = "ru";
+						}
+						Intent intentNewGame = new Intent(ChoiceActivity.this, MainActivity.class);
+						intentNewGame.putExtra("button", "newGame");
+						intentNewGame.putExtra("lang", lang);
+						startActivity(intentNewGame);// /lang
+					}
+				}).show();
+
 	}
 
 	@Override
@@ -42,13 +68,12 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_newGame:
-			Intent intentNewGame = new Intent(ChoiceActivity.this, MainActivity.class);
-			startActivity(intentNewGame);
+			createAlertDialog();
 			break;
 
 		case R.id.button_resumeGame:
 			Intent intentResume = new Intent(ChoiceActivity.this, MainActivity.class);
-			intentResume.putExtra("resumed", true);
+			intentResume.putExtra("button", "resume");
 			startActivity(intentResume);
 			break;
 

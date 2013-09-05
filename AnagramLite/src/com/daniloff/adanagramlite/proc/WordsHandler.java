@@ -4,16 +4,18 @@ import java.util.Queue;
 import java.util.Random;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
-import com.daniloff.adanagramlite.EntryActivity;
 import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
 
 	private final String LOG_TAG = "autor";
 	private final int MAX_LEVEL = 10;
+	private static final String SETTINGS_FILENAME = "gamestate";
 
 	private Context context;
 	private Queue<String> wordsForLevel;
@@ -32,11 +34,13 @@ public class WordsHandler {
 	private LevelParams params;
 	private boolean godMode;
 	private boolean resumed;
+	private String lang;
 
 	public void start() {
 
 		record = image.loadParams("PARAM_NAME_RECORD");
 		if (resumed) {
+			lang = loadParams("PARAM_NAME_LANG");
 			level = image.loadParams("PARAM_NAME_LEVEL");
 			if (level == 0)
 				level = 1;
@@ -44,7 +48,7 @@ public class WordsHandler {
 			score = image.loadParams("PARAM_NAME_SCORE");
 		}
 
-		if (EntryActivity.lang.equals("ru")) {
+		if (lang.equals("ru")) {
 			params = AnagramConstants.LEVEL_PARAMS_RU.get(level);
 		} else {
 			params = AnagramConstants.LEVEL_PARAMS_EN.get(level);
@@ -139,7 +143,6 @@ public class WordsHandler {
 			level++;
 			step = 1;
 			image.toast("you passed to level " + level);
-			// updateLevelInfo();
 			image.saveParams("PARAM_NAME_LEVEL", level);
 			start();
 		} else {
@@ -187,6 +190,18 @@ public class WordsHandler {
 		image.updateTextView(R.id.txt_answer, word);
 	}
 
+	public void saveParams(String paramName, String paramValue) {
+		SharedPreferences settings = context.getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
+		Editor editor = settings.edit();
+		editor.putString(paramName, paramValue);
+		editor.commit();
+	}
+
+	public String loadParams(String paramName) {
+		SharedPreferences settings = context.getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
+		return settings.getString(paramName, "");
+	}
+
 	public void setView(AnagramView image) {
 		this.image = image;
 	}
@@ -227,9 +242,10 @@ public class WordsHandler {
 		this.godMode = godMode;
 	}
 
-	// public boolean isResumed() {
-	// return resumed;
-	// }
+	public void setLang(String lang) {
+		this.lang = lang;
+		saveParams("PARAM_NAME_LANG", lang);
+	}
 
 	public void setResumed(boolean resumed) {
 		this.resumed = resumed;

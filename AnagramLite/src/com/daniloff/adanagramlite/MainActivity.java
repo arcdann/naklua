@@ -52,7 +52,14 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		wordsHandler = new WordsHandler();
 		wordsHandler.setView(this);
 		wordsHandler.setContext(getBaseContext());
-		wordsHandler.setResumed(getIntent().getBooleanExtra("resumed", false));
+
+		String pressedButton = getIntent().getStringExtra("button");
+		if (pressedButton.equals("newGame")) {
+			wordsHandler.setLang(getIntent().getStringExtra("lang"));
+		} else {
+			wordsHandler.setResumed(true);
+		}
+
 		wordsHandler.start();
 	}
 
@@ -86,11 +93,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		scoreTxt.setTextColor(Color.GREEN);
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
-
-		// button1 = (Button) findViewById(R.id.button_rulesOk);
-		// button1.setOnClickListener(this);
-		// button2 = (Button) findViewById(R.id.button2);
-		// button2.setOnClickListener(this);
 
 		answerTxt.setOnKeyListener(new OnKeyListener() {
 
@@ -234,13 +236,17 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 	@Override
 	public void saveParams(String paramName, int paramValue) {
-
 		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-
 		Editor editor = settings.edit();
 		editor.putInt(paramName, paramValue);
 		editor.commit();
+	}
 
+	public void saveParams(String paramName, boolean paramValue) {
+		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
+		Editor editor = settings.edit();
+		editor.putBoolean(paramName, paramValue);
+		editor.commit();
 	}
 
 	@Override
