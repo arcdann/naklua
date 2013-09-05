@@ -10,16 +10,23 @@ import java.util.List;
 public class Runner {
 
 	public static void main(String[] args) {
+		List<String> wordsCouples = prepareWordsList();
+		for (int count = 0; count < 4; count++) {
+			runOnce(wordsCouples);
+		}
+	}
 
+	private static List<String> prepareWordsList() {
 		String fileAsString = FileUtils.readFile("config/words.txt");
 		String[] sharpSeparatedWords = fileAsString.split("\\n");
 		List<String> wordsCouples = Arrays.asList(sharpSeparatedWords);
+		return wordsCouples;
+	}
 
-		for (int count = 0; count < 4; count++) {
-			Collections.shuffle(wordsCouples);
-			for (String wordCouple : wordsCouples) {
-				showTask(wordCouple);
-			}
+	private static void runOnce(List<String> wordsCouples) {
+		Collections.shuffle(wordsCouples);
+		for (String wordCouple : wordsCouples) {
+			showTask(wordCouple);
 		}
 	}
 
