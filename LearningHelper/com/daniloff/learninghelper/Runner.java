@@ -3,36 +3,42 @@ package com.daniloff.learninghelper;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class Runner {
 
 	public static void main(String[] args) {
-		List<String> wordsCouples = prepareWordsList();
+		List<Task> wordsCouples = prepareWordsList();
 		for (int count = 0; count < 4; count++) {
 			runOnce(wordsCouples);
 		}
 	}
 
-	private static List<String> prepareWordsList() {
+	private static List<Task> prepareWordsList() {
+
+		List<Task> retVal = new ArrayList<>();
+
 		String fileAsString = FileUtils.readFile("config/words.txt");
 		String[] sharpSeparatedWords = fileAsString.split("\\n");
-		List<String> wordsCouples = Arrays.asList(sharpSeparatedWords);
-		return wordsCouples;
+
+		for (String current : sharpSeparatedWords) {
+			retVal.add(new Task(current));
+		}
+
+		return retVal;
 	}
 
-	private static void runOnce(List<String> wordsCouples) {
+	private static void runOnce(List<Task> wordsCouples) {
 		Collections.shuffle(wordsCouples);
-		for (String wordCouple : wordsCouples) {
+		for (Task wordCouple : wordsCouples) {
 			showTask(wordCouple);
 		}
 	}
 
-	private static void showTask(String wordCouple) {
+	private static void showTask(Task task) {
 
-		Task task = new Task(wordCouple);
 		System.out.print(task.getMeaninig() + " = ");
 
 		String answer = "";
