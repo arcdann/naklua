@@ -13,6 +13,7 @@ public class Runner {
 		List<Task> wordsCouples = prepareWordsList();
 		for (int count = 0; count < 4; count++) {
 			runOnce(wordsCouples);
+			System.out.println();
 		}
 	}
 
@@ -31,34 +32,28 @@ public class Runner {
 	}
 
 	private static void runOnce(List<Task> wordsCouples) {
-		Collections.shuffle(wordsCouples);
-		for (Task wordCouple : wordsCouples) {
-			showTask(wordCouple);
+		
+		List<Task> wordsCouplesCopy = new ArrayList<Task>(wordsCouples);
+		Collections.shuffle(wordsCouplesCopy);
+		
+		while (!wordsCouplesCopy.isEmpty()) {
+			Task current = wordsCouplesCopy.remove(0);
+			System.out.print(current.getMeaninig() + " = ");
+
+			String answer = "";
+			BufferedReader bfReader = new BufferedReader(new InputStreamReader(System.in));
+			try {
+				answer = bfReader.readLine();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+			if (answer.equals(current.getPhrase())) {
+				System.out.println("Correct");
+			} else {
+				System.out.println("Shit! Correct phrase is: " + current.getPhrase());
+				wordsCouplesCopy.add(current);
+			}
 		}
 	}
-
-	private static void showTask(Task task) {
-
-		System.out.print(task.getMeaninig() + " = ");
-
-		String answer = "";
-		BufferedReader bfReader = new BufferedReader(new InputStreamReader(System.in));
-		try {
-			answer = bfReader.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		checkUpAnswer(answer, task);
-	}
-
-	private static void checkUpAnswer(String answer, Task task) {
-		if (answer.equals(task.getPhrase())) {
-			System.out.println("Correct");
-		} else {
-			System.out.println("Wrong");
-			System.out.println("Correct phrase: " + task.getPhrase());
-		}
-		System.out.println();
-	}
-
 }
