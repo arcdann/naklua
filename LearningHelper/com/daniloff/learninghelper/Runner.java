@@ -5,25 +5,19 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Runner {
-
-	static List<String> wordsCouples;
-	static List<String> unlearnedWords = new LinkedList<String>();
-	static String unlearnedWord;
 
 	public static void main(String[] args) {
 
 		String fileAsString = FileUtils.readFile("config/words.txt");
 		String[] sharpSeparatedWords = fileAsString.split("\\n");
-		wordsCouples = Arrays.asList(sharpSeparatedWords);
+		List<String> wordsCouples = Arrays.asList(sharpSeparatedWords);
 
 		for (int count = 0; count < 4; count++) {
 			Collections.shuffle(wordsCouples);
 			for (String wordCouple : wordsCouples) {
-				unlearnedWord = wordCouple;
 				showTask(wordCouple);
 			}
 		}
@@ -52,7 +46,6 @@ public class Runner {
 			System.out.println("Correct phrase: " + task.getPhrase());
 		}
 		System.out.println();
-		unlearnedWords.add(unlearnedWord);
 	}
 
 }
