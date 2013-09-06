@@ -5,10 +5,10 @@ import java.util.Random;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
+import com.daniloff.adanagramlite.ChoiceActivity;
 import com.daniloff.adanagramlite.R;
 
 public class WordsHandler {
@@ -38,14 +38,14 @@ public class WordsHandler {
 
 	public void start() {
 
-		record = image.loadParams("PARAM_NAME_RECORD");
+		record = ChoiceActivity.paramsHandler.loadParamInt("PARAM_NAME_RECORD");
 		if (resumed) {
 			lang = loadParams("PARAM_NAME_LANG");
-			level = image.loadParams("PARAM_NAME_LEVEL");
+			level = ChoiceActivity.paramsHandler.loadParamInt("PARAM_NAME_LEVEL");
 			if (level == 0)
 				level = 1;
-			step = image.loadParams("PARAM_NAME_STEP");
-			score = image.loadParams("PARAM_NAME_SCORE");
+			step = ChoiceActivity.paramsHandler.loadParamInt("PARAM_NAME_STEP");
+			score = ChoiceActivity.paramsHandler.loadParamInt("PARAM_NAME_SCORE");
 		}
 
 		if (lang.equals("ru")) {
@@ -54,7 +54,7 @@ public class WordsHandler {
 			params = AnagramConstants.LEVEL_PARAMS_EN.get(level);
 		}
 
-		image.saveParams("PARAM_NAME_LEVEL", level);
+		ChoiceActivity.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
 		wordsForLevel = FileUtils.receiveWords(context, params);
 
 		image.updateTextView(R.id.info_level, "level: " + level);
@@ -64,8 +64,8 @@ public class WordsHandler {
 	}
 
 	public void newTask() {
-		image.saveParams("PARAM_NAME_STEP", step);
-		image.saveParams("PARAM_NAME_SCORE", score);
+		ChoiceActivity.paramsHandler.saveParamInt("PARAM_NAME_STEP", step);
+		ChoiceActivity.paramsHandler.saveParamInt("PARAM_NAME_SCORE", score);
 		attempt = 1;
 		stepCost = 0;
 		supplyTask();
@@ -132,7 +132,7 @@ public class WordsHandler {
 		score = score + params.getWordPrice();
 		if (score > record) {
 			record = score;
-			image.saveParams("PARAM_NAME_RECORD", record);
+			ChoiceActivity.paramsHandler.saveParamInt("PARAM_NAME_RECORD", record);
 		}
 		updateScoreInfo();
 		newTask();
@@ -143,7 +143,7 @@ public class WordsHandler {
 			level++;
 			step = 1;
 			image.toast("you passed to level " + level);
-			image.saveParams("PARAM_NAME_LEVEL", level);
+			ChoiceActivity.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
 			start();
 		} else {
 			image.moveToFinishView();
@@ -188,13 +188,6 @@ public class WordsHandler {
 
 	public void inputWholeWord() {
 		image.updateTextView(R.id.txt_answer, word);
-	}
-
-	public void saveParams(String paramName, String paramValue) {
-		SharedPreferences settings = context.getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-		Editor editor = settings.edit();
-		editor.putString(paramName, paramValue);
-		editor.commit();
 	}
 
 	public String loadParams(String paramName) {
@@ -244,7 +237,7 @@ public class WordsHandler {
 
 	public void setLang(String lang) {
 		this.lang = lang;
-		saveParams("PARAM_NAME_LANG", lang);
+		ChoiceActivity.paramsHandler.saveParamString("PARAM_NAME_LANG", lang);
 	}
 
 	public void setResumed(boolean resumed) {

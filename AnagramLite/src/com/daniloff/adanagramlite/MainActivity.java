@@ -2,10 +2,7 @@ package com.daniloff.adanagramlite;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Html;
@@ -25,8 +22,6 @@ import android.widget.Toast;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
-
-	private static final String SETTINGS_FILENAME = "gamestate";
 
 	private LinearLayout wrapLayout;
 	private TextView taskTxt;
@@ -232,27 +227,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			answerTxt.setTextColor(Color.BLACK);
 			buttonHint.setTextColor(Color.BLACK);
 		}
-	}
-
-	@Override
-	public void saveParams(String paramName, int paramValue) {
-		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-		Editor editor = settings.edit();
-		editor.putInt(paramName, paramValue);
-		editor.commit();
-	}
-
-	public void saveParams(String paramName, boolean paramValue) {
-		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-		Editor editor = settings.edit();
-		editor.putBoolean(paramName, paramValue);
-		editor.commit();
-	}
-
-	@Override
-	public int loadParams(String paramName) {
-		SharedPreferences settings = getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-		return settings.getInt(paramName, 0);
 	}
 
 	@Override

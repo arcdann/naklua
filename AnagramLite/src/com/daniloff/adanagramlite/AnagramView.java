@@ -14,10 +14,6 @@ public interface AnagramView {
 
 	void updateMode(boolean godMode);
 
-	public abstract int loadParams(String paramName);
-
-	public abstract void saveParams(String paramName, int paramValue);
-
 	public abstract void moveToFinishView();
 
 }
