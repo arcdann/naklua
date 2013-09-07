@@ -1,7 +1,5 @@
 package com.daniloff.adanagramlite;
 
-import com.daniloff.adanagramlite.proc.ParamsHandler;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -12,13 +10,14 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+import com.daniloff.adanagramlite.proc.ParamsHandler;
+
 public class ChoiceActivity extends Activity implements OnClickListener {
 
 	private Button buttonNewGame;
 	private Button buttonResumeGame;
 	private Button buttonRules;
 	private Button buttonAbout;
-//	public static ParamsHandler paramsHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

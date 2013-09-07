@@ -25,7 +25,7 @@ public class WordsHandler {
 	private Random rnd = new Random();
 
 	private int level = 1;
-
+	private int hintRemain;
 	private int step = 1;
 	private int attempt = 1;
 	private int score;
@@ -76,6 +76,8 @@ public class WordsHandler {
 		shuffleChars();
 		Log.i(LOG_TAG, word + " => " + wordShuffled);
 		image.showTask(wordShuffled);
+		hintRemain = params.getHintLimit();
+		image.updateTextView(R.id.button_hint, "Hint (" + hintRemain + ")");
 	}
 
 	private void shuffleChars() {
@@ -93,6 +95,11 @@ public class WordsHandler {
 	}
 
 	public void hint(int i) {
+		hintRemain--;
+		image.updateTextView(R.id.button_hint, "Hint (" + hintRemain + ")");
+		if (hintRemain == 0) {
+			image.setEnable(R.id.button_hint, false);
+		}
 		score = score - params.getHintPrice();
 		updateScoreInfo();
 
@@ -242,6 +249,10 @@ public class WordsHandler {
 
 	public void setResumed(boolean resumed) {
 		this.resumed = resumed;
+	}
+
+	public int getHintRemain() {
+		return hintRemain;
 	}
 
 }

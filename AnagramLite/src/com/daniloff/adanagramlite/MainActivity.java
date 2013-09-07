@@ -34,7 +34,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private Button buttonHint;
 	private Button buttonNext;
 	private EditText answerTxt;
-	private int hintRemain;
 
 	private WordsHandler wordsHandler;
 
@@ -104,8 +103,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	}
 
 	public void showTask(final String shuffledWord) {
-		hintRemain = wordsHandler.getParams().getHintLimit();
-		buttonHint.setText("Hint (" + hintRemain + ")");
 		buttonHint.setEnabled(true);
 		runOnUiThread(new Runnable() {
 			public void run() {
@@ -136,11 +133,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			} else {
 				int charsCount = answerTxt.getText().length();
 				wordsHandler.hint(charsCount + 1);// позиция символа в строке
-				hintRemain--;
-				buttonHint.setText("Hint (" + hintRemain + ")");
-				if (hintRemain == 0) {
-					buttonHint.setEnabled(false);
-				}
 			}
 			answerTxt.setSelection(answerTxt.length());
 			break;
@@ -176,7 +168,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	@Override
 	public void appendChar(final char c) {
 		final StringBuilder sb = new StringBuilder(answerTxt.getText());
-		sb.append("<font color='#0000FF'>");// blue
+		sb.append("<font color='#0000FF'>");
 		sb.append(c);
 		sb.append("</font>");
 
@@ -198,6 +190,12 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	public void updateTextView(int viewTextID, String text) {
 		TextView tv = (TextView) findViewById(viewTextID);
 		tv.setText(text);
+	}
+
+	@Override
+	public void setEnable(int buttonID, boolean b) {
+		Button button = (Button) findViewById(buttonID);
+		button.setEnabled(b);
 	}
 
 	@Override
