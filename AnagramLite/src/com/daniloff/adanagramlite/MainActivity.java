@@ -19,7 +19,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daniloff.adanagramlite.proc.WordsHandler;
+import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
 
@@ -35,7 +35,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private Button buttonNext;
 	private EditText answerTxt;
 
-	private WordsHandler wordsHandler;
+	private WordsHandlerImpl wordsHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +43,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		setContentView(R.layout.activity_main);
 		inicializeViews();
 
-		wordsHandler = new WordsHandler();
+		wordsHandler = new WordsHandlerImpl();
 		wordsHandler.setView(this);
 		wordsHandler.setContext(getBaseContext());
 
@@ -54,7 +54,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			wordsHandler.setResumed(true);
 		}
 
-		wordsHandler.start();
+		wordsHandler.startLevel();
 	}
 
 	@Override
@@ -136,11 +136,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			}
 			answerTxt.setSelection(answerTxt.length());
 			break;
-
-		case R.id.button_rulesOk:
-			moveToFinishView();
-			break;
-
 		}
 	}
 
@@ -152,12 +147,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			wordsHandler.analyzeAnswer(answer);
 			answerTxt.setText("");
 		} else {
-//			if (answer.equalsIgnoreCase("godmode")) {
-//				wordsHandler.toggleGodMode();
-//				answerTxt.setText("");
-//			} else {
-				toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
-			//			}
+			toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
 		}
 	}
 

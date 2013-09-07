@@ -11,7 +11,7 @@ import com.daniloff.adanagramlite.AnagramView;
 import com.daniloff.adanagramlite.GlobalInvoke;
 import com.daniloff.adanagramlite.R;
 
-public class WordsHandler {
+public class WordsHandlerImpl {
 
 	private final String LOG_TAG = "autor";
 	private final int MAX_LEVEL = 10;
@@ -36,7 +36,7 @@ public class WordsHandler {
 	private boolean resumed;
 	private String lang;
 
-	public void start() {
+	public void startLevel() {
 
 		record = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_RECORD");
 		if (resumed) {
@@ -63,7 +63,7 @@ public class WordsHandler {
 		supplyTask();
 	}
 
-	public void newTask() {
+	private void newTask() {
 		GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_STEP", step);
 		GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_SCORE", score);
 		attempt = 1;
@@ -108,7 +108,7 @@ public class WordsHandler {
 		image.appendChar(c);
 	}
 
-	public void toggleGodMode() {
+	private void toggleGodMode() {
 		if (!godMode) {
 			godMode = true;
 		} else {
@@ -155,8 +155,9 @@ public class WordsHandler {
 			step = 1;
 			image.toast("you passed to level " + level);
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
-			start();
+			startLevel();
 		} else {
+			GlobalInvoke.paramsHandler.saveParamBoolean("PARAM_NAME_RESUMING", false);
 			image.moveToFinishView();
 		}
 	}
@@ -186,7 +187,7 @@ public class WordsHandler {
 		stepCost = stepCost + cost;
 	}
 
-	public void penalty(int price) {
+	private void penalty(int price) {
 		int penaltyScore;
 		if (stepCost > price) {
 			penaltyScore = stepCost;
@@ -201,7 +202,7 @@ public class WordsHandler {
 		image.updateTextView(R.id.txt_answer, word);
 	}
 
-	public String loadParams(String paramName) {
+	private String loadParams(String paramName) {
 		SharedPreferences settings = context.getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
 		return settings.getString(paramName, "");
 	}
@@ -226,10 +227,6 @@ public class WordsHandler {
 		return record;
 	}
 
-	public int getLevel() {
-		return level;
-	}
-
 	public LevelParams getParams() {
 		return params;
 	}
@@ -242,10 +239,6 @@ public class WordsHandler {
 		return godMode;
 	}
 
-	public void setGodMode(boolean godMode) {
-		this.godMode = godMode;
-	}
-
 	public void setLang(String lang) {
 		this.lang = lang;
 		GlobalInvoke.paramsHandler.saveParamString("PARAM_NAME_LANG", lang);
@@ -253,10 +246,6 @@ public class WordsHandler {
 
 	public void setResumed(boolean resumed) {
 		this.resumed = resumed;
-	}
-
-	public int getHintRemain() {
-		return hintRemain;
 	}
 
 }
