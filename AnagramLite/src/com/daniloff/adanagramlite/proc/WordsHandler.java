@@ -126,7 +126,11 @@ public class WordsHandler {
 		if (answer.equals(word)) {
 			onCorrectAnswer();
 		} else {
-			onMistake();
+			if (answer.substring(0, 3).equalsIgnoreCase("$$$")) {
+				toggleGodMode();
+			} else {
+				onMistake();
+			}
 		}
 	}
 

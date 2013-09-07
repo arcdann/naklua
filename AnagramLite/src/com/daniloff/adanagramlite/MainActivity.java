@@ -152,12 +152,12 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			wordsHandler.analyzeAnswer(answer);
 			answerTxt.setText("");
 		} else {
-			if (answer.equalsIgnoreCase("godmode")) {
-				wordsHandler.toggleGodMode();
-				answerTxt.setText("");
-			} else {
+//			if (answer.equalsIgnoreCase("godmode")) {
+//				wordsHandler.toggleGodMode();
+//				answerTxt.setText("");
+//			} else {
 				toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
-			}
+			//			}
 		}
 	}
 
