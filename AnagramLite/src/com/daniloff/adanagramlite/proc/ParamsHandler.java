@@ -1,12 +1,12 @@
-package com.daniloff.adanagramlite;
+package com.daniloff.adanagramlite.proc;
 
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.os.Parcel;
-import android.os.Parcelable;
 
-public class ParamsHandler implements Parcelable {
+import com.daniloff.adanagramlite.ChoiceActivity;
+
+public class ParamsHandler {
 
 	private static final String SETTINGS_FILENAME = "gamestate";
 	private Context context;
@@ -50,17 +50,6 @@ public class ParamsHandler implements Parcelable {
 
 	public void setContext(Context baseContext) {
 		context = baseContext;
-	}
-
-	@Override
-	public int describeContents() {
-		return 0;
-	}
-
-	@Override
-	public void writeToParcel(Parcel arg0, int arg1) {
-		// TODO Auto-generated method stub
-
 	}
 
 }

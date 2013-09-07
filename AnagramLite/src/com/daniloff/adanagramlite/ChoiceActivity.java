@@ -1,5 +1,7 @@
 package com.daniloff.adanagramlite;
 
+import com.daniloff.adanagramlite.proc.ParamsHandler;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -16,7 +18,7 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 	private Button buttonResumeGame;
 	private Button buttonRules;
 	private Button buttonAbout;
-	public static ParamsHandler paramsHandler;
+//	public static ParamsHandler paramsHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,9 +35,9 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		buttonRules.setOnClickListener(this);
 		buttonAbout.setOnClickListener(this);
 
-		paramsHandler = new ParamsHandler();
-		paramsHandler.setView(this);
-		paramsHandler.setContext(getBaseContext());
+		GlobalInvoke.paramsHandler = new ParamsHandler();
+		GlobalInvoke.paramsHandler.setView(this);
+		GlobalInvoke.paramsHandler.setContext(getBaseContext());
 
 	}
 
@@ -54,7 +56,7 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 							lang = "ru";
 						}
 
-						paramsHandler.saveParamBoolean("PARAM_NAME_RESUMING", true);
+						GlobalInvoke.paramsHandler.saveParamBoolean("PARAM_NAME_RESUMING", true);
 						Intent intentNewGame = new Intent(ChoiceActivity.this, MainActivity.class);
 						intentNewGame.putExtra("button", "newGame");
 						intentNewGame.putExtra("lang", lang);
