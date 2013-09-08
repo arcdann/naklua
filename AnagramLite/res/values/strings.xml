@@ -7,50 +7,44 @@
     <string name="button_txt_ok">OK</string>
     <string name="button_txt_hint">Hint</string>
     <string name="button_txt_next">Next word</string>
-    <string name="button_txt_exit">Exit</string><string name="button_txt_newGame">New Game</string><string name="button_txt_resumeGame">Resume Game</string><string name="button_txt_rules">Rules</string><string name="button_txt_about">About</string><color name="red">#FF0000</color><color name="purple">#800080</color><color name="blue">#0000FF</color><color name="brown_light">#C6A36A</color><color name="brown_deep">#5F3A12</color><string name="score_info">score:</string>
+    <string name="button_txt_exit">Exit</string>
+    <string name="button_txt_newGame">New Game</string>
+    <string name="button_txt_resumeGame">Resume Game</string>
+    <string name="button_txt_rules">Rules</string>
+    <string name="button_txt_about">About</string>
+
+    <color name="red">#FF0000</color>
+    <color name="purple">#800080</color>
+    <color name="blue">#0000FF</color>
+    <color name="brown_light">#C6A36A</color>
+    <color name="brown_deep">#5F3A12</color>
+
+    <string name="score_info">score:</string>
     <string name="input_answer">Input answer here</string>
     <string name="level">level</string>
     <string name="step">step</string>
     <string name="attempt">attempt</string>
     <string name="record">record</string>
-
-    
-    
-
     <string name="god_mode">god mode</string>
-
-    
-
     <string name="congratulation">Congratulations!</string>
     <string name="you_finished">You have finished this game!</string>
     <string name="your_score">Your score is</string>
     <string name="title_activity_finish">AD Anagram lite: finish</string>
     <string name="title_activity_choice">AD Anagram lite: choice</string>
-    
-    
-    
-    
-    
     <string name="title_activity_rules">AD Anagram lite: rules</string>
     <string name="rules_txt">&quot;Just compose word of shown letters. You may use some hints and attempts, numbers of those depends of reached level.&quot;</string>
     <string name="title_activity_about">AD Anagram lite: about</string>
     <string name="author_txt">Author</string>
     <string name="author_name">Arkady Danilov</string>
-
-    
-    
-
     <string name="title_activity_entry">AD Anagram lite: entry</string>
-
     <string name="selectEnglish">Select English</string>
-
     <string name="selectRussian">Выберите Русский</string>
-
     <string name="enrty_checkbox_txt">Show this screen next time</string>
     <string name="design_name">Sergey Ptaha</string>
     <string name="design_email">ptaha-dip@ya.ru</string>
     <string name="design_txt"> logo design by</string>
     <string name="anagramLogo">Anagram logo</string>
     <string name="about_version_title">   version </string>
+    <string name="title_activity_buttons_input">MainActivity</string>
 
 </resources>
