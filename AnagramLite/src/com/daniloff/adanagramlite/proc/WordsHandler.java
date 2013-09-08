@@ -6,34 +6,37 @@ import com.daniloff.adanagramlite.AnagramView;
 
 public interface WordsHandler {
 
-	public abstract void startLevel();
+	void startLevel();
 
-	public abstract void hint(int i);
+	void hint(int i);
 
-	public abstract void analyzeAnswer(String answer);
+	void analyzeAnswer(String answer);
 
-	public abstract void nextWord();
+	void nextWord();
 
-	public abstract void inputWholeWord();
+	void inputWholeWord();
 
-	public abstract void setView(AnagramView image);
+	// ///////////////////////
+	void setView(AnagramView image);
 
-	public abstract int getStep();
+	void setContext(Context baseContext);
 
-	public abstract int getAttempt();
+	// /////////////////////
+	void setLang(String lang);// enum
 
-	public abstract int getScore();
+	void setResumed(boolean resumed);
 
-	public abstract int getRecord();
+	// //////////////////////
+	LevelParams getParams();
 
-	public abstract LevelParams getParams();
+	boolean isGodMode();
 
-	public abstract void setContext(Context baseContext);
+	int getStep();
 
-	public abstract boolean isGodMode();
+	int getAttempt();
 
-	public abstract void setLang(String lang);
+	int getScore();
 
-	public abstract void setResumed(boolean resumed);
+	int getRecord();
 
 }

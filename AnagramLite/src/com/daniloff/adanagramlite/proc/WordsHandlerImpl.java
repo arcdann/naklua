@@ -41,7 +41,7 @@ public class WordsHandlerImpl implements WordsHandler {
 
 		record = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_RECORD");
 		if (resumed) {
-			lang = loadParams("PARAM_NAME_LANG");
+			lang = GlobalInvoke.paramsHandler.loadParamString("PARAM_NAME_LANG");
 			level = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_LEVEL");
 			if (level == 0)
 				level = 1;
@@ -205,11 +205,6 @@ public class WordsHandlerImpl implements WordsHandler {
 	@Override
 	public void inputWholeWord() {
 		image.updateTextView(R.id.txt_answer, word);
-	}
-
-	private String loadParams(String paramName) {
-		SharedPreferences settings = context.getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
-		return settings.getString(paramName, "");
 	}
 
 	@Override
