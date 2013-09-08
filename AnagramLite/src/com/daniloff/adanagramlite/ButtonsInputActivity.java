@@ -71,8 +71,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 				int id = v.getId();
 				int idPrefix = id / 1000 * 1000;
 				
-	//			char c=(Character) v.getTag();
-
 				if (idPrefix == TASKBUTTON_ID_PREFIX) {
 					handleTaskButtonStress(id);
 				}
@@ -113,9 +111,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 		buttonNext = (Button) findViewById(R.id.button_next);
 		buttonNext.setOnClickListener(this);
 
-		// taskTxt = (TextView) findViewById(R.id.view_task);
-		// answerTxt = (EditText) findViewById(R.id.txt_answer);
-
 		stepTxt = (TextView) findViewById(R.id.info_step);
 		attemptTxt = (TextView) findViewById(R.id.info_attempt);
 		scoreTxt = (TextView) findViewById(R.id.view_score);
@@ -123,19 +118,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
 
-		// answerTxt.setOnKeyListener(new OnKeyListener() {
-		//
-		// @Override
-		// public boolean onKey(View v, int keyCode, KeyEvent event) {
-		// if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode ==
-		// KeyEvent.KEYCODE_ENTER) {
-		// submitAnswer();
-		// return true;
-		// } else {
-		// return false;
-		// }
-		// }
-		// });
 	}
 
 	@Override

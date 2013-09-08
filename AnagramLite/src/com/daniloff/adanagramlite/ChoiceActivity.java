@@ -38,6 +38,9 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		GlobalInvoke.paramsHandler.setView(this);
 		GlobalInvoke.paramsHandler.setContext(getBaseContext());
 
+		boolean resuming = GlobalInvoke.paramsHandler.loadParamBoolean("PARAM_NAME_RESUMING");
+		buttonResumeGame.setEnabled(resuming);
+		
 	}
 
 	private void createAlertDialog() {
