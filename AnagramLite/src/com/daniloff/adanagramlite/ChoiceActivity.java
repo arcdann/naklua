@@ -56,7 +56,7 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 						}
 
 						GlobalInvoke.paramsHandler.saveParamBoolean("PARAM_NAME_RESUMING", true);
-						Intent intentNewGame = new Intent(ChoiceActivity.this, MainActivity.class);
+						Intent intentNewGame = new Intent(ChoiceActivity.this, ButtonsInputActivity.class);
 						intentNewGame.putExtra("button", "newGame");
 						intentNewGame.putExtra("lang", lang);
 
@@ -81,7 +81,7 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 			break;
 
 		case R.id.button_resumeGame:
-			Intent intentResume = new Intent(ChoiceActivity.this, MainActivity.class);
+			Intent intentResume = new Intent(ChoiceActivity.this, ButtonsInputActivity.class);
 			intentResume.putExtra("button", "resume");
 			startActivity(intentResume);
 			break;

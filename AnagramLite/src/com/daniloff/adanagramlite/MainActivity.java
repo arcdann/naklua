@@ -42,7 +42,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		inicializeViews();
+		initializeViews();
 
 		wordsHandler = new WordsHandlerImpl();
 		wordsHandler.setView(this);
@@ -65,7 +65,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		return true;
 	}
 
-	private void inicializeViews() {
+	private void initializeViews() {
 
 		wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
 		wrapLayout.setBackgroundColor(getResources().getColor(R.color.brown_light));
@@ -150,10 +150,6 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		} else {
 			toast("it must be " + (wordsHandler.getParams().getWordLength()) + " chars");
 		}
-	}
-
-	public void setTask(TextView word) {
-		this.taskTxt = word;
 	}
 
 	@Override
