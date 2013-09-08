@@ -33,7 +33,8 @@ public class ParamsHandler {
 	}
 
 	public String loadParamString(String paramName) {
-		return null;
+		SharedPreferences settings = context.getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
+		return settings.getString(paramName, "");
 	}
 
 	public int loadParamInt(String paramName) {
@@ -42,7 +43,8 @@ public class ParamsHandler {
 	}
 
 	public boolean loadParamBoolean(String paramName) {
-		return false;
+		SharedPreferences settings = context.getSharedPreferences(SETTINGS_FILENAME, Context.MODE_PRIVATE);
+		return settings.getBoolean(paramName, false);
 	}
 
 	public void setView(ChoiceActivity view) {

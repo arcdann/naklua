@@ -16,11 +16,12 @@ import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
 
 public class ButtonsInputActivity extends Activity implements OnClickListener, AnagramView {
 
-	private final int TASKBUTTON_ID_PREFIX = 2013090800;
-	private final int ANSWERBUTTON_ID_PREFIX = 2013090900;
+	private final int TASKBUTTON_ID_PREFIX = 20201000;
+	private final int ANSWERBUTTON_ID_PREFIX = 20202000;
 
 	private LinearLayout wrapLayout;
 	private LinearLayout taskLayout;
+	private LinearLayout answerLayout;
 
 	private TextView taskTxt;
 	private TextView stepTxt;
@@ -31,9 +32,12 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 	private Button buttonOK;
 	private Button buttonHint;
 	private Button buttonNext;
-	private EditText answerTxt;
+	private String answerTxt;
+
+	private OnClickListener listener;
 
 	private WordsHandler wordsHandler;
+	private char[] wordChars;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +57,43 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 			wordsHandler.setResumed(true);
 		}
 
+		listenButton();
+
 		wordsHandler.startLevel();
 
+	}
+
+	private void listenButton() {
+		listener = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int id = v.getId();
+				int idPrefix = id / 1000 * 1000;
+				
+	//			char c=(Character) v.getTag();
+
+				if (idPrefix == TASKBUTTON_ID_PREFIX) {
+					handleTaskButtonStress(id);
+				}
+
+				taskLayout.removeView(v);
+			}
+		};
+	}
+
+	protected void handleTaskButtonStress(int id) {
+		int index = id % TASKBUTTON_ID_PREFIX;
+		Button bA = createAnswerButton();
+		bA.setText(wordChars, index, 1);
+		answerLayout.addView(bA);
+
+	}
+
+	protected Button createAnswerButton() {
+
+		Button answerButton = new Button(this);
+		return answerButton;
 	}
 
 	private void initializeViews() {
@@ -63,6 +102,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 		wrapLayout.setBackgroundColor(getResources().getColor(R.color.brown_light));
 
 		taskLayout = (LinearLayout) findViewById(R.id.task_layout);
+		answerLayout = (LinearLayout) findViewById(R.id.answer_layout);
 
 		buttonOK = (Button) findViewById(R.id.button_ok);
 		buttonOK.setOnClickListener(this);
@@ -107,17 +147,19 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 
 	@Override
 	public void showTask(String shuffledWord) {
+
 		buttonHint.setEnabled(true);
 
-		char[] wordChars = shuffledWord.toCharArray();
+		wordChars = shuffledWord.toCharArray();
 		Button[] taskButtons = new Button[wordChars.length];
 
 		for (int i = 0; i < wordChars.length; i++) {
 			taskButtons[i] = new Button(this);
 			Button tB = taskButtons[i];
-			// tB.setText(wordChars[i]);
 			tB.setText(wordChars, i, 1);
 			tB.setId(TASKBUTTON_ID_PREFIX + i);
+			tB.setOnClickListener(listener);
+
 			taskLayout.addView(tB);
 		}
 
