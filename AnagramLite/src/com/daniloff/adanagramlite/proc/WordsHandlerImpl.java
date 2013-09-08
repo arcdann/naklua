@@ -11,7 +11,7 @@ import com.daniloff.adanagramlite.AnagramView;
 import com.daniloff.adanagramlite.GlobalInvoke;
 import com.daniloff.adanagramlite.R;
 
-public class WordsHandlerImpl {
+public class WordsHandlerImpl implements WordsHandler {
 
 	private final String LOG_TAG = "autor";
 	private final int MAX_LEVEL = 10;
@@ -36,6 +36,7 @@ public class WordsHandlerImpl {
 	private boolean resumed;
 	private String lang;
 
+	@Override
 	public void startLevel() {
 
 		record = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_RECORD");
@@ -94,6 +95,7 @@ public class WordsHandlerImpl {
 		wordShuffled = sb.toString();
 	}
 
+	@Override
 	public void hint(int i) {
 		hintRemain--;
 		image.updateTextView(R.id.button_hint, "Hint (" + hintRemain + ")");
@@ -122,6 +124,7 @@ public class WordsHandlerImpl {
 		image.updateScoreColors(score, record);
 	}
 
+	@Override
 	public void analyzeAnswer(String answer) {
 		if (answer.equals(word)) {
 			onCorrectAnswer();
@@ -177,6 +180,7 @@ public class WordsHandlerImpl {
 		}
 	}
 
+	@Override
 	public void nextWord() {
 		penalty(params.getWordPrice());
 		image.toast("The word: " + word);
@@ -198,6 +202,7 @@ public class WordsHandlerImpl {
 		updateScoreInfo();
 	}
 
+	@Override
 	public void inputWholeWord() {
 		image.updateTextView(R.id.txt_answer, word);
 	}
@@ -207,43 +212,53 @@ public class WordsHandlerImpl {
 		return settings.getString(paramName, "");
 	}
 
+	@Override
 	public void setView(AnagramView image) {
 		this.image = image;
 	}
 
+	@Override
 	public int getStep() {
 		return step;
 	}
 
+	@Override
 	public int getAttempt() {
 		return attempt;
 	}
 
+	@Override
 	public int getScore() {
 		return score;
 	}
 
+	@Override
 	public int getRecord() {
 		return record;
 	}
 
+	@Override
 	public LevelParams getParams() {
 		return params;
 	}
 
+	@Override
 	public void setContext(Context baseContext) {
 		context = baseContext;
 	}
 
+	@Override
 	public boolean isGodMode() {
 		return godMode;
 	}
 
+	@Override
 	public void setLang(String lang) {
 		this.lang = lang;
 		GlobalInvoke.paramsHandler.saveParamString("PARAM_NAME_LANG", lang);
 	}
 
+	@Override
 	public void setResumed(boolean resumed) {
 		this.resumed = resumed;
 	}

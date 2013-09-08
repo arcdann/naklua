@@ -19,6 +19,7 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daniloff.adanagramlite.proc.WordsHandler;
 import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
 
 public class MainActivity extends Activity implements OnClickListener, AnagramView {
@@ -35,7 +36,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private Button buttonNext;
 	private EditText answerTxt;
 
-	private WordsHandlerImpl wordsHandler;
+	private WordsHandler wordsHandler;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
