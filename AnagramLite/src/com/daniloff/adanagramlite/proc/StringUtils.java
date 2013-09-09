@@ -14,7 +14,7 @@ public class StringUtils {
 		return retList;
 	}
 
-	public String lettersToWord(List<String> listOfLetters) {
+	public static String lettersToWord(List<String> listOfLetters) {
 
 		String retString = "";
 		for (String s : listOfLetters) {

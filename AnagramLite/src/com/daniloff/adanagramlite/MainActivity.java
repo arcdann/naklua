@@ -107,6 +107,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		buttonHint.setEnabled(true);
 		runOnUiThread(new Runnable() {
 			public void run() {
+				taskTxt.setText("");
 				taskTxt.setText(shuffledWord);
 				stepTxt.setText("step: " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
 				attemptTxt.setText("attempt: " + wordsHandler.getAttempt() + "/"

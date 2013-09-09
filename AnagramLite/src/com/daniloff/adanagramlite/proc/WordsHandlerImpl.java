@@ -74,9 +74,9 @@ public class WordsHandlerImpl implements WordsHandler {
 		word = wordsForLevel.poll();
 		shuffleChars();
 		Log.i(LOG_TAG, word + " => " + wordShuffled);
-		image.showTask(wordShuffled);
 		hintRemain = params.getHintLimit();
 		image.updateTextView(R.id.button_hint, "Hint (" + hintRemain + ")");
+		image.showTask(wordShuffled);
 	}
 
 	private void shuffleChars() {
@@ -139,7 +139,7 @@ public class WordsHandlerImpl implements WordsHandler {
 		image.toast("Correct!");
 		step++;
 		if (step > params.getStepsLimit()) {
-			updateLevel();
+			updateLevel();// ////////////////////////////////////////////////////////////////////
 		}
 		score = score + params.getWordPrice();
 		if (score > record) {
@@ -171,6 +171,7 @@ public class WordsHandlerImpl implements WordsHandler {
 			updateScoreInfo();
 			countStepCost(params.getAttemptPrice());
 			image.toast("Try again");
+			image.showTask(wordShuffled);
 		} else {
 			penalty(params.getWordPrice());
 			image.toast("The word: " + word);
