@@ -4,7 +4,6 @@ import java.util.Queue;
 import java.util.Random;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
@@ -15,7 +14,6 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	private final String LOG_TAG = "autor";
 	private final int MAX_LEVEL = 10;
-	private static final String SETTINGS_FILENAME = "gamestate";
 
 	private Context context;
 	private Queue<String> wordsForLevel;

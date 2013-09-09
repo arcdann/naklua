@@ -1,5 +1,9 @@
 package com.daniloff.adanagramlite;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -7,10 +11,10 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.daniloff.adanagramlite.proc.StringUtils;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
 
@@ -33,11 +37,17 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 	private Button buttonHint;
 	private Button buttonNext;
 	private String answerTxt;
+	
+	
 
 	private OnClickListener listener;
 
 	private WordsHandler wordsHandler;
-	private char[] wordChars;
+	
+	private List <Button> taskButtons;
+	private List <Button> answerButtons;
+	private List <String> answerLetters;
+	private List<String> taskLetters;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -56,44 +66,18 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 		} else {
 			wordsHandler.setResumed(true);
 		}
+		
+		taskButtons = new ArrayList<Button>();
+		answerButtons = new ArrayList<Button>();
+		answerLetters = new ArrayList<String>();
+		
 
 		listenButton();
 
 		wordsHandler.startLevel();
 
 	}
-
-	private void listenButton() {
-		listener = new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				int id = v.getId();
-				int idPrefix = id / 1000 * 1000;
-				
-				if (idPrefix == TASKBUTTON_ID_PREFIX) {
-					handleTaskButtonStress(id);
-				}
-
-				taskLayout.removeView(v);
-			}
-		};
-	}
-
-	protected void handleTaskButtonStress(int id) {
-		int index = id % TASKBUTTON_ID_PREFIX;
-		Button bA = createAnswerButton();
-		bA.setText(wordChars, index, 1);
-		answerLayout.addView(bA);
-
-	}
-
-	protected Button createAnswerButton() {
-
-		Button answerButton = new Button(this);
-		return answerButton;
-	}
-
+	
 	private void initializeViews() {
 
 		wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
@@ -119,6 +103,96 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 		recordTxt.setTextColor(Color.BLUE);
 
 	}
+	
+	@Override
+	public void showTask(String shuffledWord) {
+
+		buttonHint.setEnabled(true);
+
+		taskLetters = StringUtils.wordToLetters(shuffledWord);
+		 taskButtons =new ArrayList<Button>();
+
+		for (int i = 0; i < taskLetters.size(); i++) {
+			Button tB = new Button(this);
+			tB.setText(taskLetters.get(i));
+			tB.setId(TASKBUTTON_ID_PREFIX + i);
+			tB.setOnClickListener(listener);
+
+			taskButtons.add(tB);
+			taskLayout.addView(tB);
+		}
+
+	}
+
+	private void listenButton() {
+		listener = new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				int id = v.getId();
+				int idPrefix = id / 1000 * 1000;
+				
+				if (idPrefix == TASKBUTTON_ID_PREFIX) {
+					handleTaskButtonStress(id);
+					taskLayout.removeView(v);
+				}
+				if (idPrefix == ANSWERBUTTON_ID_PREFIX) {
+					handleAnswerButtonStress(id);
+					answerLayout.removeView(v);
+				}
+			}
+		};
+	}
+	
+	private void handleTaskButtonStress(int id) {
+		
+		int index = id % TASKBUTTON_ID_PREFIX;
+		
+		Button answerButton = new Button(this);
+		answerLetters.add(taskLetters.get(index));
+		answerButtons.add(answerButton);
+		answerButton.setText(taskLetters.get(index));
+		answerButton.setId(ANSWERBUTTON_ID_PREFIX+answerLetters.size()-1);
+		answerButton.setOnClickListener(listener);
+		answerLayout.addView(answerButton);
+		
+		taskButtons.remove(index);
+		taskLetters.remove(index);
+		
+		for(int i=0;i<taskButtons.size();i++){
+			taskButtons.get(i).setId(TASKBUTTON_ID_PREFIX+i);
+		}
+		
+	}
+
+	private void handleAnswerButtonStress(int id) {
+		
+		int index = id % ANSWERBUTTON_ID_PREFIX;
+		
+		Button taskButton=new Button(this);
+		taskLetters.add(answerLetters.get(index));
+		taskButtons.add(taskButton);
+		taskButton.setText(answerLetters.get(index));
+		taskButton.setId(TASKBUTTON_ID_PREFIX+taskLetters.size()-1);
+		taskButton.setOnClickListener(listener);
+		taskLayout.addView(taskButton);
+		
+		answerLetters.remove(index);
+		answerButtons.remove(index);
+		
+		for(int i=0;i<answerButtons.size();i++){
+			answerButtons.get(i).setId(ANSWERBUTTON_ID_PREFIX+i);
+		}
+		
+	}
+
+	 
+	 
+
+	
+
+
+	
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
@@ -127,25 +201,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, A
 		return true;
 	}
 
-	@Override
-	public void showTask(String shuffledWord) {
 
-		buttonHint.setEnabled(true);
 
-		wordChars = shuffledWord.toCharArray();
-		Button[] taskButtons = new Button[wordChars.length];
-
-		for (int i = 0; i < wordChars.length; i++) {
-			taskButtons[i] = new Button(this);
-			Button tB = taskButtons[i];
-			tB.setText(wordChars, i, 1);
-			tB.setId(TASKBUTTON_ID_PREFIX + i);
-			tB.setOnClickListener(listener);
-
-			taskLayout.addView(tB);
-		}
-
-	}
 
 	@Override
 	public void appendChar(char c) {
