@@ -45,6 +45,7 @@ public class WordsHandlerImpl implements WordsHandler {
 				level = 1;
 			step = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_STEP");
 			score = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_SCORE");
+			resumed=false;
 		}
 
 		if (lang.equals("ru")) {
@@ -136,18 +137,22 @@ public class WordsHandlerImpl implements WordsHandler {
 	}
 
 	private void onCorrectAnswer() {
+		
 		image.toast("Correct!");
-		step++;
-		if (step > params.getStepsLimit()) {
-			updateLevel();// ////////////////////////////////////////////////////////////////////
-		}
+		
 		score = score + params.getWordPrice();
 		if (score > record) {
 			record = score;
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_RECORD", record);
 		}
 		updateScoreInfo();
-		newTask();
+		
+		step++;
+		if (step > params.getStepsLimit()) {
+			updateLevel();
+		}else{
+			newTask();
+		}
 	}
 
 	private void updateLevel() {

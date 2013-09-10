@@ -103,6 +103,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void showTask(String shuffledWord) {
+		
+		clearAnswerField();
 
 		buttonHint.setEnabled(true);
 
@@ -118,7 +120,9 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			taskButton.setOnClickListener(listener);
 
 			taskButtons.add(taskButton);
+
 			taskLayout.addView(taskButton);
+			
 		}
 
 		stepTxt.setText("step: " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
@@ -128,6 +132,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	}
 
 	private void listenButton() {
+		
 		listener = new OnClickListener() {
 
 			@Override
@@ -164,9 +169,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		taskButtons.remove(index);
 		taskLetters.remove(index);
 
-		for (int i = 0; i < taskButtons.size(); i++) {
-			taskButtons.get(i).setId(TASKBUTTON_ID_PREFIX + i);
-		}
+		reindexButtons(taskButtons, TASKBUTTON_ID_PREFIX);
 
 		if (taskLetters.size() == 0) {
 			submitAnswer(answerLetters);
@@ -174,26 +177,40 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	}
 
+	private void reindexButtons(List<Button> buttons, int prefix) {
+		for (int i = 0; i < buttons.size(); i++) {
+			taskButtons.get(i).setId(prefix + i);
+		}
+	}
+
 	private void submitAnswer(List<String> letters) {
 
 		String answer = StringUtils.lettersToWord(letters);
-		clearAllFields();
-
+		clearTaskField();
 		wordsHandler.analyzeAnswer(answer);
 
 	}
 
-	private void clearAllFields() {
-
-		answerLetters.removeAll(answerLetters);
-		answerButtons.removeAll(answerButtons);
-		answerLayout.removeAllViews();
+	private void clearTaskField() {
 
 		taskLetters.removeAll(answerLetters);
 		taskButtons.removeAll(answerButtons);
 		taskLayout.removeAllViews();
 
 	}
+
+	private void clearAnswerField() {
+		
+		answerLetters.removeAll(answerLetters);
+		answerButtons.removeAll(answerButtons);
+		answerLayout.removeAllViews();
+		
+	}
+	
+	
+	
+	
+	
 
 	private void inputHintedWord() {
 		// TODO Auto-generated method stub
@@ -217,9 +234,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerLetters.remove(index);
 		answerButtons.remove(index);
 
-		for (int i = 0; i < answerButtons.size(); i++) {
-			answerButtons.get(i).setId(ANSWERBUTTON_ID_PREFIX + i);
-		}
+		reindexButtons(answerButtons, ANSWERBUTTON_ID_PREFIX);
 
 	}
 
@@ -281,7 +296,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_next:
-			clearAllFields();
+			clearTaskField();
 			wordsHandler.nextWord();
 			break;
 
@@ -300,7 +315,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public boolean onLongClick(View v) {
-//
+		//
 		return false;
 	}
 
