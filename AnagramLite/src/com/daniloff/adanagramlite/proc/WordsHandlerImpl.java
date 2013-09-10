@@ -45,7 +45,7 @@ public class WordsHandlerImpl implements WordsHandler {
 				level = 1;
 			step = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_STEP");
 			score = GlobalInvoke.paramsHandler.loadParamInt("PARAM_NAME_SCORE");
-			resumed=false;
+			resumed = false;
 		}
 
 		if (lang.equals("ru")) {
@@ -73,15 +73,15 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	private void supplyTask() {
 		word = wordsForLevel.poll();
-		shuffleChars();
+		wordShuffled = shuffleChars(word);
 		Log.i(LOG_TAG, word + " => " + wordShuffled);
 		hintRemain = params.getHintLimit();
 		image.updateTextView(R.id.button_hint, "Hint (" + hintRemain + ")");
 		image.showTask(wordShuffled);
 	}
 
-	private void shuffleChars() {
-		char[] chars = word.toCharArray();
+	private String shuffleChars(String str) {
+		char[] chars = str.toCharArray();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < chars.length; i++) {
 			int index = rnd.nextInt(chars.length);
@@ -91,22 +91,30 @@ public class WordsHandlerImpl implements WordsHandler {
 			} else
 				i--;
 		}
-		wordShuffled = sb.toString();
+		return sb.toString();
 	}
 
 	@Override
-	public void hint(int i) {
+	public String[] hint(String letters) {
 		hintRemain--;
-		image.updateTextView(R.id.button_hint, "Hint (" + hintRemain + ")");
-		if (hintRemain == 0) {
-			image.setEnable(R.id.button_hint, false);
-		}
-		score = score - params.getHintPrice();
-		updateScoreInfo();
 
-		countStepCost(params.getHintPrice());
-		char c = word.charAt(i - 1);
-		image.appendChar(c);
+		int wrongLetterIndex = 0;
+		for (int i = 0; i < letters.length(); i++) {
+			if (letters.charAt(i) == word.charAt(i)) {
+				wrongLetterIndex++;
+			} else {
+				wrongLetterIndex = i;
+				break;
+			}
+		}
+
+		String hintedLetters = word.substring(0, wrongLetterIndex + 1);
+		String unusedLetters = shuffleChars(word.substring(wrongLetterIndex + 1));
+
+		String[] retHint = { hintedLetters, unusedLetters };
+
+		return retHint;
+
 	}
 
 	private void toggleGodMode() {
@@ -137,20 +145,20 @@ public class WordsHandlerImpl implements WordsHandler {
 	}
 
 	private void onCorrectAnswer() {
-		
+
 		image.toast("Correct!");
-		
+
 		score = score + params.getWordPrice();
 		if (score > record) {
 			record = score;
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_RECORD", record);
 		}
 		updateScoreInfo();
-		
+
 		step++;
 		if (step > params.getStepsLimit()) {
 			updateLevel();
-		}else{
+		} else {
 			newTask();
 		}
 	}

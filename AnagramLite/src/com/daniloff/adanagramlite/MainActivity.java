@@ -133,8 +133,8 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			if (wordsHandler.isGodMode()) {
 				wordsHandler.inputWholeWord();
 			} else {
-				int charsCount = answerTxt.getText().length();
-				wordsHandler.hint(charsCount + 1);// позиция символа в строке
+				// int charsCount = answerTxt.getText().length();
+				// wordsHandler.hint(charsCount + 1);// позиция символа в строке
 			}
 			answerTxt.setSelection(answerTxt.length());
 			break;

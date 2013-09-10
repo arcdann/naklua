@@ -3,7 +3,9 @@ package com.daniloff.adanagramlite;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -24,21 +26,19 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	private final int TASKBUTTON_ID_PREFIX = 20201000;
 	private final int ANSWERBUTTON_ID_PREFIX = 20202000;
-	private final int BUTTON_SUZE = 48;
+	private final int BUTTON_SIZE = 64;
 
 	private LinearLayout wrapLayout;
 	private LinearLayout taskLayout;
 	private LinearLayout answerLayout;
 
-	private TextView taskTxt;
 	private TextView stepTxt;
 	private TextView attemptTxt;
 	private TextView scoreTxt;
 	private TextView recordTxt;
-	private TextView godModeTxt;
+	// private TextView godModeTxt;
 	private Button buttonHint;
 	private Button buttonNext;
-	// private String answerTxt;
 
 	private OnClickListener listener;
 
@@ -48,6 +48,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private List<Button> answerButtons;
 	private List<String> answerLetters;
 	private List<String> taskLetters;
+	private int hintRemain;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -103,9 +104,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void showTask(String shuffledWord) {
-		
+
 		clearAnswerField();
 
+		hintRemain = wordsHandler.getParams().getHintLimit();
 		buttonHint.setEnabled(true);
 
 		taskLetters = StringUtils.wordToLetters(shuffledWord);
@@ -113,8 +115,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		for (int i = 0; i < taskLetters.size(); i++) {
 			Button taskButton = new Button(this);
-			taskButton.setWidth(BUTTON_SUZE);
-			taskButton.setHeight(BUTTON_SUZE);
+			taskButton.setWidth(BUTTON_SIZE);
+			taskButton.setHeight(BUTTON_SIZE);
 			taskButton.setText(taskLetters.get(i));
 			taskButton.setId(TASKBUTTON_ID_PREFIX + i);
 			taskButton.setOnClickListener(listener);
@@ -122,7 +124,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			taskButtons.add(taskButton);
 
 			taskLayout.addView(taskButton);
-			
+
 		}
 
 		stepTxt.setText("step: " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
@@ -132,7 +134,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	}
 
 	private void listenButton() {
-		
+
 		listener = new OnClickListener() {
 
 			@Override
@@ -157,35 +159,45 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		int index = id % TASKBUTTON_ID_PREFIX;
 
 		Button answerButton = new Button(this);
-		answerButton.setWidth(BUTTON_SUZE);
-		answerButton.setHeight(BUTTON_SUZE);
+		answerButton.setWidth(BUTTON_SIZE);
+		answerButton.setHeight(BUTTON_SIZE);
 		answerLetters.add(taskLetters.get(index));
-		answerButtons.add(answerButton);
 		answerButton.setText(taskLetters.get(index));
 		answerButton.setId(ANSWERBUTTON_ID_PREFIX + answerLetters.size() - 1);
+
+		if (answerButtons.size() > 0) {
+			answerButtons.get(answerButtons.size() - 1).setEnabled(false);
+		}
 		answerButton.setOnClickListener(listener);
+		answerButtons.add(answerButton);
+
 		answerLayout.addView(answerButton);
 
 		taskButtons.remove(index);
 		taskLetters.remove(index);
 
+		reindexButtons(answerButtons, ANSWERBUTTON_ID_PREFIX);
 		reindexButtons(taskButtons, TASKBUTTON_ID_PREFIX);
 
+		if (taskLetters.size() < 3) {
+			buttonHint.setEnabled(false);
+		}
+
 		if (taskLetters.size() == 0) {
-			submitAnswer(answerLetters);
+			submitAnswer();
 		}
 
 	}
 
 	private void reindexButtons(List<Button> buttons, int prefix) {
 		for (int i = 0; i < buttons.size(); i++) {
-			taskButtons.get(i).setId(prefix + i);
+			buttons.get(i).setId(prefix + i);
 		}
 	}
 
-	private void submitAnswer(List<String> letters) {
+	private void submitAnswer() {
 
-		String answer = StringUtils.lettersToWord(letters);
+		String answer = StringUtils.lettersToWord(answerLetters);
 		clearTaskField();
 		wordsHandler.analyzeAnswer(answer);
 
@@ -200,17 +212,12 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	}
 
 	private void clearAnswerField() {
-		
+
 		answerLetters.removeAll(answerLetters);
 		answerButtons.removeAll(answerButtons);
 		answerLayout.removeAllViews();
-		
+
 	}
-	
-	
-	
-	
-	
 
 	private void inputHintedWord() {
 		// TODO Auto-generated method stub
@@ -222,8 +229,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		int index = id % ANSWERBUTTON_ID_PREFIX;
 
 		Button taskButton = new Button(this);
-		taskButton.setWidth(BUTTON_SUZE);
-		taskButton.setHeight(BUTTON_SUZE);
+		taskButton.setWidth(BUTTON_SIZE);
+		taskButton.setHeight(BUTTON_SIZE);
 		taskLetters.add(answerLetters.get(index));
 		taskButtons.add(taskButton);
 		taskButton.setText(answerLetters.get(index));
@@ -231,11 +238,19 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		taskButton.setOnClickListener(listener);
 		taskLayout.addView(taskButton);
 
+		if (hintRemain >= 1 && taskLetters.size() >= 3) {
+			buttonHint.setEnabled(true);
+		}
+
 		answerLetters.remove(index);
 		answerButtons.remove(index);
 
 		reindexButtons(answerButtons, ANSWERBUTTON_ID_PREFIX);
+		reindexButtons(taskButtons, TASKBUTTON_ID_PREFIX);
 
+		if (answerButtons.size() > 0) {
+			answerButtons.get(answerButtons.size() - 1).setEnabled(true);
+		}
 	}
 
 	@Override
@@ -288,10 +303,16 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void moveToFinishView() {
-		// TODO Auto-generated method stub
+
+		Intent intent = new Intent(ButtonsInputActivity.this, FinishActivity.class);
+		intent.putExtra("score", wordsHandler.getScore());
+		intent.putExtra("record", wordsHandler.getRecord());
+
+		startActivity(intent);
 
 	}
 
+	@SuppressLint("ResourceAsColor")
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
@@ -305,8 +326,53 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 				// wordsHandler.inputWholeWord();
 				inputHintedWord();
 			} else {
-				int charsCount = answerLetters.size();
-				wordsHandler.hint(charsCount + 1);// позиция символа в строке
+
+				hintRemain--;
+				if (hintRemain < 1 || taskLetters.size() < 3) {
+					buttonHint.setEnabled(false);
+				}
+
+				String askHint = StringUtils.lettersToWord(answerLetters);
+
+				String[] hintStrings = wordsHandler.hint(askHint);
+
+				clearAnswerField();
+				clearTaskField();
+
+				List<String> correctLetters = StringUtils.wordToLetters(hintStrings[0]);
+
+				for (int a = 0; a < hintStrings[0].length(); a++) {
+					Button answerButton = new Button(this);
+					answerButton.setWidth(BUTTON_SIZE);
+					answerButton.setHeight(BUTTON_SIZE);
+
+					answerLetters.add(correctLetters.get(a));
+
+					answerButton.setText(correctLetters.get(a));
+					answerButton.setEnabled(false);
+					answerButton.setTextColor(R.color.purple);
+					answerButton.setOnClickListener(listener);
+					answerButton.setId(ANSWERBUTTON_ID_PREFIX + a);
+
+					answerButtons.add(answerButton);
+					answerLayout.addView(answerButton);
+				}
+
+				taskLetters = StringUtils.wordToLetters(hintStrings[1]);
+				taskButtons = new ArrayList<Button>();
+
+				for (int i = 0; i < taskLetters.size(); i++) {
+					Button taskButton = new Button(this);
+					taskButton.setWidth(BUTTON_SIZE);
+					taskButton.setHeight(BUTTON_SIZE);
+					taskButton.setText(taskLetters.get(i));
+					taskButton.setId(TASKBUTTON_ID_PREFIX + i);
+					taskButton.setOnClickListener(listener);
+
+					taskButtons.add(taskButton);
+
+					taskLayout.addView(taskButton);
+				}
 			}
 			break;
 		}

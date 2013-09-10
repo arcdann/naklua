@@ -8,7 +8,7 @@ public interface WordsHandler {
 
 	void startLevel();
 
-	void hint(int i);
+	String[] hint(String askHint);
 
 	void analyzeAnswer(String answer);
 
