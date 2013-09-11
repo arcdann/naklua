@@ -1,12 +1,11 @@
 package com.daniloff.wordcards;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Random;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -17,8 +16,8 @@ public class MainActivity extends Activity implements OnClickListener {
 	private Button nextButton;
 	private List<Task> taskList;
 	private Task currentTask;
-	private boolean overturned;
-	int count;
+	private boolean reverted;
+	private Random rnd = new Random();
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -26,93 +25,71 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 
 		showButton = (Button) findViewById(R.id.button_show);
-		nextButton = (Button) findViewById(R.id.button_next);
-		nextButton.setOnClickListener(this);
 		showButton.setOnClickListener(this);
 
-		taskList = prepareTaskList();
-		showTask(taskList);
+		nextButton = (Button) findViewById(R.id.button_next);
+		nextButton.setOnClickListener(this);
+
+		prepareTaskList();
+		showTask();
 	}
 
-	private List<Task> prepareTaskList() {
+	private void prepareTaskList() {
 
-		String FileAsString = FileUtils.readFile(getApplicationContext(), R.raw.words);
-		String[] sharpSeparatedWords = FileAsString.split("\\n");
+		String fileAsString = FileUtils.readFile(getApplicationContext(), R.raw.words);
+		String[] sharpSeparatedWords = fileAsString.split("\\n");
 
 		List<Task> retList = new ArrayList<Task>();
 
 		for (String wordsCouple : sharpSeparatedWords) {
-			Task task = new Task(wordsCouple);
+			int separatorIndex = wordsCouple.indexOf('#');
+			String phrase = wordsCouple.substring(0, separatorIndex);
+			String meaning = wordsCouple.substring(separatorIndex + 1);
+
+			Task task = new Task(phrase, meaning);
 			retList.add(task);
 		}
-		Collections.shuffle(retList);
-		return retList;
-
+		taskList = retList;
 	}
 
-	private void showTask(List<Task> taskList) {
+	private void showTask() {
+		currentTask = taskList.get(rnd.nextInt(taskList.size()));
+		showInitialView();
+	}
 
+	private void revertCard() {
+		if (reverted) {
+			showInitialView();
+			reverted = false;
+		} else {
+			showRevertedView();
+			reverted = true;
+		}
+	}
+
+	private void showRevertedView() {
+		showButton.setBackgroundColor(getResources().getColor(R.color.sand));
+		showButton.setTextColor(getResources().getColor(R.color.brown));
+
+		showButton.setText(currentTask.getMeaning());
+	}
+
+	private void showInitialView() {
 		showButton.setBackgroundColor(getResources().getColor(R.color.azure));
 		showButton.setTextColor(getResources().getColor(R.color.blue));
 
-		overturned = false;
-		currentTask = taskList.remove(0);
 		showButton.setText(currentTask.getPhrase());
-
-		taskList.add(currentTask);
-
-	}
-
-	private void overturnCard() {
-
-		if (!overturned) {
-
-			showButton.setBackgroundColor(getResources().getColor(R.color.sand));
-			showButton.setTextColor(getResources().getColor(R.color.brown));
-
-			showButton.setText(currentTask.getMeaning());
-			overturned = true;
-		} else {
-
-			showButton.setBackgroundColor(getResources().getColor(R.color.azure));
-			showButton.setTextColor(getResources().getColor(R.color.blue));
-
-			showButton.setText(currentTask.getPhrase());
-			overturned = false;
-		}
-
-	}
-
-	private void countCard() {
-		count++;
-		if (count > taskList.size()) {
-			Collections.shuffle(taskList);
-			count = 0;
-		}
-	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.main, menu);
-		return true;
 	}
 
 	@Override
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.button_next:
-			countCard();
-			showTask(taskList);
+			showTask();
 			break;
 		case R.id.button_show:
-			overturnCard();
-			break;
-
-		default:
+			revertCard();
 			break;
 		}
-
 	}
-
 }

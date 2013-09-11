@@ -5,10 +5,9 @@ public class Task {
 	private final String phrase;
 	private final String meaning;
 
-	public Task(String wordsCouples) {
-		int separatorIndex = wordsCouples.indexOf('#');
-		phrase = wordsCouples.substring(0, separatorIndex);
-		meaning = wordsCouples.substring(separatorIndex + 1);
+	public Task(String phrase, String meaning) {
+		this.phrase = phrase;
+		this.meaning = meaning;
 	}
 
 	public String getPhrase() {
