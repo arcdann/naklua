@@ -1,206 +1,984 @@
-ask someone out#invite on a date
-ask around#ask many people the same question
-add up to something#equal
-back something up#reverse
-back someone up#support
-blow up#explode
-blow something up#add air
-break down#stop functioning (vehicle, machine)
-break down#get upset
-break something down#divide into smaller parts
-break in#force entry to a building
-break into something#enter forcibly
-break something in#wear something a few times so that it doesn't look/feel new
-break in#interrupt
-break up#end a relationship
-break up#start laughing (informal)
-break out#escape
-break out in something#develop a skin condition
-bring someone down#make unhappy
-bring someone up#raise a child
-bring something up#start talking about a subject
-bring something up#vomit
-call around#phone many different places/people
-call someone back#return a phone call
-call something off#cancel
-call on someone#ask for an answer or opinion
-call on someone#visit someone
-call someone up#phone
-calm down#relax after being angry
-not care for someone/something#not like (formal)
-catch up#get to the same point as someone else
-check in#arrive and register at a hotel or airport
-check out#leave a hotel
-check someone/something out#look at carefully, investigate
-check out someone/something#look at (informal)
-cheer up#become happier
-cheer someone up#make happier
-chip in#help
-clean something up#tidy, clean
-come across something#find unexpectedly
-come apart#separate
-come down with something#become sick
-come forward#volunteer for a task or to give evidence
-come from somewhere#originate in
-count on someone/something#rely on
-cross something out#draw a line through
-cut back on something#consume less
-cut something down#make something fall to the ground
-cut in#interrupt
-cut in#pull in too closely in front of another vehicle
-cut in#start operating (of an engine or electrical device)
-cut something off#remove with something sharp
-cut something off#stop providing
-cut someone off#take out of a will
-cut something out#remove part of something (usually with scissors and paper)
-do someone/something over#beat up, ransack (Br.E., informal)
-do something over#do again (N.Amer.)
-do away with something#discard
-do something up#fasten, close
-dress up#wear nice clothing
-drop back#move back in a position/group
-drop in/by/over#come without an appointment
-drop someone/something off#take someone/something somewhere and leave them/it there
-drop out#quit a class, school etc
-eat out#eat at a restaurant
-end up#eventually reach/do/decide
-fall apart#break into pieces
-fall down#fall to the ground
-fall out#separate from an interior
-fall out#(of hair, teeth) become loose and unattached
-figure something out#understand, find the answer
-fill something in#to write information in blanks (Br.E.)
-fill something out#to write information in blanks (N.Amer.)
-fill something up#fill to the top
-find out#discover
-find something out#discover
-get something across/over#communicate, make understandable
-get along/on#like each other
-get around#have mobility
-get away#go on a vacation
-get away with something#do without being noticed or punished
-get back#return
-get something back#receive something you had before
-get back at someone#retaliate, take revenge
-get back into something#become interested in something again
-get on something#step onto a vehicle
-get over something#recover from an illness, loss, difficulty
-get over something#overcome a problem
-get round to something#finally find time to do (N.Amer.: get around to something)
-get together#meet (usually for social reasons)
-get up#get out of bed
-get up#stand
-give someone away#reveal hidden information about someone
-give someone away#take the bride to the altar
-give something away#ruin a secret
-give something away#give something to someone for free
-give something back#return a borrowed item
-give in#reluctantly stop fighting or arguing
-give something out#give to many people (usually at no cost)
-give something up#quit a habit
-give up#stop trying
-go after someone#follow someone
-go after something#try to achieve something
-go against someone#compete, oppose
-go ahead#start, proceed
-go back#return to a place
-go out#leave home to go on a social event
-go out with someone#date
-go over something#review
-go over#visit someone nearby
-go without something#suffer lack or deprivation
-grow apart#stop being friends over time
-grow back#regrow
-grow up#become an adult
-grow out of something#get too big for
-grow into something#grow big enough to fit
-hand something down#give something used to someone else
-hand something in#submit
-hand something out#to distribute to a group of people
-hand something over#give (usually unwillingly)
-hang in#stay positive (N.Amer., informal)
-hang on#wait a short time (informal)
-hang out#spend time relaxing (informal)
-hang up#end a phone call
-hold someone/something back#prevent from doing/going
-hold something back#hide an emotion
-hold on#wait a short time
-hold onto someone/something#hold firmly using your hands or arms
-hold someone/somethingup#rob
-keep on doing something#continue doing
-keep something from someone#not tell
-keep someone/something out#stop from entering
-keep something up#continue at the same rate
-let someone down#fail to support or help, disappoint
-let someone in#allow to enter
-look after someone/something#take care of
-look down on someone#think less of, consider inferior
-look for someone/something#try to find
-look forward to something#be excited about the future
-look into something#investigate
-look out#be careful, vigilant, and take notice
-look out for someone/something#be especially vigilant for
-look something over#check, examine
-look something up#search and find information in a reference book or database
-look up to someone#have a lot of respect for
-make something up#invent, lie about something
-make up#forgive each other
-make someone up#apply cosmetics to
-mix something up#confuse two or more things
-pass away#die
-pass out#faint
-pass something out#give the same thing to many people
-pass something up#decline (usually something good)
-pay someone back#return owed money
-pay for something#be punished for doing something bad
-pick something out#choose
-point someone/something out#indicate with your finger
-put something down#put what you are holding on a surface or floor
-put someone down#insult, make someone feel stupid
-put something off#postpone
-put something out#extinguish
-put something together#assemble
-put up with someone/something#tolerate
-put something on#put clothing/accessories on your body
-run into someone/something#meet unexpectedly
-run over someone/something#drive a vehicle over a person or thing
-run over/through something#rehearse, review
-run away#leave unexpectedly, escape
-run out#have none left
-send something back#return (usually by mail)
-set something up#arrange, organize
-set someone up#trick, trap
-shop around#compare prices
-show off#act extra special for people watching (usually boastfully)
-sleep over#stay somewhere for the night (informal)
-sort something out#organize, resolve a problem
-stick to something#continue doing something, limit yourself to one particular thing
-switch something off#stop the energy flow, turn off
-switch something on#start the energy flow, turn on
-take after someone#resemble a family member
-take something apart#purposely break into pieces
-take something back#return an item
-take off#start to fly
-take something off#remove something (usually clothing)
-take something out#remove from a place or thing
-take someone out#pay for someone to go somewhere with you
-tear something up#rip into pieces
-think back#remember (often + to, sometimes + on)
-think something over#consider
-throw something away#dispose of
-turn something down#decrease the volume or strength (heat, light etc)
-turn something down#refuse
-turn something off#stop the energy flow, switch off
-turn something on#start the energy, switch on
-turn something up#increase the volume or strength (heat, light etc)
-turn up#appear suddenly
-try something on#sample clothing
-try something out#test
-use something up#finish the supply
-wake up#stop sleeping
-warm someone/something up#increase the temperature
-warm up#prepare body for exercise
-wear off#fade away
-work out#exercise
-work out#be successful
-work something out#make a calculation
+﻿have # (had; had ) иметь; получать; быть должным
+you # ты, вы
+he # он
+it # он, она, оно; это
+in # в
+not # не, нет; ни
+was # был, была, было;
+that # тот, та, то
+his # его
+do # (did; done ) делать
+on # на
+with # с, вместе с
+she # она
+at # около, у; в, на
+say # (said; said ) говорить
+her # её
+for # в течение, на, для
+as # как; когда
+we # мы
+but # только, лишь; кроме; но,
+can, could # мочь; уметь
+him # его
+they # они
+up # наверх(у), выше; вверх по, вдоль по
+what # что
+out # вне, снаружи; вне, за
+me # мне, меня
+go # (went; gone)
+get # (got)
+this # этот, эта, это
+from # от, из, с
+be (was/were/ ; been ) # быть, существовать; находиться и
+look # взгляд; смотреть
+my # мой
+there # там, туда; вот
+know # (knew ; known ) знать
+all # все, вся, всё
+one # один; один
+no # нет; не
+see # (saw ; seen ) видеть
+back # спина; задний
+into # в
+like # похожий; как, подобно; любить, нравиться
+if # если
+were # были; прош. врем.
+then # тогда; затем
+come # (came ; come) приходить, приезжать; случаться
+think # (thought ; thought) думать; считать, полагать
+so # так; тоже, также
+down # вниз, внизу; вниз по, вдоль по
+your # твой, ваш
+them # их, им
+about # кругом, вокруг; около; о, об, относительно
+man (мн. ч. men) # человек, мужчина
+take # (took ; taken ) брать; доставлять; принимать
+just # только что
+by # у, около
+am # 1 е л. ед.ч. наст. врем. гл. to be
+now # теперь, сейчас
+over # над; свыше
+make # (made ; made) делать, производить; совершать
+or # или
+time # время; раз
+when # когда
+hand # рука
+who # кто; который
+want # хотеть
+here # здесь, тут
+tell # (told ; told) говорить
+off # с, от
+right # правый; верно
+their # их
+turn # поворачивать(ся)
+two # два
+through # через, сквозь
+eye # глаз; взгляд
+head # голова
+other # другой, иной, еще; другой; others другие
+how # как
+some # несколько
+more # больше, более
+around # кругом, вокруг; поблизости; вокруг, по
+door # дверь
+room # комната
+face # лицо
+day # день; сутки
+where # где; куда
+way # путь, дорога
+night # ночь; вечер
+well # хорошо
+thing # вещь, предмет
+open # открывать(ся)
+away # далеко; прочь
+give # (gave ; given ) давать
+only # только
+something # что то, что нибудь; примерно, около
+ask # спрашивать
+move # двигать(ся)
+stand # (stood ; stood) стоять; ставить; терпеть; стойка
+good # хороший; добро
+find # (found ; found) находить, обнаруживать
+again # опять, снова
+little # маленький
+try # пытаться, пробовать
+too # также; слишком
+still # тихий; все еще
+hear # (heard ; heard) слышать; слушать
+walk # ходьба; ходить
+before # перед; раньше
+leave # (left; left) покидать
+sit # (sat ; sat) сидеть
+let # (let; let) позволять
+long # длинный; долго
+call # призыв; звать
+feel # (felt; felt) чувствовать
+close # близкий, тесный; близко; закрывать(ся)
+very # очень
+why # почему
+which # который; что
+car # автомобиль, машина
+any # какой нибудь
+hold # (held; held) держать; владеть; вмещать
+work # работа; работать
+run # (ran ; run) бежать
+never # никогда
+start # начало; начинать(ся)
+even # даже; ровно
+light # свет; (lit, lighted; lit, lighted ) освещать(ся)
+than # чем, нежели
+after # после, через; потом
+put # (put; put) положить
+yes # да
+stop # остановка; останавливать(ся)
+old # старый
+watch # смотреть, следить; наблюдение; 2) часы
+first # первый; сначала
+may (прош. вр. might) # мочь и май (месяц)
+talk # разговор; говорить
+another # другой
+cut # (cut; cut) резать
+mean # середина; (meant; meant ) значить; подразумевать
+pull # тянуть, тащить
+behind # за; сзади, позади
+smile # улыбка; улыбаться
+our # наш
+toward(s) # к
+much # много; много
+its # его, её (о предм.)
+house # дом
+keep # (kept; kept) держать
+place # место; помещать
+begin # (began ; begun ) начинать(ся); приступать (к)
+nothing # ничего
+year # год
+woman (мн. ч. women ) # женщина
+side # сторона
+because # потому что
+three # три
+seem # казаться
+wait # ждать
+need # нуждаться
+moment # мгновение, момент
+himself # себя; сам
+stare # уставиться (на)
+arm # 1) рука; 2)~s оружие
+use # применение, польза; употредлять, применять и
+voice # голос
+last # последний
+late # поздний; поздно
+across # через, сквозь; поперек
+sure # уверенный; конечно
+front # передний
+sound # звук; звучать
+big # большой
+really # действительно
+name # имя; название
+should # должен, следует
+new # новый
+anything # что нибудь; что угодно
+against # против
+guy # парень
+kill # убивать
+point # острие; точка; пункт; смысл; указывать на
+small # маленький
+happen # случаться
+wall # стена
+black # черный
+step # шаг; шагать
+window # окно
+life # жизнь
+maybe # может быть
+fall # (fell; fallen ) падать, понижаться; падение; осень (амер.)
+own # свой; владеть
+far # дальний; далеко
+under # под; ниже
+boy # мальчик, парень
+end # конец; кончать(ся)
+those # те
+reach # достигать
+while # в то время как
+floor # пол; этаж
+street # улица
+help # помощь; помогать
+girl # девочка, девушка
+next # следующий; будущий; потом, затем; рядом
+few # немного; a~ несколько
+white # белый
+must # должен, обязан
+feet (мн. ч. от foot) # ноги
+table # стол
+these # эти
+show # показ; (showed ; shown , редк. showed) показывать
+okay или OK # хорошо!, ладно!, есть!
+enough # достаточно
+phone # телефон; звонить по телефону
+body # тело
+same # тот же самый
+minute # минута
+shake # (shook ; shaken ) трясти(сь); дрожать; потрясать
+water # вода
+fire # огонь; пожар; стрелять; поджигать
+inside # внутренний; внутри; внутрь
+break # (broke ; broken ) ломать(ся); пролом; перерыв
+ever # когда либо
+follow # следовать (за)
+second # секунда; второй
+nod # кивать головой; кивок
+meet # (met; met) встречать(ся); знакомиться
+great # большой, великий
+yeah # разг. от yes да
+each # каждый, всякий
+mind # разум; мнение
+suddenly # вдруг
+dead # мертвый
+almost # почти
+gun # огнестр. оружие
+both # оба
+speak # (spoke ; spoken ) говорить, разговаривать
+love # любовь; любить
+pick # собирать; выбирать
+home # дом
+without # без
+win # (won; won ) выиграть
+once # однажды
+word # слово
+better # лучше
+every # каждый
+god # бог
+build # (built; built) строить; building также n здание
+until # до тех пор пока
+beat # (beat; beaten ) бить
+course # курс; of course конечно
+lot # жребий, судьба; a lot of, lots of –много, масса
+drive # (droe ; drien ) ехать; управлять (автомоб.); езда
+bring # (brought; brought ) приносить; приводить; привозить
+along # по; вперед
+five # пять
+hard # твердый, трудный; сильно, упорно
+air # воздух; воздушный
+continue # продолжать(ся)
+most # большинство; наибольший; наиболее
+pass # проходить, проезжать; выдержать (экзамен); пропуск
+always # всегда
+kid # ребенок, малыш; подшучивать; обманывать
+believe # верить
+half # половина
+line # линия; проводить линии; выстраивать(ся) в ряд
+high # высокий; высший; высоко
+set # (set; set) ставить, помещать; комплект, набор
+read # (read ; read ) читать
+world # мир, вселенная
+hour # час
+office # контора
+play # игра; играть
+young # молодой, юный
+answer # ответ; отвечать
+shoot # (shot; shot ) стрелять11.838
+dark # темнота; темный
+laugh # смех; смеяться
+bed # кровать, постель
+thank # благодарить
+remember # помнить, вспоминать
+drop # капля; капать
+friend # друг, подруга
+though # однако; хотя
+glass # стекло; стакан
+hair # волос, волосы
+hell # ад, преисподняя
+catch # (caught ; caught) ловить, поймать, застигнуть; захват
+mother # мать
+four # четыре
+listen # слушать
+understand # (understood ; understood) понимать
+sir # сэр, господин
+lose # (lost; lost) терять; проигрывать; отставать (о часах)
+lie # (lay ; lain ) лежать; 2) ложь; лгать
+between # между
+live # жить
+money # деньги
+father # отец
+morning # утро
+red # красный
+please # нравиться
+everything # всё
+slowly # медленно
+rise # (rose ; risen ) подниматься, вставать; восходить
+die # умирать
+else # еще; кроме
+kind # сорт, вид; добрый, любезный
+wear # (wore ; worn ) носить (одежду и одежда
+hit # (hit; hit) ударять(ся); попадать; удар; попадание
+hang # (hung; hung ; но hanged; hanged в знач. казнить) висеть; вешать; hanging вешание; висячий
+many # многие, множество; многие, много
+someone # кто то
+drink # (drank ; drunk ) пить; выпивать; питье
+stay # пребывание; оставаться; жить
+shoulder # плечо
+past # прошлое; прошлый; после, за; мимо
+grab # хватать(ся)
+question # вопрос; проблема; распрашивать
+part # часть; роль
+case # 1) случай; обстоятельство; 2) ящик, чемодан
+mouth # рот
+throw # (threw ; thrown ) бросать, кидать
+enter # входить (в)
+hundred # сто
+cover # (по)крышка; покрывать, прикрывать
+blood # кровь
+check # проверка, контроль; проверять, контролировать
+outside # наружный, внешний; снаружи
+large # большой, крупный
+change # изменение, перемена; менять(ся), изменять(ся)
+push # толчок; толкать(ся); нажимать
+sorry # сожалеющий
+bad # плохой
+top # верх; верхний
+chair # стул, кресло
+finger # палец
+lead # (led; led) вести
+scream # крик, вопль; кричать, вопить
+ground # земля
+already # уже
+forward # вперед; передний
+figure # фигура; цифра; вычислять; понимать
+touch # прикосновение; трогать, касаться
+become # (became ; become) становиться, делаться
+yet # еще; однако
+also # также
+desk # письменный. стол
+clear # очищать; чистый
+real # действительный
+carry # нести; везти
+sleep # (slept; slept) спать
+glance # (быстрый) взгляд; (мельком) взглянуть
+seat # сиденье; место; усаживать; вмещать
+matter # дело, вопрос; иметь значение
+number # число
+ship # корабль, судно
+full # полный
+police # полиция
+twenty # двадцать
+send # (sent; sent) посылать; отправлять; присылать
+gonna # сокр. = going to– собираться что-либо сделать
+together # вместе
+ten # десять
+roll # рулон; раскат; катить(ся); грохотать; качать(ся)
+return # возврат; ответный; возвращать(ся); отвечать
+such # такой
+near # ближний; близко; около; приближаться
+miss # промахнуться; промах; Miss мисс (дев. или незамужн.
+pay # (paid; paid ) платить; плата
+paper # бумага; газета
+rest # отдыхать; лежать; покой, отдых; the ~ остаток
+appear # появляться
+park # парк
+above # над; свыше; наверху, выше
+onto # на
+control # управление, контроль; управлять
+fly # (flew ; flow ) лететь, летать; мчаться; 2) муха
+pause # пауза, перерыв; делать паузу, перерыв
+road # дорога; путь
+probably # вероятно
+finally # в заключение
+guard # стража, охрана; часовой; охранять; защищать
+draw # (drew ; drawn ) 1) тащить, тянуть; 2) чертить, рисовать
+city # город
+deep # глубокий; глубоко
+job # работа; дело
+ring # (rang ; rung ) звонить, звенеть; звонок; 2) кольцо; круг
+fight # бой; драка; (fought; fought ) бороться, сражаться
+leg # нога; ножка
+wonder # удивление; удивляться; интересоваться
+lean # прислонять(ся); наклонять(ся); 2) тощий, худой
+since # с; с тех пор; с тех пор как
+hope # надежда; надеяться
+left # левый; налево
+sign # знак; подписывать(ся)
+cross # крест; пересекать; переходить; скрещивать
+suppose # предполагать
+order # порядок; приказ; заказ; приказывать; заказывать
+eat # (ate ; eaten ) есть
+corner # угол
+wrong # неправильный; не тот; неправильно, неверно
+tear # (tore ; torn ) рвать(ся); n разрыв; чаще: 2) слеза
+six # шесть
+soon # скоро, вскоре
+fast # быстрый; прочный; быстро; прочно
+bill # счет; банкнота
+quickly # быстро
+shadow # тень
+wife # жена
+dress # платье, одежда; одевать(ся)
+damn # проклятие; проклинать; в знач. междомет.: черт!
+guess # думать, полагать
+myself # себя; сам
+care # забота; заботиться
+raise # поднимать
+mile # миля (сухопутн. м. =1609м; морск. м. =1853м)
+land # земля; почва; страна; приземляться; высаживаться
+perhaps # может быть, возможно
+bar # бар, буфет; 2) засов; преграда; решетка
+blue # синий, голубой
+idea # идея, мысль
+death # смерть
+alone # один, одинокий
+best # (наи)лучший; лучше всего; больше всего
+dad, daddy # папа
+whole # весь, целый
+tree # дерево
+force # сила; насилие; ~s войска; заставлять, принуждать
+fill # наполнять(ся)
+crowd # толпа; толпиться; набиваться битком
+shut # (shut; shut) закрывать(ся); перекрывать; запирать
+business # дело, занятие
+blow # (blew ; blown ) дуть; раздувать; 2) удар
+cry # крик; кричать
+write # (wrote ; written ) писать
+notice # извещение; внимание; обращать внимание
+fine # прекрасный; ясный
+quite # вполне, совсем
+power # сила, энергия
+fact # факт
+pretty # хорошенький
+week # неделя
+nice # хороший; милый
+lock # замок; запирать
+story # повесть, рассказ
+dog # собака
+least # наименьший; наименее;: the ~ самое меньшее
+empty # пустой
+everyone # каждый
+wave # волна; взмах (рукой); махать (рукой); развеваться
+several # несколько
+silence # молчание
+short # короткий
+cold # холодный
+problem # проблема
+cop # полицейский
+thousand # тысяча
+approach # приближение; приближаться (к)
+realize # представлять себе, понимать, осознавать
+rock # камень; скала; качать(ся)
+piece # кусок; штука
+wind # ветер;запах; чуять; 2) (wound; wound ) виться, извиваться
+box # коробка, ящик
+either # любой (из двух); также (при отриц.)
+sort # сорт, род, вид
+kiss # поцелуй; целовать(ся)
+edge # острие, лезвие; край, кромка; точить; окаймлять
+interest # интерес; (за)интересовать
+surprise # удивление; сюрприз; удивлять
+bit # кусочек; a ~ немного
+forget # (forgot ; forgotten) забывать, не помнить
+stick # (stuck; stuck ) втыкать, прикалывать; липнуть; 2) палка
+heart # сердце
+finish # окончание; заканчивать(ся), кончать(ся)
+grow # (grew ; grown ) расти; увеличиваться; становиться
+ago # тому назад
+bag # мешок, сумка
+sense # чувство, ощущение; чувствовать, осознавать
+picture # картина
+ready # готовый
+chance # случай, шанс
+worry # беспокоить(ся
+ahead # вперед; впереди
+couple # два, пара
+press # пресса, печать; 2) нажимать, давить
+doctor # врач, доктор
+book # книга
+officer # офицер
+anyone # кто нибудь
+son # сын
+pocket # карман
+human # человеческий
+family # семья
+safe # безопасный
+burn # (бр. burnt, burnt ;
+breath # дыхание; вздох
+early # ранний; рано
+jump # прыжок; прыгать
+lift # лифт; поднимать
+green # зеленый
+reason # причина; разум
+lay # (laid; laid leId]) класть, положить; (lay также и прош.
+free # свободный
+machine # машина
+beside # рядом с; около
+stuff # все, что угодно: вещь, штука, барахло и т.п.
+wide # широкий; широко
+round # круглый; круг; огибать; вокруг
+expect # ожидать
+neck # шея; горлышко(бут.)
+careful # осторожный; внимательный
+lip # губа
+school # школа
+hide # (hid; hidden ) прятать(ся); скрывать(ся); шкура
+deal # (некоторое) количество; доля; сделка, соглашение; реже (dealt; dealt ) распределять, выдавать
+whisper # шепот; шептать
+space # пространство, место; расстояние; космос
+herself # себя; сама
+baby # ребенок; малыш
+climb # подниматься(на)
+easy # легкий; легко
+plan # план; планировать
+yourself # себя; сам
+trouble # заботы, беспокойство; беспокоить(ся)
+slide # (slid; slid) скользить, поскользнуться; скольжение
+thirty # тридцать
+train # поезд; 2) воспитывать; тренировать(ся)
+low # низкий; низко
+key # ключ
+different # различный
+swing # (swug; swug ) качать(ся; колебание; размах
+coffee # кофе
+radio # радио
+hotel # гостиница, отель5.460
+anyway # в любом случае
+shout # крик; кричать
+state # штат; государство; a государственный; 2) состояние; излагать
+study # изучение; обучение, занятия; учить(ся)
+foot (мн. ч. feet) # 1) ступня, нога; 2) подножие; 3) фут =30,48 см
+slow # медленный; замедлять(ся)
+station # станция; вокзал
+brother # брат
+hurt # (hurt; hurt) ушибить; болеть, причинять боль
+game # игра
+heavy # тяжелый
+lady # дама; госпожа
+below # ниже, под; внизу
+kitchen # кухня
+buy # (bought; bought ) покупать
+area # площадь; район
+knock # стук; удар; стучать(ся); бить
+star # звезда
+decide # решать(ся)
+view # вид; взгляд, мнение
+flash # вспышка; вспыхивать
+sun # солнце
+month # месяц
+straight # прямой; честный; прямо; немедленно
+truck # грузовик
+shirt # рубашка (мужская)
+remain # оставаться
+whatever # любой; все, что; (в отриц. предл.) вообще не
+sky # небо
+suit # удовлетворять требованиям; годиться; костюм
+hot # горячий, жаркий
+boat # лодка; судно
+ride # (rode ; ridden ) ехать (верхом, в машине); поездка
+fear # страх; бояться
+pain # боль; страдание
+note # заметка; записка; банкнота; отмечать; замечать
+sight # зрение; вид; взгляд
+wish # желание; желать
+slip # скольжение; ошибка; скользить; поскользнуться
+hall # зал; передняя; холл
+actually # фактически, на самом деле
+group # группа
+learn # (бр. learnt, learnt ,
+race # раса; род; 2) гонки; мчаться; гнать
+dollar # доллар
+true # правдивый; верный
+children (мн. ч. от child) # дети
+shot # выстрел
+afraid # испуганный
+except # кроме
+grin # усмешка; ухмыляться
+cause # причина; быть причиной, причинять
+exactly # точно
+mark # знак; оценка, балл; ставить знак, отметку
+stone # камень; каменный
+computer # компьютер
+huge # огромный
+less # меньший; менее
+explain # объяснять
+spot # пятно; место; пятнать; узнавать, отмечать
+upon #
+reply # ответ; отвечать
+clean # чистый; чистить
+centre; center # центр
+corridor # коридор
+chest # грудная клетка
+ear # ухо
+report # доклад, сообщение; докладывать, сообщать
+dream # (бр. dreamt, dreamt ; мечта
+living # жизнь; живой
+middle # середина; средний
+wheel # колесо; катить
+bottle # бутылка
+somebody # кто то, кто нибудь
+able # способный; умелый
+movie # кино, фильм
+driver # водитель
+happy # счастливый
+murder # убийство; убивать
+rather # довольно; вернее, скорее
+offer # предложение; предлагать
+quiet # спокойный
+rush # спешка; бросаться
+rain # дождь
+today # сегодня
+freeze # (froze ; frozen ) замерзать; замораживать
+bank # берег(реки, озера); насыпь; насыпать; 2) банк
+bedroom # спальня
+kick # удар ногой; пинок; ударять ногой
+field # поле
+beautiful # красивый
+stair # ступенька
+form # форма; бланк; класс; формировать(ся)
+angle # угол
+darkness # темнота
+card # открытка; билет
+person # человек
+nobody # никто
+hole # дыра, отверстие
+earth # земля; почва
+gray; grey # серый; седой
+snap # треск; треснуть
+war # война
+within # в; внутри
+music # музыка
+skin # кожа; шкура
+sea # море
+cigarette # сигарета
+lower # нижний; спускать(ся); понижать(ся)
+attention # внимание
+direction # направление
+ice # лед
+knee # колено
+search # поиски; искать
+company # компания
+eight # восемь
+block # глыба; квартал (города); преграждать; блокировать
+save # спасать; экономить
+smell # (бр. smelt, smelt , запах
+track # след; тропинка; колея ж/д; следить (за)
+weapon # оружие
+horse # лошадь, конь
+apartment # комната; квартира
+reveal # открывать, разоблачать; обнаруживать
+charge # заряд; нагрузка; поручение; заряжать; нагружать
+record # запись; пластинка; записывать
+clothes # одежда, платье
+child # ребенок
+beyond # за; вне, сверх, выше; вдали
+spend # (spent; spent) тратить, расходовать
+tonight # сегодня вечером
+loud # громкий; громко
+tire # утомлять(ся), уставать
+shrug # пожимать (плечами)
+slam # со стуком/шумом закрыть, захлопнуть, швырнуть
+position # положение
+arrive # прибывать
+animal # животное
+brown # коричневый
+somewhere # где нибудь, куда нибудь
+tape # лента; записывать
+soldier # солдат
+nose # нос; обоняние
+tight # тугой; туго
+paint # краска; красить
+agent # агент
+hate # ненавидеть
+knife # нож
+colour; color # цвет; краска; красить
+strike # (struck; struck ) 1) ударять(ся); поражать; осенять; 2) бастовать; забастовка
+party # вечеринка; партия
+fifty # пятьдесят
+quick # быстрый; быстро
+security # безопасность
+news # новость, новости
+tomorrow # завтра
+strange # чужой
+speed # скорость; (sped , speeded ; sped, speeded) спешить
+disappear # исчезать
+hurry # спешка; спешить
+distance # расстояние
+file # картотека; регистрировать
+deck # палуба и
+possible # возможный
+beneath # под, ниже; внизу
+bright # яркий, светлый
+country # страна; сельская местность
+handle # ручка; трогать, брать руками; управлять
+act # дело; действовать
+afternoon # время после полудня
+metal # металл
+telephone # телефон
+evening # вечер
+seven # семь
+certain # определенный; уверенный; один, некий
+crash # грохот; крушение; рушиться с треском; разбиться
+quietly # спокойно
+frame # каркас; рама; кадр; составлять, формулировать
+island # остров
+store # магазин; склад; запасать
+food # пища, еда
+bathroom # ванная; туалет
+mom # мама
+mirror # зеркало
+plane # плоскость; самолет (=airplane); плоский
+shape # форма, вид; образ; придавать/принимать форму
+sigh # вздох; вздыхать
+throat # горло
+fade # вянуть; блекнуть
+important # важный
+main # основной, главный
+sometimes # иногда
+ball # шар; мяч
+tie # соединение; лента, шнур; галстук; связывать, скреплять
+crack # треск; трещать
+dance # танец; танцы (вечеринка); танцевать
+engine # машина; мотор3.857
+exit # выход
+itself # себя; сам
+letter # буква; письмо
+bear # медведь; 2) (bore ; borne носить; bore ; born рождать) носить; выносить, терпеть; рождать; (bore также скука; надоедать; born также прирожденный)
+board # доска; борт (судна, самолета); посадка на борт
+join # соединять(ся)
+shock # удар; потрясать
+everybody # все
+add # прибавлять
+spin # (spun , span ; spun) вертеть(ся); вращение
+ass # зоол. осел; дурак
+blade # лезвие
+yard # 1) двор; 2) ярд (= 91,4 см)
+hello # привет!; алло!
+alive # живой
+mine # мой
+pack # пакет; тюк; упаковывать(ся); заполнять(ся)
+silent # молчаливый
+teeth (мн. ч. от tooth) # зубы
+crazy # сумасшедший
+gate # ворота, калитка
+none # никто, ничто; никакой, ни один; нисколько
+third # третий
+wake # (woke , waked ; woken , waked) просыпаться; будить
+age # возраст; стареть
+truth # правда, истина
+strong # сильный; крепкий
+clock # часы
+camera # фото , кинокамера
+image # образ; имидж
+noise # шум
+marry # женить(ся), выходить замуж
+wood # дерево; лес; в знач. прилагат.: лесной; деревянный
+law # закон; право
+trust # доверие; верить
+consider # рассматривать, обсуждать; полагать
+million # миллион
+remove # удалять
+yell # крик; кричать
+struggle # борьба; бороться; биться; делать усилие
+promise # обещание; обещать
+instead (of) # вместо, взамен 3606
+among(st) # среди
+tiny # крошечный
+slightly # слегка, едва
+shop # магазин
+hospital # больница
+Jesus # воскл. боже!
+bend # (bent; bent) гнуть(ся); сгибать(ся); наклонять(ся)
+count # считать; 1) счет, подсчет; 2) граф
+cool # прохладный
+agree # соглашаться
+river # река
+scare # пугать
+during # в течение
+information # информация, сведения, данные
+system # система
+surface # поверхность
+service # служба
+bridge # мост
+attack # нападение; нападать
+lawyer # адвокат
+sing # (sang ; sung ) петь
+motion # движение
+ray # луч
+hill # холм
+elevator # лифт
+twist # изгиб; виться
+dry # сухой; сушить(ся)
+thick # толстый; густой
+chief # глава; главный
+button # пуговица; кнопка
+level # уровень
+general # общий; обычный; генерал
+flight # полет; рейс
+brain # мозг; ум
+page # страница
+pour # лить(ся); наливать
+doorway # дверной проем3.389
+tall # высокий
+jacket # куртка, пиджак
+bone # кость; останки
+sink # (sank ; sunk ) тонуть; топить; погружать(ся); опускать(ся), понижать(ся); раковина (водопроводная); впадина
+gotta # = (have) got to должен, должна(…ны)
+circle # круг; окружность; вращаться
+gaze # пристальный взгляд; пристально глядеть; уставиться
+soft # мягкий; нежный
+drag # тащить(ся)
+desert # пустыня; пустынный; покидать
+certainly # конечно
+fish # рыба; ловить рыбу
+beach # пляж; взморье
+single # один, единственный; отдельный; одинокий
+team # команда; группа
+bottom # дно; низ
+secret # секрет, тайна; секретный, тайный
+allow # позволять
+immediately # немедленно
+concern # отношение; иметь отношение (к)
+husband # муж
+burst # (burst; burst) взрываться; лопаться; вспышка; взрыв
+forty # сорок
+sell # (sold; sold) продавать
+leap # (leapt , leaped ; leapt, leaped) прыгать, скакать; перепрыгивать; прыжок, скачок
+pound # бить(ся), колотить(ся); бомбить; 2) фунт (=454г); 3) фунт (стерлингов) – денежн.
+escape # побег; совершать побег; спастись; ускользать
+cloud # облако; туча; покрывать(ся) тучами
+rear # задняя сторона; тыл
+gold # золото; золотой
+simply # просто
+message # сообщение
+detective # сыщик, детектив; детективный
+manage # руководить
+creature # создание,тварь
+themselves # себя
+roof # крыша
+inch # дюйм (= 2,54 см)
+dinner # обед
+gesture # жест; жестикулировать
+army # армия
+switch # переключение; выключатель; переключать
+nurse # няня; сиделка; ухаживать
+expression # выражение
+yellow # желтый
+sergeant # сержант
+warm # теплый; греть(ся)
+roar # рев; грохот; реветь; грохотать
+club # клуб
+pop # хлопнуть, треснуть; 2) сокр. от popular популярный
+grand # грандиозный; большой; важный; восхитительный
+bite # (bit; bitten) кусать(ся); жалить; укус; кусок (пищи)
+coat # пальто
+size # размер; величина; формат; определять величину
+however # как бы ни; однако, тем не менее
+cat # кот, кошка
+type # тип; род; модедь; 2) печатать на машинке
+thin # тонкий; худой; редкий
+dozen # дюжина
+crew # экипаж (судна и
+present # настоящее время; присутствующий; 2) подарок; дарить
+shoe # (полу)ботинок, туфля
+beer # пиво
+doubt # сомнение; сомневаться
+settle # поселить(ся); устраивать(ся); улаживать; решать
+daughter # дочь
+anybody # кто нибудь (в вопр.); никто (в отриц.); любой (в утверд.)
+grip # сжатие; хватка; схватывать(за); сжимать
+completely # совершенно, полностью
+nearly # почти; около
+pair # пара
+nine # девять
+gather # собирать(ся)
+bud # сокр. от buddy приятель 3084
+bird # птица
+sister # сестра
+special # специальный
+hallway # прихожая
+base # основа; база; основывать, базировать
+mountain # гора
+flat # квартира
+sweat # пот; потеть
+gently # мягко, нежно
+spread # (spread; spread) распространять(ся); расстилать(ся)
+wire # проволока, провод; телеграмма; телеграфировать
+bullet # пуля
+stretch # растягивать(ся)
+master # хозяин; мастер
+cell # камера; карцер; ячейка
+counter # прилавок; 2) противоположное; противостоять
+private # частный; личный; 2) рядовой (воинск. звание)
+king # король
+flame # пламя; сияние
+sick # больной
+rip # рвать(ся
+entrance # вход
+sheet # простыня; лист
+entire # целый, полный, весь
+steal # (stole ; stolen ) красть
+warn # предупреждать
+judge # судья; судить
+perfect # совершенный
+command # команда, приказ; приказывать; командовать
+sharp # острый; резкий
+scene # сцена; место; явление
+screen # экран; ширма; прикрывать
+conversation # разговор, беседа
+dear # дорогой, милый
+whether # ли
+toss # бросание; бросать
+cup # чашка; кубок
+ceiling # потолок
+fit # годный; годиться
+narrow # узкий, тесный; суживать(ся); уменьшать(ся)
+imagine # воображать
+Christ # Христос; восклицание: боже!; господи!
+simple # простой
+colonel # полковник
+pilot # летчик, пилот
+cheek # 1) щека; 2) наглость
+grace # грация, изящество
+photo # фотография
+buddy # приятель
+excuse # извинение; 2) извинять
+frown # хмуриться
+tunnel # тоннель
+fix # закреплять; чинить
+hat # шляпа
+snow # снег
+planet # планета
+glow # свет; сверкать
+double # двойной; удваивать; вдвое
+recognize # узнавать
+sudden # внезапный
+steel # сталь; стальной
+worse # худший; хуже
+wipe # вытирать, утирать
+stupid # глупый, тупой
+monitor # монитор; наставник; староста (класса); наставлять
+test # испытание; проверка; экзамен; испытывать, проверять
+square # квадрат; площадь; сквер; квадратный
+mention # упоминание; упоминать; ссылаться на
+uniform # форменная одежда; форменный; одевать в форму
+south # юг; южный; к югу, на юг(е)
+travel # путешествие; путешествовать
+mask # маска; маскировать
+fifteen # пятнадцать
+class # класс; сорт, качество; в школе класс, урок, занятие
+path # тропинка; путь
+match # спичка; 2) состязание, матч; состязаться
+grant # дар; стипендия; дарить, предоставлять
+memory # память
+serious # серьезный
+softly # мягко, нежно
+dust # пыль; вытир. пыль
+major # майор; 2) большой; главный
+wild # дикий; бешеный
+calm # тихий; успокаивать
+dig # (dug; dug ) рыть(ся)
+angry # сердитый, гневный
+wet # мокрый; дождливый
+contact # контакт, связь; связаться
+tank # 1) танк; 2) цистерна
+wrap # обертывать
+action # действие
+click # щелканье; щелкать
+tower # башня; вышка
+crawl # ползание; ползти
+whose # чей
+prepare # готовить(ся)
+thought # мысль, размышление
+load # груз; грузить
