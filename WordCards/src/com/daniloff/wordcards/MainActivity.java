@@ -6,8 +6,10 @@ import java.util.Random;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnTouchListener;
 import android.widget.Button;
 
 public class MainActivity extends Activity implements OnClickListener {
@@ -25,7 +27,27 @@ public class MainActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_main);
 
 		showButton = (Button) findViewById(R.id.button_show);
-		showButton.setOnClickListener(this);
+		// showButton.setOnClickListener(this);
+
+		OnTouchListener listener = new OnTouchListener() {
+
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+
+				switch (event.getAction()) {
+				case MotionEvent.ACTION_DOWN:
+					revertCard();
+					break;
+				case MotionEvent.ACTION_UP:
+					revertCard();
+					break;
+				default:
+					break;
+				}
+				return true;
+			}
+		};
+		showButton.setOnTouchListener(listener);
 
 		nextButton = (Button) findViewById(R.id.button_next);
 		nextButton.setOnClickListener(this);
