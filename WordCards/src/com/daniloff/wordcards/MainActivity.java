@@ -53,6 +53,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private void showTask() {
+		reverted = false;
 		currentTask = taskList.get(rnd.nextInt(taskList.size()));
 		showInitialView();
 	}
