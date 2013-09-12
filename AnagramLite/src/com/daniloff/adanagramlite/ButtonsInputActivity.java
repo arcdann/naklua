@@ -24,9 +24,9 @@ import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
 
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
-	private final int TASKBUTTON_ID_PREFIX = 20201000;
-	private final int ANSWERBUTTON_ID_PREFIX = 20202000;
 	private final int BUTTON_SIZE = 64;
+	private final int BUTTON_ID_PREFIX = 1216000;
+//	private final int ANSWERBUTTON_ID_PREFIX = 20202000;
 
 	private LinearLayout wrapLayout;
 	private LinearLayout taskLayout;
@@ -44,10 +44,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	private WordsHandler wordsHandler;
 
-	private List<Button> taskButtons;
-	private List<Button> answerButtons;
-	private List<String> answerLetters;
-	private List<String> taskLetters;
+	private List<Button> taskButtonsList;
+	private List<Button> answerButtonsList;
+	private List<String> answerLettersList;
+	private List<String> taskLettersList;
 	private int hintRemain;
 
 	@Override
@@ -68,14 +68,13 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			wordsHandler.setResumed(true);
 		}
 
-		taskButtons = new ArrayList<Button>();
-		answerButtons = new ArrayList<Button>();
-		answerLetters = new ArrayList<String>();
+		taskButtonsList = new ArrayList<Button>();
+		answerButtonsList = new ArrayList<Button>();
+		answerLettersList = new ArrayList<String>();
 
 		listenButton();
 
 		wordsHandler.startLevel();
-
 	}
 
 	private void initializeViews() {
@@ -110,18 +109,18 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		hintRemain = wordsHandler.getParams().getHintLimit();
 		buttonHint.setEnabled(true);
 
-		taskLetters = StringUtils.wordToLetters(shuffledWord);
-		taskButtons = new ArrayList<Button>();
+		taskLettersList = StringUtils.wordToLetters(shuffledWord);
+		taskButtonsList = new ArrayList<Button>();
 
-		for (int i = 0; i < taskLetters.size(); i++) {
+		for (int i = 0; i < taskLettersList.size(); i++) {
 			Button taskButton = new Button(this);
 			taskButton.setWidth(BUTTON_SIZE);
 			taskButton.setHeight(BUTTON_SIZE);
-			taskButton.setText(taskLetters.get(i));
-			taskButton.setId(TASKBUTTON_ID_PREFIX + i);
+			taskButton.setText(taskLettersList.get(i));
+			taskButton.setId(BUTTON_ID_PREFIX+ i);
 			taskButton.setOnClickListener(listener);
 
-			taskButtons.add(taskButton);
+			taskButtonsList.add(taskButton);
 
 			taskLayout.addView(taskButton);
 
@@ -140,15 +139,17 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			@Override
 			public void onClick(View v) {
 				int id = v.getId();
-				int idPrefix = id / 1000 * 1000;
-
-				if (idPrefix == TASKBUTTON_ID_PREFIX) {
-					handleTaskButtonStress(id);
-					taskLayout.removeView(v);
+				
+				String field;
+				if(id%BUTTON_ID_PREFIX/100>0){
+					field="answer";
+				}else{
+					field="task";
 				}
-				if (idPrefix == ANSWERBUTTON_ID_PREFIX) {
-					handleAnswerButtonStress(id);
-					answerLayout.removeView(v);
+				
+				if (field.equals("task")) {
+					handleTaskButtonStress(id);
+					v.setVisibility(0x00000004); // 0x00000004 = invisible
 				}
 			}
 		};
@@ -156,37 +157,28 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	private void handleTaskButtonStress(int id) {
 
-		int index = id % TASKBUTTON_ID_PREFIX;
+		int index = id % BUTTON_ID_PREFIX;
 
+		answerLettersList.add(taskLettersList.get(index));
+		
 		Button answerButton = new Button(this);
 		answerButton.setWidth(BUTTON_SIZE);
 		answerButton.setHeight(BUTTON_SIZE);
-		answerLetters.add(taskLetters.get(index));
-		answerButton.setText(taskLetters.get(index));
-		answerButton.setId(ANSWERBUTTON_ID_PREFIX + answerLetters.size() - 1);
+		answerButton.setText(taskLettersList.get(index));
+		answerButton.setId(id*1000+100 + answerLettersList.size() - 1);
 
-		if (answerButtons.size() > 0) {
-			answerButtons.get(answerButtons.size() - 1).setEnabled(false);
-		}
 		answerButton.setOnClickListener(listener);
-		answerButtons.add(answerButton);
+		answerButtonsList.add(answerButton);
 
 		answerLayout.addView(answerButton);
 
-		taskButtons.remove(index);
-		taskLetters.remove(index);
-
-		reindexButtons(answerButtons, ANSWERBUTTON_ID_PREFIX);
-		reindexButtons(taskButtons, TASKBUTTON_ID_PREFIX);
-
-		if (taskLetters.size() < 3) {
+		if (taskLettersList.size() < 3) {
 			buttonHint.setEnabled(false);
 		}
 
-		if (taskLetters.size() == 0) {
+		if (answerLettersList.size() >= taskButtonsList.size()) {
 			submitAnswer();
 		}
-
 	}
 
 	private void reindexButtons(List<Button> buttons, int prefix) {
@@ -197,7 +189,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	private void submitAnswer() {
 
-		String answer = StringUtils.lettersToWord(answerLetters);
+		String answer = StringUtils.lettersToWord(answerLettersList);
 		clearTaskField();
 		wordsHandler.analyzeAnswer(answer);
 
@@ -205,16 +197,16 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	private void clearTaskField() {
 
-		taskLetters.removeAll(answerLetters);
-		taskButtons.removeAll(answerButtons);
+		taskLettersList.removeAll(answerLettersList);
+		taskButtonsList.removeAll(answerButtonsList);
 		taskLayout.removeAllViews();
 
 	}
 
 	private void clearAnswerField() {
 
-		answerLetters.removeAll(answerLetters);
-		answerButtons.removeAll(answerButtons);
+		answerLettersList.removeAll(answerLettersList);
+		answerButtonsList.removeAll(answerButtonsList);
 		answerLayout.removeAllViews();
 
 	}
@@ -226,30 +218,30 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	private void handleAnswerButtonStress(int id) {
 
-		int index = id % ANSWERBUTTON_ID_PREFIX;
+//		int index = id % ANSWERBUTTON_ID_PREFIX;
 
-		Button taskButton = new Button(this);
-		taskButton.setWidth(BUTTON_SIZE);
-		taskButton.setHeight(BUTTON_SIZE);
-		taskLetters.add(answerLetters.get(index));
-		taskButtons.add(taskButton);
-		taskButton.setText(answerLetters.get(index));
-		taskButton.setId(TASKBUTTON_ID_PREFIX + taskLetters.size() - 1);
-		taskButton.setOnClickListener(listener);
-		taskLayout.addView(taskButton);
+//		Button taskButton = new Button(this);
+//		taskButton.setWidth(BUTTON_SIZE);
+//		taskButton.setHeight(BUTTON_SIZE);
+//		taskLettersList.add(answerLettersList.get(index));
+//		taskButtonsList.add(taskButton);
+//		taskButton.setText(answerLettersList.get(index));
+//		taskButton.setId(BUTTON_ID_PREFIX + taskLettersList.size() - 1);
+//		taskButton.setOnClickListener(listener);
+//		taskLayout.addView(taskButton);
+//
+//		if (hintRemain >= 1 && taskLettersList.size() >= 3) {
+//			buttonHint.setEnabled(true);
+//		}
+//
+//		answerLettersList.remove(index);
+//		answerButtonsList.remove(index);
 
-		if (hintRemain >= 1 && taskLetters.size() >= 3) {
-			buttonHint.setEnabled(true);
-		}
+//		reindexButtons(answerButtonsList, ANSWERBUTTON_ID_PREFIX);
+//		reindexButtons(taskButtonsList, TASKBUTTON_ID_PREFIX);
 
-		answerLetters.remove(index);
-		answerButtons.remove(index);
-
-		reindexButtons(answerButtons, ANSWERBUTTON_ID_PREFIX);
-		reindexButtons(taskButtons, TASKBUTTON_ID_PREFIX);
-
-		if (answerButtons.size() > 0) {
-			answerButtons.get(answerButtons.size() - 1).setEnabled(true);
+		if (answerButtonsList.size() > 0) {
+			answerButtonsList.get(answerButtonsList.size() - 1).setEnabled(true);
 		}
 	}
 
@@ -321,60 +313,60 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			wordsHandler.nextWord();
 			break;
 
-		case R.id.button_hint:
-			if (wordsHandler.isGodMode()) {
-				// wordsHandler.inputWholeWord();
-				inputHintedWord();
-			} else {
-
-				hintRemain--;
-				if (hintRemain < 1 || taskLetters.size() < 3) {
-					buttonHint.setEnabled(false);
-				}
-
-				String askHint = StringUtils.lettersToWord(answerLetters);
-
-				String[] hintStrings = wordsHandler.hint(askHint);
-
-				clearAnswerField();
-				clearTaskField();
-
-				List<String> correctLetters = StringUtils.wordToLetters(hintStrings[0]);
-
-				for (int a = 0; a < hintStrings[0].length(); a++) {
-					Button answerButton = new Button(this);
-					answerButton.setWidth(BUTTON_SIZE);
-					answerButton.setHeight(BUTTON_SIZE);
-
-					answerLetters.add(correctLetters.get(a));
-
-					answerButton.setText(correctLetters.get(a));
-					answerButton.setEnabled(false);
-					answerButton.setTextColor(R.color.purple);
-					answerButton.setOnClickListener(listener);
-					answerButton.setId(ANSWERBUTTON_ID_PREFIX + a);
-
-					answerButtons.add(answerButton);
-					answerLayout.addView(answerButton);
-				}
-
-				taskLetters = StringUtils.wordToLetters(hintStrings[1]);
-				taskButtons = new ArrayList<Button>();
-
-				for (int i = 0; i < taskLetters.size(); i++) {
-					Button taskButton = new Button(this);
-					taskButton.setWidth(BUTTON_SIZE);
-					taskButton.setHeight(BUTTON_SIZE);
-					taskButton.setText(taskLetters.get(i));
-					taskButton.setId(TASKBUTTON_ID_PREFIX + i);
-					taskButton.setOnClickListener(listener);
-
-					taskButtons.add(taskButton);
-
-					taskLayout.addView(taskButton);
-				}
-			}
-			break;
+//		case R.id.button_hint:
+//			if (wordsHandler.isGodMode()) {
+//				// wordsHandler.inputWholeWord();
+//				inputHintedWord();
+//			} else {
+//
+//				hintRemain--;
+//				if (hintRemain < 1 || taskLettersList.size() < 3) {
+//					buttonHint.setEnabled(false);
+//				}
+//
+//				String askHint = StringUtils.lettersToWord(answerLettersList);
+//
+//				String[] hintStrings = wordsHandler.hint(askHint);
+//
+//				clearAnswerField();
+//				clearTaskField();
+//
+//				List<String> correctLetters = StringUtils.wordToLetters(hintStrings[0]);
+//
+//				for (int a = 0; a < hintStrings[0].length(); a++) {
+//					Button answerButton = new Button(this);
+//					answerButton.setWidth(BUTTON_SIZE);
+//					answerButton.setHeight(BUTTON_SIZE);
+//
+//					answerLettersList.add(correctLetters.get(a));
+//
+//					answerButton.setText(correctLetters.get(a));
+//					answerButton.setEnabled(false);
+//					answerButton.setTextColor(R.color.purple);
+//					answerButton.setOnClickListener(listener);
+//					answerButton.setId(ANSWERBUTTON_ID_PREFIX + a);
+//
+//					answerButtonsList.add(answerButton);
+//					answerLayout.addView(answerButton);
+//				}
+//
+//				taskLettersList = StringUtils.wordToLetters(hintStrings[1]);
+//				taskButtonsList = new ArrayList<Button>();
+//
+//				for (int i = 0; i < taskLettersList.size(); i++) {
+//					Button taskButton = new Button(this);
+//					taskButton.setWidth(BUTTON_SIZE);
+//					taskButton.setHeight(BUTTON_SIZE);
+//					taskButton.setText(taskLettersList.get(i));
+//					taskButton.setId(BUTTON_ID_PREFIX + i);
+//					taskButton.setOnClickListener(listener);
+//
+//					taskButtonsList.add(taskButton);
+//
+//					taskLayout.addView(taskButton);
+//				}
+//			}
+//			break;
 		}
 
 	}
