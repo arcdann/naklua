@@ -115,7 +115,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 			Button taskButton = createButton();
 
-			taskButton.setText(taskLettersList.get(i));
+			taskButton.setText(taskLettersList.get(i).toUpperCase());
 			taskButton.setId(BUTTON_ID_PREFIX + i);
 			taskButton.setOnClickListener(listener);
 
@@ -171,7 +171,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		Button answerButton = createButton();
 
-		answerButton.setText(taskLettersList.get(index));
+		answerButton.setText(taskLettersList.get(index).toUpperCase());
 		answerButton.setId(id * 1000 + 100 + answerLettersList.size() - 1);
 
 		answerButton.setOnClickListener(listener);
@@ -193,7 +193,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		String answer = StringUtils.lettersToWord(answerLettersList);
 		clearTaskField();
 		wordsHandler.analyzeAnswer(answer);
-
 	}
 
 	private void clearTaskField() {
@@ -201,7 +200,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		taskLettersList.removeAll(answerLettersList);
 		taskButtonsList.removeAll(answerButtonsList);
 		taskLayout.removeAllViews();
-
 	}
 
 	private void clearAnswerField() {
@@ -209,7 +207,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerLettersList.removeAll(answerLettersList);
 		answerButtonsList.removeAll(answerButtonsList);
 		answerLayout.removeAllViews();
-
 	}
 
 	private void handleAnswerButtonStress(int id) {
