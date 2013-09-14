@@ -229,4 +229,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		startActivity(intent);
 	}
 
+	@Override
+	public void simulateButtonPress(int hintedLetterIndex, int pressableTaskButtonIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

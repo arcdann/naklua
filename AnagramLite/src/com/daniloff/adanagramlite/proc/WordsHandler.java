@@ -8,7 +8,7 @@ public interface WordsHandler {
 
 	void startLevel();
 
-	String[] hint(String askHint);
+	void hint(String askHint, boolean[] taskButtonsVisibility);
 
 	void analyzeAnswer(String answer);
 

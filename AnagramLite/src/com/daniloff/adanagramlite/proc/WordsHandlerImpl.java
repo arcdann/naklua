@@ -95,26 +95,32 @@ public class WordsHandlerImpl implements WordsHandler {
 	}
 
 	@Override
-	public String[] hint(String letters) {
+	public void hint(String letters, boolean[] buttonsVisibility) {
 		hintRemain--;
 
-		int wrongLetterIndex = 0;
+		int firstWrongLetterIndex = -1;
 		for (int i = 0; i < letters.length(); i++) {
-			if (letters.charAt(i) == word.charAt(i)) {
-				wrongLetterIndex++;
-			} else {
-				wrongLetterIndex = i;
+			if (letters.charAt(i) != word.charAt(i)) {
+				firstWrongLetterIndex = i;
 				break;
 			}
 		}
 
-		String hintedLetters = word.substring(0, wrongLetterIndex + 1);
-		String unusedLetters = shuffleChars(word.substring(wrongLetterIndex + 1));
+		int hintedLetterIndex = firstWrongLetterIndex;
+		if (hintedLetterIndex < 0) {
+			hintedLetterIndex = letters.length();
+		}
 
-		String[] retHint = { hintedLetters, unusedLetters };
+		char hintedLetter = word.charAt(hintedLetterIndex);
 
-		return retHint;
-
+		int pressableTaskButtonIndex=0;
+		for (int i = 0; i < wordShuffled.length(); i++) {
+			if (hintedLetter == wordShuffled.charAt(i) && buttonsVisibility[i]) {
+				pressableTaskButtonIndex = i;
+			}
+		}
+		image.simulateButtonPress(firstWrongLetterIndex, pressableTaskButtonIndex);
+		
 	}
 
 	private void toggleGodMode() {

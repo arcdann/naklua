@@ -18,4 +18,6 @@ public interface AnagramView {
 
 	public abstract void moveToFinishView();
 
+	void simulateButtonPress(int firstWrongLetterIndex, int pressableTaskButtonIndex);
+
 }
