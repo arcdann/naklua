@@ -7,6 +7,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -22,6 +23,7 @@ import com.daniloff.adanagramlite.proc.StringUtils;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
 
+@SuppressLint("DefaultLocale")
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
 	private final int BUTTON_SIZE = 64;
@@ -100,6 +102,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	}
 
+	@SuppressLint("DefaultLocale")
 	@Override
 	public void showTask(String shuffledWord) {
 
@@ -116,6 +119,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			Button taskButton = createButton();
 
 			taskButton.setText(taskLettersList.get(i).toUpperCase());
+			taskButton.setTypeface(null,Typeface.BOLD);
 			taskButton.setId(BUTTON_ID_PREFIX + i);
 			taskButton.setOnClickListener(listener);
 
@@ -161,6 +165,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		};
 	}
 
+	@SuppressLint("DefaultLocale")
 	private void handleTaskButtonStress(int id) {
 
 		int index = id % BUTTON_ID_PREFIX;
@@ -172,6 +177,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		Button answerButton = createButton();
 
 		answerButton.setText(taskLettersList.get(index).toUpperCase());
+		answerButton.setTypeface(null,Typeface.BOLD);
 		answerButton.setId(id * 1000 + 100 + answerLettersList.size() - 1);
 
 		answerButton.setOnClickListener(listener);
