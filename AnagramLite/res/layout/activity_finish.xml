@@ -61,9 +61,14 @@
         android:id="@+id/button_finish"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/textCongratulations"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
+        android:layout_alignRight="@+id/textCongratulations"
         android:layout_marginBottom="27dp"
+        android:shadowColor="@color/brown_deep"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="4"
         android:text="@string/button_txt_ok" />
 
 </RelativeLayout>

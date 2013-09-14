@@ -23,14 +23,14 @@ public class WordsHandlerImpl implements WordsHandler {
 	private Random rnd = new Random();
 
 	private int level = 1;
-	private int hintRemain;
+	private int hintRemain;// ////////////
 	private int step = 1;
 	private int attempt = 1;
 	private int score;
 	private int record;
 	private int stepCost;
 	private LevelParams params;
-	private boolean godMode;
+	private boolean magicMode;
 	private boolean resumed;
 	private String lang;
 
@@ -96,40 +96,45 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	@Override
 	public void hint(String letters, boolean[] buttonsVisibility) {
-		hintRemain--;
+		 hintRemain--;
 
-		int firstWrongLetterIndex = -1;
-		for (int i = 0; i < letters.length(); i++) {
-			if (letters.charAt(i) != word.charAt(i)) {
-				firstWrongLetterIndex = i;
-				break;
+		if (magicMode) {
+			image.updateTextView(R.id.magicWord, word);
+			
+		} else {
+			int firstWrongLetterIndex = -1;
+			for (int i = 0; i < letters.length(); i++) {
+				if (letters.charAt(i) != word.charAt(i)) {
+					firstWrongLetterIndex = i;
+					break;
+				}
 			}
-		}
 
-		int hintedLetterIndex = firstWrongLetterIndex;
-		if (hintedLetterIndex < 0) {
-			hintedLetterIndex = letters.length();
-		}
-
-		char hintedLetter = word.charAt(hintedLetterIndex);
-
-		int pressableTaskButtonIndex=0;
-		for (int i = 0; i < wordShuffled.length(); i++) {
-			if (hintedLetter == wordShuffled.charAt(i) && buttonsVisibility[i]) {
-				pressableTaskButtonIndex = i;
+			int hintedLetterIndex = firstWrongLetterIndex;
+			if (hintedLetterIndex < 0) {
+				hintedLetterIndex = letters.length();
 			}
+
+			char hintedLetter = word.charAt(hintedLetterIndex);
+
+			int pressableTaskButtonIndex = 0;
+			for (int i = 0; i < wordShuffled.length(); i++) {
+				if (hintedLetter == wordShuffled.charAt(i) && buttonsVisibility[i]) {
+					pressableTaskButtonIndex = i;
+				}
+			}
+			image.simulateButtonPress(firstWrongLetterIndex, pressableTaskButtonIndex);
 		}
-		image.simulateButtonPress(firstWrongLetterIndex, pressableTaskButtonIndex);
-		
 	}
 
-	private void toggleGodMode() {
-		if (!godMode) {
-			godMode = true;
+	@Override
+	 public void toggleMagicMode() {
+		if (!magicMode) {
+			magicMode = true;
 		} else {
-			godMode = false;
+			magicMode = false;
 		}
-		image.updateMode(godMode);
+		image.updateMode(magicMode);
 	}
 
 	private void updateScoreInfo() {
@@ -139,13 +144,19 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	@Override
 	public void analyzeAnswer(String answer) {
+
 		if (answer.equals(word)) {
 			onCorrectAnswer();
 		} else {
-			if (answer.substring(0, 3).equalsIgnoreCase("$$$")) {
-				toggleGodMode();
+			System.out.println(answer.substring(1));
+			if (answer.substring(1, 4).equalsIgnoreCase("$$$")) {
+				toggleMagicMode();
 			} else {
-				onMistake();
+				if (answer.charAt(0) == '*') {
+					image.closeMagicTextView();
+				} else {
+					onMistake();
+				}
 			}
 		}
 	}
@@ -261,8 +272,8 @@ public class WordsHandlerImpl implements WordsHandler {
 	}
 
 	@Override
-	public boolean isGodMode() {
-		return godMode;
+	public boolean isMagicMode() {
+		return magicMode;
 	}
 
 	@Override

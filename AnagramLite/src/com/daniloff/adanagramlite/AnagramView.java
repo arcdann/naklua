@@ -20,4 +20,6 @@ public interface AnagramView {
 
 	void simulateButtonPress(int firstWrongLetterIndex, int pressableTaskButtonIndex);
 
+	void closeMagicTextView();
+
 }

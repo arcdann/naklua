@@ -29,7 +29,7 @@ public interface WordsHandler {
 	// //////////////////////
 	LevelParams getParams();
 
-	boolean isGodMode();
+	boolean isMagicMode();
 
 	int getStep();
 
@@ -38,5 +38,7 @@ public interface WordsHandler {
 	int getScore();
 
 	int getRecord();
+
+	void toggleMagicMode();
 
 }

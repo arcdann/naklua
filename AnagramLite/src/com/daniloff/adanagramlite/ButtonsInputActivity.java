@@ -8,17 +8,23 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.ShapeDrawable;
+import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.View.OnKeyListener;
 import android.view.View.OnLongClickListener;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.daniloff.adanagramlite.R.color;
 import com.daniloff.adanagramlite.proc.StringUtils;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
@@ -37,7 +43,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private TextView attemptTxt;
 	private TextView scoreTxt;
 	private TextView recordTxt;
-	// private TextView godModeTxt;
+	// private TextView magicModeTxt;
 	private Button buttonHint;
 	private Button buttonNext;
 
@@ -50,6 +56,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private List<String> answerLettersList;
 	private List<String> taskLettersList;
 	private int hintRemain;
+	private EditText magicText;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -99,7 +106,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		scoreTxt.setTextColor(Color.GREEN);
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
-
+		magicText = (EditText) findViewById(R.id.magicWord);
 	}
 
 	@SuppressLint("DefaultLocale")
@@ -107,6 +114,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void showTask(String shuffledWord) {
 
 		clearAnswerField();
+		magicText.setText("");
 
 		hintRemain = wordsHandler.getParams().getHintLimit();
 		buttonHint.setEnabled(true);
@@ -119,7 +127,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			Button taskButton = createButton();
 
 			taskButton.setText(taskLettersList.get(i).toUpperCase());
-			taskButton.setTypeface(null,Typeface.BOLD);
+			taskButton.setTypeface(null, Typeface.BOLD);
 			taskButton.setId(BUTTON_ID_PREFIX + i);
 			taskButton.setOnClickListener(listener);
 
@@ -136,7 +144,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		retButton.setWidth(BUTTON_SIZE);
 		retButton.setHeight(BUTTON_SIZE);
-
+		// RoundRectShape rs = new RoundRectShape(new float[] { 10, 10, 10, 10,
+		// 10, 10, 10, 10 }, null, null);
+		// ShapeDrawable sd = new ShapeDrawable(rs);
+		// retButton.setTextColor(Color.WHITE);
+		// retButton.setBackgroundDrawable(sd);
 		return retButton;
 	}
 
@@ -170,14 +182,14 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		int index = id % BUTTON_ID_PREFIX;
 
-		taskButtonsList.get(index).setVisibility(View.INVISIBLE);// ////
+		taskButtonsList.get(index).setVisibility(View.INVISIBLE);
 
 		answerLettersList.add(taskLettersList.get(index));
 
 		Button answerButton = createButton();
 
 		answerButton.setText(taskLettersList.get(index).toUpperCase());
-		answerButton.setTypeface(null,Typeface.BOLD);
+		answerButton.setTypeface(null, Typeface.BOLD);
 		answerButton.setId(id * 1000 + 100 + answerLettersList.size() - 1);
 
 		answerButton.setOnClickListener(listener);
@@ -273,9 +285,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	}
 
 	@Override
-	public void updateMode(boolean godMode) {
-		// TODO Auto-generated method stub
-
+	public void updateMode(boolean magicMode) {
+		magicText.setText("");
+		magicText.setBackgroundColor(getResources().getColor(R.color.brown_light));
+		magicText.setTextColor(getResources().getColor(R.color.purple));
+		magicText.setHint("Magic Mode");
 	}
 
 	@Override
@@ -299,35 +313,52 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			break;
 
 		case R.id.button_hint:
-			// if (wordsHandler.isGodMode()) {
-			// // wordsHandler.inputWholeWord();
-			// inputHintedWord();
-			// } else {
-
-			hintRemain--;
-			if (hintRemain < 1) {
-				buttonHint.setEnabled(false);
-			}
-
-			boolean[] taskButtonsVisibility = new boolean[taskButtonsList.size()];
-			for (int i = 0; i < taskButtonsList.size(); i++) {
-				int viz = taskButtonsList.get(i).getVisibility();
-				if (viz == View.VISIBLE) {
-					taskButtonsVisibility[i] = true;
-				} else {
-					taskButtonsVisibility[i] = false;
+			if (!wordsHandler.isMagicMode()) {
+				hintRemain--;
+				if (hintRemain < 1) {
+					buttonHint.setEnabled(false);
 				}
-			}
 
-			String askHint = StringUtils.lettersToWord(answerLettersList);
-			wordsHandler.hint(askHint, taskButtonsVisibility);
+				boolean[] taskButtonsVisibility = new boolean[taskButtonsList.size()];
+				for (int i = 0; i < taskButtonsList.size(); i++) {
+					int viz = taskButtonsList.get(i).getVisibility();
+					if (viz == View.VISIBLE) {
+						taskButtonsVisibility[i] = true;
+					} else {
+						taskButtonsVisibility[i] = false;
+					}
+				}
+				String askHint = StringUtils.lettersToWord(answerLettersList);
+				wordsHandler.hint(askHint, taskButtonsVisibility);
+			} else {
+				wordsHandler.hint("", null);
+				magicText.setSelection(magicText.length());
+			}
 		}
 	}
 
 	@Override
 	public boolean onLongClick(View v) {
-		//
-		return false;
+
+		if (wordsHandler.isMagicMode()) {
+			wordsHandler.toggleMagicMode();
+		}
+
+		magicText.setVisibility(View.VISIBLE);
+		magicText.setOnKeyListener(new OnKeyListener() {
+
+			@Override
+			public boolean onKey(View v, int keyCode, KeyEvent event) {
+				if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
+
+					wordsHandler.analyzeAnswer("*" + magicText.getText().toString() + "!!!");
+					return true;
+				} else {
+					return false;
+				}
+			}
+		});
+		return true;
 	}
 
 	@Override
@@ -339,6 +370,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			handleTaskButtonStress(taskButtonsList.get(pressableTaskButtonIndex).getId());
 		}
 
+	}
+
+	@Override
+	public void closeMagicTextView() {
+		magicText.setVisibility(View.GONE);
 	}
 
 }

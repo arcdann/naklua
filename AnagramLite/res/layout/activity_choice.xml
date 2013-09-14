@@ -15,6 +15,11 @@
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="32dp"
+        android:maxWidth="360dp"
+        android:shadowColor="@color/brown_deep"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="4"
         android:text="@string/button_txt_newGame" />
 
     <Button
@@ -23,6 +28,10 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button_newGame"
         android:layout_below="@+id/button_newGame"
+        android:shadowColor="@color/brown_deep"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="4"
         android:text="@string/button_txt_resumeGame" />
 
     <Button
@@ -31,6 +40,10 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button_resumeGame"
         android:layout_below="@+id/button_resumeGame"
+        android:shadowColor="@color/brown_deep"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="4"
         android:text="@string/button_txt_rules" />
 
     <Button
@@ -39,6 +52,10 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/button_rules"
         android:layout_below="@+id/button_rules"
+        android:shadowColor="@color/brown_deep"
+        android:shadowDx="8"
+        android:shadowDy="8"
+        android:shadowRadius="4"
         android:text="@string/button_txt_about" />
 
 </RelativeLayout>

@@ -104,6 +104,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:shadowColor="@color/brown_deep"
+            android:shadowDx="8"
+            android:shadowDy="8"
+            android:shadowRadius="4"
             android:text="@string/button_txt_hint" />
 
         <Button
@@ -112,7 +116,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:shadowColor="@color/brown_deep"
+            android:shadowDx="8"
+            android:shadowDy="8"
+            android:shadowRadius="4"
             android:text="@string/button_txt_next" />
+
     </LinearLayout>
+
+    <EditText
+        android:id="@+id/magicWord"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Input magic word here"
+        android:inputType="text"
+        android:visibility="gone" >
+
+        <requestFocus />
+    </EditText>
 
 </LinearLayout>

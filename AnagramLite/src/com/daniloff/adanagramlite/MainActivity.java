@@ -30,7 +30,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	private TextView attemptTxt;
 	private TextView scoreTxt;
 	private TextView recordTxt;
-	private TextView godModeTxt;
+	private TextView magicModeTxt;
 	private Button buttonOK;
 	private Button buttonHint;
 	private Button buttonNext;
@@ -130,7 +130,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 			break;
 
 		case R.id.button_hint:
-			if (wordsHandler.isGodMode()) {
+			if (wordsHandler.isMagicMode()) {
 				wordsHandler.inputWholeWord();
 			} else {
 				// int charsCount = answerTxt.getText().length();
@@ -196,20 +196,20 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 	}
 
 	@Override
-	public void updateMode(boolean godMode) {
-		if (godMode) {
+	public void updateMode(boolean magicMode) {
+		if (magicMode) {
 			wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
 			LayoutParams lpView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-			godModeTxt = new TextView(this);
-			godModeTxt.setText("god mode");
-			godModeTxt.setTextColor(getResources().getColor(R.color.purple));
-			godModeTxt.setLayoutParams(lpView);
-			wrapLayout.addView(godModeTxt);
+			magicModeTxt = new TextView(this);
+			magicModeTxt.setText("magic mode");
+			magicModeTxt.setTextColor(getResources().getColor(R.color.purple));
+			magicModeTxt.setLayoutParams(lpView);
+			wrapLayout.addView(magicModeTxt);
 
 			answerTxt.setTextColor(getResources().getColor(R.color.purple));
 			buttonHint.setTextColor(getResources().getColor(R.color.purple));
 		} else {
-			wrapLayout.removeView(godModeTxt);
+			wrapLayout.removeView(magicModeTxt);
 			answerTxt.setTextColor(Color.BLACK);
 			buttonHint.setTextColor(Color.BLACK);
 		}
@@ -231,6 +231,12 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 
 	@Override
 	public void simulateButtonPress(int hintedLetterIndex, int pressableTaskButtonIndex) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void closeMagicTextView() {
 		// TODO Auto-generated method stub
 		
 	}
