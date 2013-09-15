@@ -241,4 +241,10 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		
 	}
 
+	@Override
+	public void showAd() {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

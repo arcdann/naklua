@@ -1,12 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.daniloff.adanagramlite"
-    android:versionCode="5"
-    android:versionName="1.2" >
+    android:versionCode="6"
+    android:versionName="1.32" >
 
     <uses-sdk
         android:minSdkVersion="10"
         android:targetSdkVersion="18" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -16,7 +21,7 @@
         <activity
             android:name="com.daniloff.adanagramlite.ChoiceActivity"
             android:label="@string/app_name" >
-            android:screenOrientation="portrait" >            
+            android:screenOrientation="portrait" >            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -43,6 +48,16 @@
             android:name="com.daniloff.adanagramlite.ButtonsInputActivity"
             android:label="@string/app_name" >
         </activity>
+        <activity
+            android:name="com.purplebrain.adbuddiz.sdk.AdBuddizActivity"
+            android:theme="@android:style/Theme.Translucent" />
+
+        <meta-data
+            android:name="ADBUDDIZ_PUBLISHER_KEY"
+            android:value="15363961-fa99-4a1e-9e0b-5ebc3e542d47" />
+        <meta-data
+            android:name="SHOW_ADBUDDIZ_LOG"
+            android:value="true" />
     </application>
 
 </manifest>

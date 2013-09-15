@@ -8,8 +8,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.graphics.drawable.ShapeDrawable;
-import android.graphics.drawable.shapes.RoundRectShape;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.KeyEvent;
@@ -24,15 +22,17 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.daniloff.adanagramlite.R.color;
 import com.daniloff.adanagramlite.proc.StringUtils;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 @SuppressLint("DefaultLocale")
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
-	private final int BUTTON_SIZE = 64;
+	private final int BUTTON_SIZE = 56;
+	private final int TEXT_SIZE = 56;
+
 	private final int BUTTON_ID_PREFIX = 1216000;
 
 	private LinearLayout wrapLayout;
@@ -43,7 +43,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private TextView attemptTxt;
 	private TextView scoreTxt;
 	private TextView recordTxt;
-	// private TextView magicModeTxt;
 	private Button buttonHint;
 	private Button buttonNext;
 
@@ -62,6 +61,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_buttons_input);
+
+		AdBuddiz.getInstance().onStart(this);
 
 		initializeViews();
 
@@ -139,16 +140,16 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		recordTxt.setText("record: " + wordsHandler.getRecord());
 	}
 
+	@SuppressWarnings("deprecation")
 	private Button createButton() {
 		Button retButton = new Button(this);
 
 		retButton.setWidth(BUTTON_SIZE);
 		retButton.setHeight(BUTTON_SIZE);
-		// RoundRectShape rs = new RoundRectShape(new float[] { 10, 10, 10, 10,
-		// 10, 10, 10, 10 }, null, null);
-		// ShapeDrawable sd = new ShapeDrawable(rs);
-		// retButton.setTextColor(Color.WHITE);
-		// retButton.setBackgroundDrawable(sd);
+		retButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.rect_button));
+		retButton.setIncludeFontPadding(false);
+		retButton.setTextSize(TEXT_SIZE);
+
 		return retButton;
 	}
 
@@ -375,6 +376,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	@Override
 	public void closeMagicTextView() {
 		magicText.setVisibility(View.GONE);
+	}
+
+	@Override
+	public void showAd() {
+		// AdBuddiz.getInstance().onStart(this);
 	}
 
 }

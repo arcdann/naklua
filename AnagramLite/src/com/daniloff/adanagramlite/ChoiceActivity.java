@@ -11,6 +11,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 
 import com.daniloff.adanagramlite.proc.ParamsHandler;
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class ChoiceActivity extends Activity implements OnClickListener {
 
@@ -23,6 +24,11 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_choice);
+
+		AdBuddiz.getInstance().cacheAds(this);
+//		AdBuddiz.getInstance().onStart(this);// ////////////////////////////
+
+//		AdBuddiz.getInstance().showAd();// /////////////////////////////
 
 		buttonNewGame = (Button) findViewById(R.id.button_newGame);
 		buttonResumeGame = (Button) findViewById(R.id.button_resumeGame);
@@ -40,7 +46,7 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 
 		boolean resuming = GlobalInvoke.paramsHandler.loadParamBoolean("PARAM_NAME_RESUMING");
 		buttonResumeGame.setEnabled(resuming);
-		
+
 	}
 
 	private void createAlertDialog() {

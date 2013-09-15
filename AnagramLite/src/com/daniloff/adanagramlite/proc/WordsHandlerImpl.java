@@ -9,6 +9,7 @@ import android.util.Log;
 import com.daniloff.adanagramlite.AnagramView;
 import com.daniloff.adanagramlite.GlobalInvoke;
 import com.daniloff.adanagramlite.R;
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 public class WordsHandlerImpl implements WordsHandler {
 
@@ -183,6 +184,9 @@ public class WordsHandlerImpl implements WordsHandler {
 	private void updateLevel() {
 		if (level < MAX_LEVEL) {
 			level++;
+			
+			AdBuddiz.getInstance().showAd();
+			
 			step = 1;
 			image.toast("you passed to level " + level);
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
