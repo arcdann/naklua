@@ -45,6 +45,9 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="36dp"
+        android:background="@drawable/rect_button"
+        android:maxWidth="360dp"
+        android:minHeight="48dp"
         android:text="@string/button_txt_ok" />
 
     <TextView

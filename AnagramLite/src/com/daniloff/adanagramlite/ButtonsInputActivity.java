@@ -255,7 +255,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void toast(String message) {
 
 		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.CENTER, 0, 12);
+		toast.setGravity(Gravity.TOP, 0, 48);
 		toast.show();
 	}
 
