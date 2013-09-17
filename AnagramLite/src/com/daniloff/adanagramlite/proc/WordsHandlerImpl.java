@@ -24,7 +24,6 @@ public class WordsHandlerImpl implements WordsHandler {
 	private Random rnd = new Random();
 
 	private int level = 1;
-//	private int hintRemain;// ////////////
 	private int step = 1;
 	private int attempt = 1;
 	private int score;
@@ -76,8 +75,8 @@ public class WordsHandlerImpl implements WordsHandler {
 		word = wordsForLevel.poll();
 		wordShuffled = shuffleChars(word);
 		Log.i(LOG_TAG, word + " => " + wordShuffled);
-		int hintLimit = params.getHintLimit();
-		image.updateTextView(R.id.button_hint, "Hint (" + hintLimit + ")");
+//		int hintLimit = params.getHintLimit();
+//		image.updateTextView(R.id.button_hint, "Hint (" + hintLimit + ")");
 		image.showTask(wordShuffled);
 	}
 

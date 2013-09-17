@@ -180,7 +180,7 @@ public abstract class MainActivity extends Activity implements OnClickListener, 
 		tv.setText(text);
 	}
 
-	@Override
+//	@Override
 	public void setEnable(int buttonID, boolean b) {
 		Button button = (Button) findViewById(buttonID);
 		button.setEnabled(b);

@@ -118,6 +118,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		magicText.setText("");
 
 		hintRemain = wordsHandler.getParams().getHintLimit();
+		buttonHint.setText("Hint (" + hintRemain + ")");
 		buttonHint.setEnabled(true);
 
 		taskLettersList = StringUtils.wordToLetters(shuffledWord);
@@ -198,10 +199,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		answerLayout.addView(answerButton);
 
-		if (taskLettersList.size() < 3) {
-			buttonHint.setEnabled(false);
-		}
-
 		if (answerLettersList.size() >= taskLettersList.size()) {
 			submitAnswer();
 		}
@@ -256,7 +253,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
 		toast.setGravity(Gravity.CENTER, 0, 12);
 		toast.show();
-
 	}
 
 	@Override
@@ -264,13 +260,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		TextView tv = (TextView) findViewById(viewTextID);
 		tv.setText(text);
-
-	}
-
-	@Override
-	public void setEnable(int buttonID, boolean b) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -298,7 +287,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		intent.putExtra("record", wordsHandler.getRecord());
 
 		startActivity(intent);
-
 	}
 
 	@SuppressLint("ResourceAsColor")
@@ -312,15 +300,17 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		case R.id.button_hint:
 			if (!wordsHandler.isMagicMode()) {
-				hintRemain--;
-				buttonHint.setText("Hint (" + hintRemain + ")");
-				
-				if (hintRemain < 1) {
-					buttonHint.setEnabled(false);
-				}
+				if (taskLettersList.size() > answerLettersList.size() + 1) {
+					hintRemain--;
+					buttonHint.setText("Hint (" + hintRemain + ")");
 
-				String askHint = StringUtils.lettersToWord(answerLettersList);
-				wordsHandler.hint(askHint);
+					if (hintRemain < 1) {
+						buttonHint.setEnabled(false);
+					}
+
+					String askHint = StringUtils.lettersToWord(answerLettersList);
+					wordsHandler.hint(askHint);
+				}
 			} else {
 				wordsHandler.hint("");
 				magicText.setSelection(magicText.length());
@@ -365,10 +355,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			handleTaskButtonStress(taskButtonsList.get(pressableTaskButtonIndex).getId());
 		}
 	}
-	
+
 	@Override
 	public boolean[] getTaskButtonVisibility() {
-		boolean[] retVizArray = new boolean[taskButtonsList.size()];// //////////////////////////////////////////////////////////////
+		boolean[] retVizArray = new boolean[taskButtonsList.size()];
 		for (int i = 0; i < taskButtonsList.size(); i++) {
 			int viz = taskButtonsList.get(i).getVisibility();
 			if (viz == View.VISIBLE) {
@@ -389,7 +379,5 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void showAd() {
 		// AdBuddiz.getInstance().onStart(this);
 	}
-
-
 
 }

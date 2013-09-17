@@ -8,8 +8,6 @@ public interface AnagramView {
 
 	void updateTextView(int viewID, String text);
 
-	void setEnable(int buttonID, boolean b);
-
 	void updateScoreColors(int score, int record);
 
 	void updateMode(boolean magicMode);
