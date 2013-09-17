@@ -75,8 +75,7 @@ public class WordsHandlerImpl implements WordsHandler {
 		word = wordsForLevel.poll();
 		wordShuffled = shuffleChars(word);
 		Log.i(LOG_TAG, word + " => " + wordShuffled);
-//		int hintLimit = params.getHintLimit();
-//		image.updateTextView(R.id.button_hint, "Hint (" + hintLimit + ")");
+		image.applyNewTaskParams();
 		image.showTask(wordShuffled);
 	}
 
@@ -96,7 +95,6 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	@Override
 	public void hint(String letters) {
-//		 hintRemain--;
 
 		if (magicMode) {
 			image.updateTextView(R.id.magicWord, word);

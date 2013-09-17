@@ -24,4 +24,6 @@ public interface AnagramView {
 
 	boolean[] getTaskButtonVisibility();
 
+	void applyNewTaskParams();
+
 }

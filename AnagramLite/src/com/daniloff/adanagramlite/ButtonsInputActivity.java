@@ -110,16 +110,20 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		magicText = (EditText) findViewById(R.id.magicWord);
 	}
 
+	@Override
+	public void applyNewTaskParams() {
+		
+		hintRemain = wordsHandler.getParams().getHintLimit();
+		buttonHint.setText("Hint (" + hintRemain + ")");
+		buttonHint.setEnabled(true);
+	}
+
 	@SuppressLint("DefaultLocale")
 	@Override
 	public void showTask(String shuffledWord) {
 
 		clearAnswerField();
 		magicText.setText("");
-
-		hintRemain = wordsHandler.getParams().getHintLimit();
-		buttonHint.setText("Hint (" + hintRemain + ")");
-		buttonHint.setEnabled(true);
 
 		taskLettersList = StringUtils.wordToLetters(shuffledWord);
 		taskButtonsList = new ArrayList<Button>();
