@@ -96,7 +96,7 @@ public class WordsHandlerImpl implements WordsHandler {
 	}
 
 	@Override
-	public void hint(String letters, boolean[] buttonsVisibility) {
+	public void hint(String letters) {
 		 hintRemain--;
 
 		if (magicMode) {
@@ -110,6 +110,9 @@ public class WordsHandlerImpl implements WordsHandler {
 					break;
 				}
 			}
+			
+			image.simulateAnswerButtonPress(firstWrongLetterIndex);
+			boolean[] taskButtonsVisibility=image.getTaskButtonVisibility();
 
 			int hintedLetterIndex = firstWrongLetterIndex;
 			if (hintedLetterIndex < 0) {
@@ -118,13 +121,13 @@ public class WordsHandlerImpl implements WordsHandler {
 
 			char hintedLetter = word.charAt(hintedLetterIndex);
 
-			int pressableTaskButtonIndex = 0;
+			int pressableTaskButtonIndex = 0;/////////////////////////
 			for (int i = 0; i < wordShuffled.length(); i++) {
-				if (hintedLetter == wordShuffled.charAt(i) && buttonsVisibility[i]) {
+				if (hintedLetter == wordShuffled.charAt(i) && taskButtonsVisibility[i]) {
 					pressableTaskButtonIndex = i;
 				}
 			}
-			image.simulateButtonPress(firstWrongLetterIndex, pressableTaskButtonIndex);
+ 		image.simulateTaskButtonPress( pressableTaskButtonIndex);
 		}
 	}
 

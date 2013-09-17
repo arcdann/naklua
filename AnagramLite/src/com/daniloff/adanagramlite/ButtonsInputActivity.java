@@ -31,7 +31,7 @@ import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
 	private final int BUTTON_SIZE = 56;
-	private final int TEXT_SIZE = 56;
+	private final int TEXT_SIZE = 24;
 
 	private final int BUTTON_ID_PREFIX = 1216000;
 
@@ -251,12 +251,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	}
 
 	@Override
-	public void appendChar(char c) {
-		// TODO Auto-generated method stub
-
-	}
-
-	@Override
 	public void toast(String message) {
 
 		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
@@ -281,8 +275,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void updateScoreColors(int score, int record) {
-		// TODO Auto-generated method stub
-
+		if (record > score) {
+			scoreTxt.setTextColor(getResources().getColor(R.color.brown_deep));
+		} else {
+			scoreTxt.setTextColor(Color.BLUE);
+		}
 	}
 
 	@Override
@@ -320,19 +317,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 					buttonHint.setEnabled(false);
 				}
 
-				boolean[] taskButtonsVisibility = new boolean[taskButtonsList.size()];
-				for (int i = 0; i < taskButtonsList.size(); i++) {
-					int viz = taskButtonsList.get(i).getVisibility();
-					if (viz == View.VISIBLE) {
-						taskButtonsVisibility[i] = true;
-					} else {
-						taskButtonsVisibility[i] = false;
-					}
-				}
 				String askHint = StringUtils.lettersToWord(answerLettersList);
-				wordsHandler.hint(askHint, taskButtonsVisibility);
+				wordsHandler.hint(askHint);
 			} else {
-				wordsHandler.hint("", null);
+				wordsHandler.hint("");
 				magicText.setSelection(magicText.length());
 			}
 		}
@@ -363,14 +351,31 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	}
 
 	@Override
-	public void simulateButtonPress(int firstWrongLetterIndex, int pressableTaskButtonIndex) {
+	public void simulateAnswerButtonPress(int firstWrongLetterIndex) {
 		if (firstWrongLetterIndex >= 0) {
 			handleAnswerButtonStress(answerButtonsList.get(firstWrongLetterIndex).getId());
 		}
+	}
+
+	@Override
+	public void simulateTaskButtonPress(int pressableTaskButtonIndex) {
 		if (pressableTaskButtonIndex >= 0) {
 			handleTaskButtonStress(taskButtonsList.get(pressableTaskButtonIndex).getId());
 		}
-
+	}
+	
+	@Override
+	public boolean[] getTaskButtonVisibility() {
+		boolean[] retVizArray = new boolean[taskButtonsList.size()];// //////////////////////////////////////////////////////////////
+		for (int i = 0; i < taskButtonsList.size(); i++) {
+			int viz = taskButtonsList.get(i).getVisibility();
+			if (viz == View.VISIBLE) {
+				retVizArray[i] = true;
+			} else {
+				retVizArray[i] = false;
+			}
+		}
+		return retVizArray;
 	}
 
 	@Override
@@ -382,5 +387,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void showAd() {
 		// AdBuddiz.getInstance().onStart(this);
 	}
+
+
 
 }

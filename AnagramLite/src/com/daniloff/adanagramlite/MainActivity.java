@@ -22,7 +22,7 @@ import android.widget.Toast;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
 
-public class MainActivity extends Activity implements OnClickListener, AnagramView {
+public abstract class MainActivity extends Activity implements OnClickListener, AnagramView {
 
 	private LinearLayout wrapLayout;
 	private TextView taskTxt;
@@ -153,7 +153,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		}
 	}
 
-	@Override
+//	@Override
 	public void appendChar(final char c) {
 		final StringBuilder sb = new StringBuilder(answerTxt.getText());
 		sb.append("<font color='#0000FF'>");
@@ -229,8 +229,7 @@ public class MainActivity extends Activity implements OnClickListener, AnagramVi
 		startActivity(intent);
 	}
 
-	@Override
-	public void simulateButtonPress(int hintedLetterIndex, int pressableTaskButtonIndex) {
+	public void simulateAnswerButtonPress(int hintedLetterIndex, int pressableTaskButtonIndex) {
 		// TODO Auto-generated method stub
 		
 	}

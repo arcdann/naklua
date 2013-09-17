@@ -4,7 +4,7 @@ public interface AnagramView {
 
 	void showTask(String word);
 
-	void appendChar(char c);
+//	void appendChar(char c);
 
 	void toast(String message);
 
@@ -18,10 +18,14 @@ public interface AnagramView {
 
 	public abstract void moveToFinishView();
 
-	void simulateButtonPress(int firstWrongLetterIndex, int pressableTaskButtonIndex);
+	void simulateAnswerButtonPress(int firstWrongLetterIndex);
 
 	void closeMagicTextView();
 	
 	void showAd();
+
+	boolean[] getTaskButtonVisibility();
+
+	void simulateTaskButtonPress(int pressableTaskButtonIndex);
 
 }
