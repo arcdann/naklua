@@ -4,8 +4,6 @@ public interface AnagramView {
 
 	void showTask(String word);
 
-//	void appendChar(char c);
-
 	void toast(String message);
 
 	void updateTextView(int viewID, String text);
@@ -14,18 +12,18 @@ public interface AnagramView {
 
 	void updateScoreColors(int score, int record);
 
-	void updateMode(boolean godMode);
+	void updateMode(boolean magicMode);
 
 	public abstract void moveToFinishView();
 
 	void simulateAnswerButtonPress(int firstWrongLetterIndex);
 
+	void simulateTaskButtonPress(int pressableTaskButtonIndex);
+
 	void closeMagicTextView();
-	
+
 	void showAd();
 
 	boolean[] getTaskButtonVisibility();
-
-	void simulateTaskButtonPress(int pressableTaskButtonIndex);
 
 }

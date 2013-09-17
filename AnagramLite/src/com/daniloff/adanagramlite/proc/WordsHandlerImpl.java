@@ -24,7 +24,7 @@ public class WordsHandlerImpl implements WordsHandler {
 	private Random rnd = new Random();
 
 	private int level = 1;
-	private int hintRemain;// ////////////
+//	private int hintRemain;// ////////////
 	private int step = 1;
 	private int attempt = 1;
 	private int score;
@@ -76,8 +76,8 @@ public class WordsHandlerImpl implements WordsHandler {
 		word = wordsForLevel.poll();
 		wordShuffled = shuffleChars(word);
 		Log.i(LOG_TAG, word + " => " + wordShuffled);
-		hintRemain = params.getHintLimit();
-		image.updateTextView(R.id.button_hint, "Hint (" + hintRemain + ")");
+		int hintLimit = params.getHintLimit();
+		image.updateTextView(R.id.button_hint, "Hint (" + hintLimit + ")");
 		image.showTask(wordShuffled);
 	}
 
@@ -97,7 +97,7 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	@Override
 	public void hint(String letters) {
-		 hintRemain--;
+//		 hintRemain--;
 
 		if (magicMode) {
 			image.updateTextView(R.id.magicWord, word);
@@ -121,7 +121,7 @@ public class WordsHandlerImpl implements WordsHandler {
 
 			char hintedLetter = word.charAt(hintedLetterIndex);
 
-			int pressableTaskButtonIndex = 0;/////////////////////////
+			int pressableTaskButtonIndex = 0;
 			for (int i = 0; i < wordShuffled.length(); i++) {
 				if (hintedLetter == wordShuffled.charAt(i) && taskButtonsVisibility[i]) {
 					pressableTaskButtonIndex = i;

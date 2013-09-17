@@ -313,6 +313,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		case R.id.button_hint:
 			if (!wordsHandler.isMagicMode()) {
 				hintRemain--;
+				buttonHint.setText("Hint (" + hintRemain + ")");
+				
 				if (hintRemain < 1) {
 					buttonHint.setEnabled(false);
 				}
