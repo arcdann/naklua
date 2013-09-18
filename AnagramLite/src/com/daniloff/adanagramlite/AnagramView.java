@@ -26,4 +26,6 @@ public interface AnagramView {
 
 	void applyNewTaskParams();
 
+	void defineButtonsSize(int wordLength);
+
 }

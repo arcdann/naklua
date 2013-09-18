@@ -9,6 +9,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -31,8 +33,8 @@ import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 @SuppressLint("DefaultLocale")
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
-	private final int BUTTON_SIZE = 56;
-	private final int TEXT_SIZE = 24;
+	private final int BUTTON_MAX_SIZE = 72;
+	private int textSize;
 
 	private final int BUTTON_ID_PREFIX = 1216000;
 
@@ -57,8 +59,9 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private List<String> taskLettersList;
 	private int hintRemain;
 	private EditText magicText;
-
-	LayoutParams llp;
+	private LayoutParams buttonsLayoutParams;
+	private DisplayMetrics metrics;
+	private int buttonSize;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -68,6 +71,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		AdBuddiz.getInstance().onStart(this);
 
 		initializeViews();
+
+		Display display = getWindowManager().getDefaultDisplay();
+		metrics = new DisplayMetrics();
+		display.getMetrics(metrics);
 
 		wordsHandler = new WordsHandlerImpl();
 		wordsHandler.setView(this);
@@ -89,6 +96,23 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		wordsHandler.startLevel();
 	}
 
+	@Override
+	public void defineButtonsSize(int wordLength) {
+
+		int screenWidth = metrics.widthPixels;
+		int wrapLayoutMarginH = 16;
+		int buttonMarginH = 2;
+		int buttonStroke = 1;
+		int buttonPadding=5;
+
+		buttonSize = (screenWidth - wrapLayoutMarginH * 2) / wordLength - buttonMarginH * 2 - buttonStroke * 2;
+		if(buttonSize>BUTTON_MAX_SIZE){
+			buttonSize=BUTTON_MAX_SIZE;
+		}
+		System.out.println("buttonWidth: " + buttonSize);
+		textSize=buttonSize/2-buttonPadding;
+	}
+
 	private void initializeViews() {
 
 		wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
@@ -97,12 +121,12 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		taskLayout = (LinearLayout) findViewById(R.id.task_layout);
 		answerLayout = (LinearLayout) findViewById(R.id.answer_layout);
 
-		llp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		llp.setMargins(2, 0, 2, 0);
+		buttonsLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		buttonsLayoutParams.setMargins(2, 0, 2, 0);
 
 		buttonHint = (Button) findViewById(R.id.button_hint);
 		buttonHint.setOnClickListener(this);
-		buttonHint.setOnLongClickListener(this);
+//		buttonHint.setOnLongClickListener(this);
 
 		buttonNext = (Button) findViewById(R.id.button_next);
 		buttonNext.setOnClickListener(this);
@@ -154,13 +178,14 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	@SuppressWarnings("deprecation")
 	private Button createButton() {
 		Button retButton = new Button(this);
-		retButton.setLayoutParams(llp);
+		retButton.setLayoutParams(buttonsLayoutParams);
 
-		retButton.setWidth(BUTTON_SIZE);
-		retButton.setHeight(BUTTON_SIZE);
+		retButton.setWidth(buttonSize);
+		retButton.setHeight(buttonSize);
+
 		retButton.setBackgroundDrawable(getResources().getDrawable(R.drawable.rect_button));
 		retButton.setIncludeFontPadding(false);
-		retButton.setTextSize(TEXT_SIZE);
+		retButton.setTextSize(textSize);
 
 		return retButton;
 	}
@@ -278,7 +303,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		if (record > score) {
 			scoreTxt.setTextColor(getResources().getColor(R.color.brown_deep));
 		} else {
-			scoreTxt.setTextColor(Color.BLUE);
+			scoreTxt.setTextColor(Color.RED);
 		}
 	}
 
@@ -364,6 +389,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void simulateTaskButtonPress(int pressableTaskButtonIndex) {
 		if (pressableTaskButtonIndex >= 0) {
 			handleTaskButtonStress(taskButtonsList.get(pressableTaskButtonIndex).getId());
+
+			for (int i = 0; i < answerButtonsList.size(); i++) {
+				answerButtonsList.get(i).setTextColor(getResources().getColor(R.color.dark_blue));
+			}
 		}
 	}
 
@@ -390,5 +419,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void showAd() {
 		// AdBuddiz.getInstance().onStart(this);
 	}
+
+
 
 }

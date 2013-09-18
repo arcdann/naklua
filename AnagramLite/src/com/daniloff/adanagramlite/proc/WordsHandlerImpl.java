@@ -58,6 +58,7 @@ public class WordsHandlerImpl implements WordsHandler {
 		wordsForLevel = FileUtils.receiveWords(context, params);
 
 		image.updateTextView(R.id.info_level, "level: " + level);
+		image.defineButtonsSize(params.getWordLength());
 		updateScoreInfo();
 
 		supplyTask();
@@ -98,7 +99,7 @@ public class WordsHandlerImpl implements WordsHandler {
 
 		if (magicMode) {
 			image.updateTextView(R.id.magicWord, word);
-			
+
 		} else {
 			int firstWrongLetterIndex = -1;
 			for (int i = 0; i < letters.length(); i++) {
@@ -107,9 +108,9 @@ public class WordsHandlerImpl implements WordsHandler {
 					break;
 				}
 			}
-			
+
 			image.simulateAnswerButtonPress(firstWrongLetterIndex);
-			boolean[] taskButtonsVisibility=image.getTaskButtonVisibility();
+			boolean[] taskButtonsVisibility = image.getTaskButtonVisibility();
 
 			int hintedLetterIndex = firstWrongLetterIndex;
 			if (hintedLetterIndex < 0) {
@@ -124,12 +125,12 @@ public class WordsHandlerImpl implements WordsHandler {
 					pressableTaskButtonIndex = i;
 				}
 			}
- 		image.simulateTaskButtonPress( pressableTaskButtonIndex);
+			image.simulateTaskButtonPress(pressableTaskButtonIndex);
 		}
 	}
 
 	@Override
-	 public void toggleMagicMode() {
+	public void toggleMagicMode() {
 		if (!magicMode) {
 			magicMode = true;
 		} else {
@@ -149,16 +150,15 @@ public class WordsHandlerImpl implements WordsHandler {
 		if (answer.equals(word)) {
 			onCorrectAnswer();
 		} else {
-			System.out.println(answer.substring(1));
-			if (answer.substring(1, 4).equalsIgnoreCase("$$$")) {
-				toggleMagicMode();
-			} else {
-				if (answer.charAt(0) == '*') {
-					image.closeMagicTextView();
-				} else {
+//			if (answer.substring(1, 4).equalsIgnoreCase("$$$")) {/////////////////////////////
+//				toggleMagicMode();
+//			} else {
+//				if (answer.charAt(0) == '*') {
+//					image.closeMagicTextView();
+//				} else {
 					onMistake();
-				}
-			}
+//				}
+//			}
 		}
 	}
 
@@ -184,9 +184,9 @@ public class WordsHandlerImpl implements WordsHandler {
 	private void updateLevel() {
 		if (level < MAX_LEVEL) {
 			level++;
-			
+
 			AdBuddiz.getInstance().showAd();
-			
+
 			step = 1;
 			image.toast("you passed to level " + level);
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
