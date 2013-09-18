@@ -19,6 +19,7 @@ import android.view.View.OnLongClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -57,6 +58,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private int hintRemain;
 	private EditText magicText;
 
+	LayoutParams llp;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -94,6 +97,9 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		taskLayout = (LinearLayout) findViewById(R.id.task_layout);
 		answerLayout = (LinearLayout) findViewById(R.id.answer_layout);
 
+		llp = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+		llp.setMargins(2, 0, 2, 0);
+
 		buttonHint = (Button) findViewById(R.id.button_hint);
 		buttonHint.setOnClickListener(this);
 		buttonHint.setOnLongClickListener(this);
@@ -112,7 +118,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void applyNewTaskParams() {
-		
+
 		hintRemain = wordsHandler.getParams().getHintLimit();
 		buttonHint.setText("Hint (" + hintRemain + ")");
 		buttonHint.setEnabled(true);
@@ -148,6 +154,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	@SuppressWarnings("deprecation")
 	private Button createButton() {
 		Button retButton = new Button(this);
+		retButton.setLayoutParams(llp);
 
 		retButton.setWidth(BUTTON_SIZE);
 		retButton.setHeight(BUTTON_SIZE);
