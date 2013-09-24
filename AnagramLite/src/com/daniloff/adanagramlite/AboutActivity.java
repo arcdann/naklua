@@ -1,5 +1,7 @@
 package com.daniloff.adanagramlite;
 
+import com.purplebrain.adbuddiz.sdk.AdBuddiz;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -19,6 +21,8 @@ public class AboutActivity extends Activity implements OnClickListener {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
+		
+		AdBuddiz.getInstance().onStart(this);
 
 		buttonOK = (Button) findViewById(R.id.about_button_ok);
 		buttonOK.setOnClickListener(this);
@@ -41,6 +45,8 @@ public class AboutActivity extends Activity implements OnClickListener {
 
 	@Override
 	public void onClick(View v) {
+		 AdBuddiz.getInstance().showAd();
+		 
 		Intent intent = new Intent(AboutActivity.this, ChoiceActivity.class);
 		startActivity(intent);
 	}

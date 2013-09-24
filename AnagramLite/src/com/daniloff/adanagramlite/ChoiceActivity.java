@@ -26,9 +26,6 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 		setContentView(R.layout.activity_choice);
 
 		AdBuddiz.getInstance().cacheAds(this);
-//		AdBuddiz.getInstance().onStart(this);// ////////////////////////////
-
-//		AdBuddiz.getInstance().showAd();// /////////////////////////////
 
 		buttonNewGame = (Button) findViewById(R.id.button_newGame);
 		buttonResumeGame = (Button) findViewById(R.id.button_resumeGame);
@@ -69,7 +66,7 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 						intentNewGame.putExtra("button", "newGame");
 						intentNewGame.putExtra("lang", lang);
 
-						startActivity(intentNewGame);// /lang
+						startActivity(intentNewGame);
 					}
 				}).show();
 
