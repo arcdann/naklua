@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">BarcodeScanner</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_scanner">ScannerActivity</string>
+    <string name="scan_nextButtonText">Next</string>
+    <string name="scan_uploadButtonText">Upload</string>
+
+</resources>
