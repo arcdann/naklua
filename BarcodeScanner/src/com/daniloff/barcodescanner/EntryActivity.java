@@ -1,8 +1,10 @@
 package com.daniloff.barcodescanner;
 
 import java.util.Date;
+import java.util.List;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.format.DateFormat;
@@ -10,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnKeyListener;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -17,16 +20,26 @@ public class EntryActivity extends Activity {
 
 	private EditText editText;
 	private TextView infoText;
-	private String legalPincode = "144009";
+
+	private List<String> validCodes;
+
+	// private String legalPincode = "144009";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_entry);
-		
-		infoText=(TextView) findViewById(R.id.entry_infoView);
+
+		infoText = (TextView) findViewById(R.id.entry_infoView);
 
 		editText = (EditText) findViewById(R.id.editText1);
+		
+		Context context=getBaseContext();
+
+		validCodes = StringUtils.receiveWords(context, R.raw.valid_pincodes);
+
+		this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_VISIBLE);
+
 		editText.setOnKeyListener(new OnKeyListener() {
 
 			@Override
@@ -44,11 +57,11 @@ public class EntryActivity extends Activity {
 	protected void analizePincode() {
 		String enterdePin = editText.getText().toString();
 		editText.setText("");
-		if (enterdePin.equals(legalPincode)) {
+		// if (enterdePin.equals(legalPincode)) {
+		if (validCodes.contains(enterdePin)) {
 
-			
-			String currentDate = (String) DateFormat.format("yyyy-MM-dd",new Date());
-			
+			String currentDate = (String) DateFormat.format("yyyy-MM-dd", new Date());
+
 			infoText.setText("" + currentDate);
 
 			moveToScannerActivity(enterdePin, currentDate);
