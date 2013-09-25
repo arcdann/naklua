@@ -3,6 +3,8 @@ package com.daniloff.barcodescanner;
 import java.util.Date;
 import java.util.List;
 
+import com.daniloff.QrReader.QKActivity;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -20,10 +22,7 @@ public class EntryActivity extends Activity {
 
 	private EditText editText;
 	private TextView infoText;
-
 	private List<String> validCodes;
-
-	// private String legalPincode = "144009";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +71,7 @@ public class EntryActivity extends Activity {
 	}
 
 	private void moveToScannerActivity(String enteredPin, String currentDate) {
-		Intent intent = new Intent(EntryActivity.this, ScannerActivity.class);
+		Intent intent = new Intent(EntryActivity.this, QKActivity.class);
 		intent.putExtra("pin", enteredPin);
 		intent.putExtra("date", currentDate);
 		startActivity(intent);
