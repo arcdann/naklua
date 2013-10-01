@@ -142,7 +142,7 @@ public abstract class MainActivity extends Activity implements OnClickListener, 
 	}
 
 	@SuppressLint("DefaultLocale")
-	private void submitAnswer() {
+	public void submitAnswer() {
 		String answer = answerTxt.getText().toString();
 		if (answer.length() == wordsHandler.getParams().getWordLength()) {
 			answer = answer.toLowerCase();
@@ -153,7 +153,7 @@ public abstract class MainActivity extends Activity implements OnClickListener, 
 		}
 	}
 
-//	@Override
+	// @Override
 	public void appendChar(final char c) {
 		final StringBuilder sb = new StringBuilder(answerTxt.getText());
 		sb.append("<font color='#0000FF'>");
@@ -180,7 +180,7 @@ public abstract class MainActivity extends Activity implements OnClickListener, 
 		tv.setText(text);
 	}
 
-//	@Override
+	// @Override
 	public void setEnable(int buttonID, boolean b) {
 		Button button = (Button) findViewById(buttonID);
 		button.setEnabled(b);
@@ -231,19 +231,19 @@ public abstract class MainActivity extends Activity implements OnClickListener, 
 
 	public void simulateAnswerButtonPress(int hintedLetterIndex, int pressableTaskButtonIndex) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void closeMagicTextView() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
 	public void showAd() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

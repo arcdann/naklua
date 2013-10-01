@@ -18,16 +18,19 @@
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
+        
         <activity
-            android:name="com.daniloff.adanagramlite.ChoiceActivity"
+            android:name="com.daniloff.adanagramlite.SplashActivity"
             android:label="@string/app_name" >
-            android:screenOrientation="portrait" >            
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name="com.daniloff.adanagramlite.ChoiceActivity"
+            android:label="@string/app_name" >
+            android:screenOrientation="portrait" >        </activity>
         <activity
             android:name="com.daniloff.adanagramlite.FinishActivity"
             android:label="@string/title_activity_finish" >
@@ -58,6 +61,8 @@
         <meta-data
             android:name="SHOW_ADBUDDIZ_LOG"
             android:value="true" />
+
+        
     </application>
 
 </manifest>

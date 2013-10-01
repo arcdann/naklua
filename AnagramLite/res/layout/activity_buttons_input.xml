@@ -141,4 +141,11 @@
         <requestFocus />
     </EditText>
 
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="289dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="4.96" />
+
 </LinearLayout>

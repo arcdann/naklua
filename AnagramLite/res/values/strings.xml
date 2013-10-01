@@ -47,6 +47,11 @@
     <string name="about_version_title">   version </string>
     <string name="title_activity_buttons_input">MainActivity</string>
     <string name="hint_magicWord">Input magic word here</string>
+
     <color name="dark_blue">#00008B</color>
+
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="splashlogo">SplashLogo</string>
 
 </resources>

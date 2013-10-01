@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.Gravity;
@@ -22,6 +23,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,6 +35,7 @@ import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 @SuppressLint("DefaultLocale")
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
+	private final long ANSWER_DELAY = 1500;
 	private final int BUTTON_MAX_SIZE = 72;
 	private int textSize;
 
@@ -62,6 +65,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private LayoutParams buttonsLayoutParams;
 	private DisplayMetrics metrics;
 	private int buttonSize;
+	private CountDownTimer answerDelayTimer;
+	private ProgressBar progressBar;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +96,18 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerButtonsList = new ArrayList<Button>();
 		answerLettersList = new ArrayList<String>();
 
+		answerDelayTimer = new CountDownTimer(ANSWER_DELAY, ANSWER_DELAY/100) {
+			@Override
+			public void onTick(long millisUntilFinished) {
+				progressBar.incrementProgressBy(4);
+			}
+
+			@Override
+			public void onFinish() {
+				submitAnswer();
+			}
+		};
+
 		listenButton();
 
 		wordsHandler.startLevel();
@@ -103,14 +120,14 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		int wrapLayoutMarginH = 16;
 		int buttonMarginH = 2;
 		int buttonStroke = 1;
-		int buttonPadding=5;
+		int buttonPadding = 5;
 
 		buttonSize = (screenWidth - wrapLayoutMarginH * 2) / wordLength - buttonMarginH * 2 - buttonStroke * 2;
-		if(buttonSize>BUTTON_MAX_SIZE){
-			buttonSize=BUTTON_MAX_SIZE;
+		if (buttonSize > BUTTON_MAX_SIZE) {
+			buttonSize = BUTTON_MAX_SIZE;
 		}
 		System.out.println("buttonWidth: " + buttonSize);
-		textSize=buttonSize/2-buttonPadding;
+		textSize = buttonSize / 2 - buttonPadding;
 	}
 
 	private void initializeViews() {
@@ -126,7 +143,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		buttonHint = (Button) findViewById(R.id.button_hint);
 		buttonHint.setOnClickListener(this);
-//		buttonHint.setOnLongClickListener(this);
+		// buttonHint.setOnLongClickListener(this);
 
 		buttonNext = (Button) findViewById(R.id.button_next);
 		buttonNext.setOnClickListener(this);
@@ -138,6 +155,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
 		magicText = (EditText) findViewById(R.id.magicWord);
+		progressBar=(ProgressBar) findViewById(R.id.progressBar3);
 	}
 
 	@Override
@@ -236,12 +254,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerLayout.addView(answerButton);
 
 		if (answerLettersList.size() >= taskLettersList.size()) {
-			submitAnswer();
+			answerDelayTimer.start();
 		}
 	}
 
-	private void submitAnswer() {
-
+	public void submitAnswer() {
 		String answer = StringUtils.lettersToWord(answerLettersList);
 		clearTaskField();
 		wordsHandler.analyzeAnswer(answer);
@@ -419,7 +436,5 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void showAd() {
 		// AdBuddiz.getInstance().onStart(this);
 	}
-
-
 
 }
