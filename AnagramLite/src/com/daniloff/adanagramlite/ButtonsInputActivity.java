@@ -35,7 +35,7 @@ import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 @SuppressLint("DefaultLocale")
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
-	private final long ANSWER_DELAY = 1500;
+	private final long ANSWER_DELAY = 1000;
 	private final int BUTTON_MAX_SIZE = 72;
 	private int textSize;
 
@@ -66,7 +66,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private DisplayMetrics metrics;
 	private int buttonSize;
 	private CountDownTimer answerDelayTimer;
-	private ProgressBar progressBar;
+
+	private final int BUTTON_MARGIN = 2;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -96,10 +97,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerButtonsList = new ArrayList<Button>();
 		answerLettersList = new ArrayList<String>();
 
-		answerDelayTimer = new CountDownTimer(ANSWER_DELAY, ANSWER_DELAY/100) {
+		answerDelayTimer = new CountDownTimer(ANSWER_DELAY, ANSWER_DELAY / 100) {
 			@Override
 			public void onTick(long millisUntilFinished) {
-				progressBar.incrementProgressBy(4);
+
 			}
 
 			@Override
@@ -139,7 +140,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerLayout = (LinearLayout) findViewById(R.id.answer_layout);
 
 		buttonsLayoutParams = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-		buttonsLayoutParams.setMargins(2, 0, 2, 0);
+		buttonsLayoutParams.setMargins(BUTTON_MARGIN, 0, BUTTON_MARGIN, 0);
 
 		buttonHint = (Button) findViewById(R.id.button_hint);
 		buttonHint.setOnClickListener(this);
@@ -155,7 +156,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		recordTxt = (TextView) findViewById(R.id.view_record);
 		recordTxt.setTextColor(Color.BLUE);
 		magicText = (EditText) findViewById(R.id.magicWord);
-		progressBar=(ProgressBar) findViewById(R.id.progressBar3);
 	}
 
 	@Override
@@ -188,6 +188,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			taskButtonsList.add(taskButton);
 			taskLayout.addView(taskButton);
 		}
+
 		stepTxt.setText("step: " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
 		attemptTxt.setText("attempt: " + wordsHandler.getAttempt() + "/" + wordsHandler.getParams().getAttemptLimit());
 		recordTxt.setText("record: " + wordsHandler.getRecord());
@@ -235,6 +236,9 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@SuppressLint("DefaultLocale")
 	private void handleTaskButtonStress(int id) {
+		if (answerLettersList.size() == 0) {
+			locateAnswer();
+		}
 
 		int index = id % BUTTON_ID_PREFIX;
 
@@ -254,8 +258,30 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerLayout.addView(answerButton);
 
 		if (answerLettersList.size() >= taskLettersList.size()) {
+
+			for (int i = 0; i < taskButtonsList.size(); i++) {
+				taskButtonsList.get(i).setVisibility(View.GONE);
+			}
+
+			ProgressBar progressBar = new ProgressBar(getApplicationContext());
+			taskLayout.addView(progressBar);
 			answerDelayTimer.start();
 		}
+	}
+
+	private void locateAnswer() {
+		int[] locTask = new int[2];
+		taskButtonsList.get(0).getLocationOnScreen(locTask);
+		int firstLetterLocatoinX = locTask[0];
+		System.out.println(locTask[0] + " " + locTask[1]);
+
+		int[] locAnswer = new int[2];
+		answerLayout.getLocationOnScreen(locAnswer);
+		int answerLayoutLocation = locAnswer[0];
+		System.out.println(locAnswer[0] + " " + locAnswer[1]);
+
+		int firstAnswerButtonOffset = firstLetterLocatoinX - BUTTON_MARGIN - answerLayoutLocation;
+		answerLayout.setPadding(firstAnswerButtonOffset, 0, 0, 0);
 	}
 
 	public void submitAnswer() {
@@ -265,25 +291,21 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	}
 
 	private void clearTaskField() {
-
 		taskLettersList.removeAll(answerLettersList);
 		taskButtonsList.removeAll(answerButtonsList);
 		taskLayout.removeAllViews();
 	}
 
 	private void clearAnswerField() {
-
 		answerLettersList.removeAll(answerLettersList);
 		answerButtonsList.removeAll(answerButtonsList);
 		answerLayout.removeAllViews();
 	}
 
 	private void handleAnswerButtonStress(int id) {
-
 		int index = (id % BUTTON_ID_PREFIX % 10);
 
 		for (int i = (answerLettersList.size() - 1); i >= index; i--) {
-
 			int taskLellersIndex = answerButtonsList.get(i).getId() % BUTTON_ID_PREFIX / 1000;
 			taskButtonsList.get(taskLellersIndex).setVisibility(View.VISIBLE);
 
@@ -302,7 +324,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void toast(String message) {
-
 		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
 		toast.setGravity(Gravity.TOP, 0, 48);
 		toast.show();
@@ -310,7 +331,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void updateTextView(int viewTextID, String text) {
-
 		TextView tv = (TextView) findViewById(viewTextID);
 		tv.setText(text);
 	}
@@ -334,7 +354,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public void moveToFinishView() {
-
 		Intent intent = new Intent(ButtonsInputActivity.this, FinishActivity.class);
 		intent.putExtra("score", wordsHandler.getScore());
 		intent.putExtra("record", wordsHandler.getRecord());
@@ -373,7 +392,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 	@Override
 	public boolean onLongClick(View v) {
-
 		if (wordsHandler.isMagicMode()) {
 			wordsHandler.toggleMagicMode();
 		}
@@ -384,7 +402,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			@Override
 			public boolean onKey(View v, int keyCode, KeyEvent event) {
 				if (event.getAction() == KeyEvent.ACTION_DOWN && keyCode == KeyEvent.KEYCODE_ENTER) {
-
 					wordsHandler.analyzeAnswer("*" + magicText.getText().toString() + "!!!");
 					return true;
 				} else {

@@ -184,10 +184,10 @@ public class WordsHandlerImpl implements WordsHandler {
 	private void updateLevel() {
 		if (level < MAX_LEVEL) {
 			level++;
+			step = 1;
 
 			AdBuddiz.getInstance().showAd();
 
-			step = 1;
 			image.toast("you passed to level " + level);
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
 			startLevel();

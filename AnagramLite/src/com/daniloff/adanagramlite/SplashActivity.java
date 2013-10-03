@@ -1,16 +1,16 @@
 package com.daniloff.adanagramlite;
 
-import android.os.Bundle;
-import android.os.Handler;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.widget.TextView;
 
 public class SplashActivity extends Activity {
 	
-	private static int SPLASH_TIME_OUT = 3000;
+	private static int SPLASH_TIME_OUT = 1500;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -21,8 +21,9 @@ public class SplashActivity extends Activity {
 		TextView appVer=(TextView) findViewById(R.id.splash_ver);
 		
 		appName.setText(R.string.app_name);
+		String versionTitle=getApplicationContext().getString(R.string.about_version_title);
 		try {
-			appVer.setText("ver. "+getApplicationContext().getPackageManager().getPackageInfo(
+			appVer.setText(versionTitle+" "+getApplicationContext().getPackageManager().getPackageInfo(
 					getApplicationContext().getPackageName(), 0).versionName);
 		} catch (NameNotFoundException e) {
 			e.printStackTrace();
