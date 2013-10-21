@@ -12,9 +12,9 @@ import org.json.JSONObject;
 
 public class JSONValidityChecker {
 
-	private static List<JSONCheckResult> objectsCheckResults = new ArrayList<JSONCheckResult>();
-
 	public static void main(String[] args) {
+		List<JSONCheckResult> objectsCheckResults = new ArrayList<JSONCheckResult>();
+
 		objectsCheckResults.add(new JSONCheckResult("amazon", "Amazon"));
 		objectsCheckResults.add(new JSONCheckResult("googleplay", "Google Play"));
 		objectsCheckResults.add(new JSONCheckResult("ios", "iOS"));
@@ -52,6 +52,8 @@ public class JSONValidityChecker {
 		String request = "http://s3.alisabingo.net/settings/" + fileName + ".json";
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(request);
+		
+		
 
 		JSONObject jsonObj = null;
 
@@ -61,8 +63,8 @@ public class JSONValidityChecker {
 			jsonObj = new JSONObject(responseBody);
 			retArray[0] = "Ok";
 
-			String maintenance = jsonObj.optString("maintenance", null);
-			if (maintenance.equalsIgnoreCase("false")) {
+			boolean maintenance=jsonObj.optBoolean("maintenance", true);
+			if (!maintenance) {
 				retArray[1] = "Ok";
 			}
 		} catch (Exception e) {
