@@ -19,26 +19,26 @@ public class JSONValidityChecker {
 		objectsCheckResults.add(new JSONCheckResult("googleplay", "Google Play"));
 		objectsCheckResults.add(new JSONCheckResult("ios", "iOS"));
 
-		for (int i = 0; i < objectsCheckResults.size(); i++) {
-			String jsonFormatCheckResult = checkObject(objectsCheckResults.get(i).getFileName())[0];
-			objectsCheckResults.get(i).setJsonFormatCheckResult(jsonFormatCheckResult);
+		for (JSONCheckResult res : objectsCheckResults) {
+			String jsonFormatCheckResult = checkObject(res.getFileName())[0];
+			res.setJsonFormatCheckResult(jsonFormatCheckResult);
 
-			String maintenanceCheckResult = checkObject(objectsCheckResults.get(i).getFileName())[1];
-			objectsCheckResults.get(i).setMaintenanceCheckResult(maintenanceCheckResult);
+			String maintenanceCheckResult = checkObject(res.getFileName())[1];
+			res.setMaintenanceCheckResult(maintenanceCheckResult);
 
-			System.out.println(objectsCheckResults.get(i).getObjAlias() + ": ");
-			System.out.println("JSON format: " + objectsCheckResults.get(i).getJsonFormatCheckResult());
-			System.out.println("maintenance: " + objectsCheckResults.get(i).getMaintenanceCheckResult());
+			System.out.println(res.getObjAlias() + ": ");
+			System.out.println("JSON format: " + res.getJsonFormatCheckResult());
+			System.out.println("maintenance: " + res.getMaintenanceCheckResult());
 			System.out.println();
 		}
 
 		String overallResult = "Ok";
-		for (int i = 0; i < objectsCheckResults.size(); i++) {
-			if (!objectsCheckResults.get(i).getJsonFormatCheckResult().equalsIgnoreCase("Ok")) {
+		for (JSONCheckResult res : objectsCheckResults) {
+			if (!res.getJsonFormatCheckResult().equalsIgnoreCase("Ok")) {
 				overallResult = "Bad";
 				break;
 			}
-			if (!objectsCheckResults.get(i).getMaintenanceCheckResult().equalsIgnoreCase("Ok")) {
+			if (!res.getMaintenanceCheckResult().equalsIgnoreCase("Ok")) {
 				overallResult = "Bad";
 				break;
 			}
@@ -52,8 +52,6 @@ public class JSONValidityChecker {
 		String request = "http://s3.alisabingo.net/settings/" + fileName + ".json";
 		HttpClient httpClient = new DefaultHttpClient();
 		HttpGet httpget = new HttpGet(request);
-		
-		
 
 		JSONObject jsonObj = null;
 
@@ -63,7 +61,7 @@ public class JSONValidityChecker {
 			jsonObj = new JSONObject(responseBody);
 			retArray[0] = "Ok";
 
-			boolean maintenance=jsonObj.optBoolean("maintenance", true);
+			boolean maintenance = jsonObj.optBoolean("maintenance", true);
 			if (!maintenance) {
 				retArray[1] = "Ok";
 			}
