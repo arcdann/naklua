@@ -7,5 +7,6 @@
     <string name="buttonPause_text_Pause">Pause</string>
     <string name="buttonPause_text_Resume">Resume</string>
     <string name="buttonNewGame_text">New Game</string>
+    <string name="MovesCountView_title_text">Moves:   </string>
 
 </resources>
