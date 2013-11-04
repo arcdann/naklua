@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Пятнашки</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Привет!</string>
+    <string name="buttonPause_text_Pause">Пауза</string>
+    <string name="buttonPause_text_Resume">Продолжить</string>
+    <string name="buttonNewGame_text">Новая игра</string>
+    <string name="MovesCountView_title_text">Ходов:   </string>
+
+</resources>
