@@ -62,23 +62,26 @@ public class BoxActivity extends Activity implements OnClickListener {
 				int xClicked = id % ((id / 10) * 10);
 				int yClicked = id % ((id / 100) * 100) / 10;
 
-				if (xClicked == xEmpty || yClicked == yEmpty) {
-					Button b=(Button) findViewById(CHIP_ID_PREXIX * 100 + yEmpty * 10 + xEmpty);
-					String buf=b.getText().toString();
-					b.setVisibility(View.VISIBLE);
+				if ((xClicked == xEmpty&&Math.abs(yClicked-yEmpty)==1) ||( yClicked == yEmpty &&Math.abs(xClicked-xEmpty)==1)){
+					Button bDon=(Button) findViewById(CHIP_ID_PREXIX * 100 + yEmpty * 10 + xEmpty);
+					Button bAcc=(Button) findViewById(CHIP_ID_PREXIX * 100 + yClicked * 10 + xClicked);
+					String buf=bDon.getText().toString();
+					bDon.setText((CharSequence) ((TextView) findViewById(CHIP_ID_PREXIX * 100 + yClicked * 10 + xClicked)).getText().toString());
+					bAcc.setText(buf);
+					bDon.setVisibility(View.VISIBLE);
 					xEmpty = xClicked;
 					yEmpty = yClicked;
 					infoView.setText(v.getId() + " x=" + xClicked + " y=" + yClicked);
 					((Button) v).setVisibility(View.INVISIBLE);
 				}
-				if(xClicked==xEmpty){
-					int numX=xEmpty-xClicked;
-					if(numX>0)
-					for (int i=xEmpty;i<xClicked;i--){
-						
-					}
-					
-				}
+//				if(xClicked==xEmpty){
+//					int numX=xEmpty-xClicked;
+//					if(numX>0)
+//					for (int i=xEmpty;i<xClicked;i--){
+//						
+//					}
+//					
+//				}
 
 			}
 		};
