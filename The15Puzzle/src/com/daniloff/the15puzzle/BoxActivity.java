@@ -2,6 +2,8 @@ package com.daniloff.the15puzzle;
 
 import android.R.color;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -202,11 +204,11 @@ public class BoxActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonNewGame:
-			
-	//		createAlertDialog();
-			
-			cleanGameBox();
-			createGameBox();
+
+			createAlertDialog();
+
+			// cleanGameBox();
+			// createGameBox();
 			break;
 		case R.id.buttonPause:
 			Button emptyCell = (Button) findViewById(CHIP_ID_PREXIX * 100 + emptyY * 10 + emptyX);
@@ -237,6 +239,30 @@ public class BoxActivity extends Activity implements OnClickListener {
 			break;
 		}
 
+	}
+
+	private void createAlertDialog() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(this);
+		// builder.setTitle("Start new game?");
+		builder.setMessage("Start new game?");
+		builder.setCancelable(true);
+		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() { // Кнопка
+																					// ОК
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						cleanGameBox();
+						createGameBox();
+					}
+				});
+		builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // Кнопка
+																				// ОК
+					@Override
+					public void onClick(DialogInterface dialog, int which) {
+						dialog.dismiss();
+					}
+				});
+		AlertDialog dialog = builder.create();
+		dialog.show();
 	}
 
 	private void cleanGameBox() {
