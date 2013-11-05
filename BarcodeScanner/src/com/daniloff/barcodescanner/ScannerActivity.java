@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import com.daniloff.QrReader.QKActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -51,32 +54,26 @@ public class ScannerActivity extends Activity implements OnClickListener {
 		String scanDate = getIntent().getStringExtra("date");
 
 		intentExtraView.setText("Pin: " + pinCode + " Date: " + scanDate);
-		
-		scannedCodes=new ArrayList<String>();
 
-		scanBarCode();
+		scannedCodes = new ArrayList<String>();
+
+		// scanBarCode();
+
+		obtainBarCode();
+
+	}
+
+	private void obtainBarCode() {
+
+		String code = getIntent().getStringExtra("scannedCode");
+		DataReceiver.setObtainedCode(code);
 
 	}
 
 	private void scanBarCode() {
 
-		Thread t = new Thread();
-		t.start();
-		try {
-			Thread.sleep(3000);
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		Random rnd = new Random();
-		String barCode = "" + rnd.nextInt(1000000000) + rnd.nextInt(1000000000);
-
-		scanResultView.setText(barCode);
-
-		scannedCodes.add(barCode);
-
-		// sb.append(tab).append(tab).append("<SHELTER>").append(barCode).append("</SHELTER>").append("\n");
+		Intent intent = new Intent(ScannerActivity.this, QKActivity.class);
+		startActivity(intent);
 
 	}
 
@@ -105,10 +102,10 @@ public class ScannerActivity extends Activity implements OnClickListener {
 	}
 
 	private void uploadMessage() {
-		String message=createMessage();
-		
+		String message = createMessage();
+
 		System.out.println(message);
-		
+
 		// connectToServer();
 
 	}
@@ -116,17 +113,12 @@ public class ScannerActivity extends Activity implements OnClickListener {
 	private String createMessage() {
 
 		StringBuilder sb = new StringBuilder();
-		sb.append("<DEPOT_SHELTERS>").append("\n");
-		sb.append(tab).append("<SECKEY>").append(pinCode).append("</SECKEY>").append("\n");
-		sb.append(tab).append("<SCANDATE>").append(scanDate).append("</SCANDATE>").append("\n");
-		sb.append(tab).append("<BARCODES>").append("\n");
+		sb.append(DataReceiver.getPincode()).append("\n");
+		sb.append(DataReceiver.getScanDate()).append("\n");
 
-		for (String barcode : scannedCodes) {
-			sb.append(tab).append(tab).append("<SHELTER>").append(barcode).append("</SHELTER>").append("\n");
+		for (String barcode : DataReceiver.getScannedCodes()) {
+			sb.append(barcode).append("\n");
 		}
-
-		sb.append(tab).append("<BARCODES>").append("\n");
-		sb.append("</DEPOT_SHELTERS>").append("\n");
 
 		return sb.toString();
 

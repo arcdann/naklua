@@ -54,20 +54,47 @@
         android:orientation="vertical" >
 
         <LinearLayout
+            android:baselineAligned="false"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/movesCountView_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/MovesCountView_title_text" />
+            <LinearLayout
+                android:id="@+id/movesLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1" >
 
-            <TextView
-                android:id="@+id/movesCountView"
-                android:layout_width="wrap_content"
+                <TextView
+                    android:id="@+id/movesCountView_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/MovesCountView_title_text" />
+
+                <TextView
+                    android:id="@+id/movesCountView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/timeLayout"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView" />
+                android:layout_weight="1" >
+
+                <TextView
+                    android:id="@+id/timeView_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/timeView_title_text" />
+
+                <TextView
+                    android:id="@+id/timeView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -77,14 +104,16 @@
 
             <Button
                 android:id="@+id/buttonNewGame"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/buttonNewGame_text" />
 
             <Button
                 android:id="@+id/buttonPause"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
                 android:text="@string/buttonPause_text_Pause" />
 
         </LinearLayout>

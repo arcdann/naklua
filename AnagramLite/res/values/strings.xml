@@ -53,5 +53,6 @@
     <string name="title_activity_splash">SplashActivity</string>
 
     <string name="splashlogo">SplashLogo</string>
+    <string name="admob_publisher_id">a152751ca60f531</string>
 
 </resources>

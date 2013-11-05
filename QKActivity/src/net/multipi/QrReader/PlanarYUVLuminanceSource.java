@@ -50,9 +50,9 @@ public final class PlanarYUVLuminanceSource extends LuminanceSource {
     this.dataHeight = dataHeight;
     this.left = left;
     this.top = top;
-    if (reverseHorizontal) {
-      reverseHorizontal(width, height);
-    }
+//    if (reverseHorizontal) {
+//      reverseHorizontal(width, height);
+//    }
   }
 
   @Override
@@ -100,43 +100,43 @@ public final class PlanarYUVLuminanceSource extends LuminanceSource {
     return matrix;
   }
 
-  @Override
-  public boolean isCropSupported() {
-    return true;
-  }
+//  @Override
+//  public boolean isCropSupported() {
+//    return true;
+//  }
 
-    @SuppressWarnings("unused")
-  public Bitmap renderCroppedGreyscaleBitmap() {
-    int width = getWidth();
-    int height = getHeight();
-    int[] pixels = new int[width * height];
-    byte[] yuv = yuvData;
-    int inputOffset = top * dataWidth + left;
+//    @SuppressWarnings("unused")
+//  public Bitmap renderCroppedGreyscaleBitmap() {
+//    int width = getWidth();
+//    int height = getHeight();
+//    int[] pixels = new int[width * height];
+//    byte[] yuv = yuvData;
+//    int inputOffset = top * dataWidth + left;
+//
+//    for (int y = 0; y < height; y++) {
+//      int outputOffset = y * width;
+//      for (int x = 0; x < width; x++) {
+//        int grey = yuv[inputOffset + x] & 0xff;
+//        pixels[outputOffset + x] = 0xFF000000 | (grey * 0x00010101);
+//      }
+//      inputOffset += dataWidth;
+//    }
+//
+//    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+//    bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
+//    return bitmap;
+//  }
 
-    for (int y = 0; y < height; y++) {
-      int outputOffset = y * width;
-      for (int x = 0; x < width; x++) {
-        int grey = yuv[inputOffset + x] & 0xff;
-        pixels[outputOffset + x] = 0xFF000000 | (grey * 0x00010101);
-      }
-      inputOffset += dataWidth;
-    }
-
-    Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-    bitmap.setPixels(pixels, 0, width, 0, 0, width, height);
-    return bitmap;
-  }
-
-  private void reverseHorizontal(int width, int height) {
-    byte[] yuvData = this.yuvData;
-    for (int y = 0, rowStart = top * dataWidth + left; y < height; y++, rowStart += dataWidth) {
-      int middle = rowStart + width / 2;
-      for (int x1 = rowStart, x2 = rowStart + width - 1; x1 < middle; x1++, x2--) {
-        byte temp = yuvData[x1];
-        yuvData[x1] = yuvData[x2];
-        yuvData[x2] = temp;
-      }
-    }
-  }
+//  private void reverseHorizontal(int width, int height) {
+//    byte[] yuvData = this.yuvData;
+//    for (int y = 0, rowStart = top * dataWidth + left; y < height; y++, rowStart += dataWidth) {
+//      int middle = rowStart + width / 2;
+//      for (int x1 = rowStart, x2 = rowStart + width - 1; x1 < middle; x1++, x2--) {
+//        byte temp = yuvData[x1];
+//        yuvData[x1] = yuvData[x2];
+//        yuvData[x2] = temp;
+//      }
+//    }
+//  }
 
 }

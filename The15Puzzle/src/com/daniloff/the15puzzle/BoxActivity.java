@@ -1,5 +1,6 @@
 package com.daniloff.the15puzzle;
 
+import android.R.color;
 import android.app.Activity;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -37,6 +38,7 @@ public class BoxActivity extends Activity implements OnClickListener {
 	private int emptyX;
 	private int emptyY;
 
+	private boolean started;
 	private boolean paused;
 
 	@Override
@@ -50,6 +52,7 @@ public class BoxActivity extends Activity implements OnClickListener {
 		pauseButton = (Button) findViewById(R.id.buttonPause);
 		pauseButton.setOnClickListener(this);
 		moveCountView = (TextView) findViewById(R.id.movesCountView);
+		timeView = (TextView) findViewById(R.id.timeView);
 
 		infoView = (TextView) findViewById(R.id.textView1);
 
@@ -59,23 +62,30 @@ public class BoxActivity extends Activity implements OnClickListener {
 			public void onClick(View v) {
 				if (paused)
 					return;
-				moveCount++;
-				moveCountView.setText("" + moveCount);
+				if (!started) {
+					started = true;
+					startTimer();
+				}
 				int id = v.getId();
 
 				int comingX = id % ((id / 10) * 10);
 				int comingY = id % ((id / 100) * 100) / 10;
 
+				// if (comingX == emptyX || comingY == emptyY) {
+				// moveChips(comingX, comingY);
+				// }
 				if ((comingX == emptyX && Math.abs(comingY - emptyY) == 1)
 						|| (comingY == emptyY && Math.abs(comingX - emptyX) == 1)) {
-					// if (comingX == emptyX || comingY == emptyY) {
 
-					swapButtons(v, comingX, comingY);
+					moveCount++;
+					moveCountView.setText("" + moveCount);
+					swapButtons(comingX, comingY);
+					((Button) v).setVisibility(View.INVISIBLE);
 				}
 
 			}
 
-			private void swapButtons(View v, int comingX, int comingY) {
+			private void swapButtons(int comingX, int comingY) {
 				Button bEmpty = (Button) findViewById(CHIP_ID_PREXIX * 100 + emptyY * 10 + emptyX);
 				Button bComing = (Button) findViewById(CHIP_ID_PREXIX * 100 + comingY * 10 + comingX);
 				String buf = bEmpty.getText().toString();
@@ -85,10 +95,58 @@ public class BoxActivity extends Activity implements OnClickListener {
 				bEmpty.setVisibility(View.VISIBLE);
 				emptyX = comingX;
 				emptyY = comingY;
-				((Button) v).setVisibility(View.INVISIBLE);
+
 			}
 		};
 		createGameBox();
+
+	}
+
+	private void startTimer() {
+		TimeWatch timeWatch = new TimeWatch();
+		timeWatch.setBox(this);
+		Thread tw = new Thread(timeWatch);
+		tw.setDaemon(true);
+		tw.start();
+	}
+
+	protected void moveChips(int comingX, int comingY) {
+		if (comingX == emptyX) {
+			int stack = emptyY - comingY;
+			if (stack > 0) {
+				moveDown(stack);
+			} else {
+				moveUp(stack);
+			}
+		}
+		if (comingY == emptyY) {
+			int stack = emptyX - comingX;
+			if (stack > 0) {
+				moveRight(stack);
+			} else {
+				moveLeft(stack);
+			}
+		}
+
+	}
+
+	private void moveLeft(int stack) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void moveRight(int stack) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void moveUp(int stack) {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void moveDown(int stack) {
+		// TODO Auto-generated method stub
 
 	}
 
@@ -96,8 +154,10 @@ public class BoxActivity extends Activity implements OnClickListener {
 		emptyX = X - 1;
 		emptyY = Y - 1;
 		moveCount = 0;
+		started = false;
 		paused = false;
 		moveCountView.setText("" + moveCount);
+		timeView.setText(String.format("%3.1f", 0.0));
 		pauseButton.setText(R.string.buttonPause_text_Pause);
 
 		chips = new Button[X][Y];
@@ -119,6 +179,8 @@ public class BoxActivity extends Activity implements OnClickListener {
 		b.setWidth(CHIP_SIZE);
 		b.setHeight(CHIP_SIZE);
 		b.setTextSize(16);// //////////
+		b.setBackgroundDrawable(getResources().getDrawable(R.drawable.rect_button));
+		b.setIncludeFontPadding(false);
 		b.setText("" + (y * X + x + 1));
 		b.setId(CHIP_ID_PREXIX * 100 + y * 10 + x);
 		b.setTypeface(null, Typeface.BOLD);
@@ -140,19 +202,24 @@ public class BoxActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.buttonNewGame:
+			
+	//		createAlertDialog();
+			
 			cleanGameBox();
 			createGameBox();
 			break;
 		case R.id.buttonPause:
+			Button emptyCell = (Button) findViewById(CHIP_ID_PREXIX * 100 + emptyY * 10 + emptyX);
 			if (!paused) {
 				paused = true;
 				pauseButton.setText(R.string.buttonPause_text_Resume);
 				for (int y = 0; y < Y; y++) {
 					for (int x = 0; x < X; x++) {
 						Button b = (Button) findViewById(CHIP_ID_PREXIX * 100 + y * 10 + x);
-						b.setTextColor(Color.GRAY);
+						b.setTextColor(color.darker_gray);
 					}
 				}
+				emptyCell.setVisibility(View.VISIBLE);
 			} else {
 				paused = false;
 				pauseButton.setText(R.string.buttonPause_text_Pause);
@@ -162,6 +229,7 @@ public class BoxActivity extends Activity implements OnClickListener {
 						b.setTextColor(Color.BLACK);
 					}
 				}
+				emptyCell.setVisibility(View.INVISIBLE);
 			}
 			break;
 
@@ -179,4 +247,28 @@ public class BoxActivity extends Activity implements OnClickListener {
 
 	}
 
+	public boolean isStarted() {
+		return started;
+	}
+
+	public boolean isPaused() {
+		return paused;
+	}
+
+	public TextView getTimeView() {
+		return timeView;
+	}
+
+	// public void setTimeView(TextView timeView) {
+	// this.timeView = timeView;
+	// }
+
+	public void setTimeView(final String string) {
+		// timeView = (TextView) findViewById(R.id.timeView);
+		runOnUiThread(new Runnable() {
+			public void run() {
+				timeView.setText(string);
+			}
+		});
+	}
 }

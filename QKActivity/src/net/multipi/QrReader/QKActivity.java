@@ -124,7 +124,9 @@ public class QKActivity extends Activity implements SurfaceHolder.Callback, Came
 
 					Map<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>();
 					Vector<BarcodeFormat> decodeFormats = new Vector<BarcodeFormat>(1);
-					decodeFormats.add(BarcodeFormat.QR_CODE);
+//					decodeFormats.add(BarcodeFormat.QR_CODE);
+					decodeFormats.add(BarcodeFormat.EAN_13);
+//					decodeFormats.add(BarcodeFormat.EAN_8);
 					hints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
 					hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, new ResultPointCallback() {
 						@Override

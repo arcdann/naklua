@@ -8,5 +8,7 @@
     <string name="buttonPause_text_Resume">Resume</string>
     <string name="buttonNewGame_text">New Game</string>
     <string name="MovesCountView_title_text">Moves:   </string>
+    <string name="timeView_title_text">"Time: "</string>
+    <color name="buttonTextColor_paused">#88888888</color>
 
 </resources>

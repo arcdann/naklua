@@ -16,6 +16,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.FrameLayout;
+
+import com.daniloff.barcodescanner.ScannerActivity;
 import com.google.zxing.*;
 import com.google.zxing.common.HybridBinarizer;
 
@@ -123,8 +125,16 @@ public class QKActivity extends Activity implements SurfaceHolder.Callback, Came
 							rect.left, rect.top, rect.width(), rect.height(), false);
 
 					Map<DecodeHintType, Object> hints = new HashMap<DecodeHintType, Object>();
-					Vector<BarcodeFormat> decodeFormats = new Vector<BarcodeFormat>(1);
+					Vector<BarcodeFormat> decodeFormats = new Vector<BarcodeFormat>(8);
+					decodeFormats.add(BarcodeFormat.EAN_13);
+					decodeFormats.add(BarcodeFormat.EAN_8);
+					decodeFormats.add(BarcodeFormat.UPC_EAN_EXTENSION);
+					decodeFormats.add(BarcodeFormat.CODABAR);
+					decodeFormats.add(BarcodeFormat.CODE_128);
+					decodeFormats.add(BarcodeFormat.MAXICODE);
+					decodeFormats.add(BarcodeFormat.UPC_E);
 					decodeFormats.add(BarcodeFormat.QR_CODE);
+					
 					hints.put(DecodeHintType.POSSIBLE_FORMATS, decodeFormats);
 					hints.put(DecodeHintType.NEED_RESULT_POINT_CALLBACK, new ResultPointCallback() {
 						@Override
@@ -150,10 +160,12 @@ public class QKActivity extends Activity implements SurfaceHolder.Callback, Came
 								handler.post(new Runnable() {
 									@Override
 									public void run() {
-										Intent i = new Intent(QKActivity.this, ResultActivity.class);
-										i.putExtra(ResultActivity.RESULT, rawResult.getText());
-										i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-										startActivity(i);
+										Intent intent = new Intent(QKActivity.this, ScannerActivity.class);
+//										intent.putExtra(ResultActivity.RESULT, rawResult.getText());
+//										intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+										intent.putExtra("scannedCode",rawResult.getText());
+										
+										startActivity(intent);
 									}
 								});
 							}

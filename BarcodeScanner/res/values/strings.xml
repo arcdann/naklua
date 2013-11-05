@@ -7,5 +7,24 @@
     <string name="title_activity_scanner">ScannerActivity</string>
     <string name="scan_nextButtonText">Next</string>
     <string name="scan_uploadButtonText">Upload</string>
+    <string name="tv0">0</string>
+    <string name="tv1">1</string>
+    <string name="tv2">2</string>
+    <string name="tv3">3</string>
+    <string name="tv4">4</string>
+    <string name="tv5">5</string>
+    <string name="button_9_txt">9</string>
+    <string name="button_8_txt">8</string>
+    <string name="button_7_txt">7</string>
+    <string name="button_4_txt">4</string>
+    <string name="button_5_txt">5</string>
+    <string name="button_6_txt">6</string>
+    <string name="button_1_txt">1</string>
+    <string name="button_2_txt">2</string>
+    <string name="button_3_txt">3</string>
+    <string name="button_0_txt">0</string>
+    <string name="button_c_txt">C</string>
+    <string name="button_x_txt">&lt;x</string>
+    <color name="Green">#008000</color>
 
 </resources>
