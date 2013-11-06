@@ -28,4 +28,8 @@ public class TimeWatch implements Runnable {
 		this.box = box;
 	}
 
+	public double getTime() {
+		return time;
+	}
+
 }

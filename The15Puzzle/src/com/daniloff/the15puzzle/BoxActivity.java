@@ -1,9 +1,13 @@
 package com.daniloff.the15puzzle;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.R.color;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -35,18 +39,23 @@ public class BoxActivity extends Activity implements OnClickListener {
 	private int moveCount;
 	private final String BLANC = "16";
 	private Button[][] chips;
-	private int[][] cells;// ///////////////////////////////////
+//	private int[][] cells;// ///////////////////////////////////
 
 	private int emptyX;
 	private int emptyY;
 
 	private boolean started;
 	private boolean paused;
+	private AnswerChecker answerChecker;
+	TimeWatch timeWatch;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_box);
+		
+	 answerChecker=new AnswerChecker();
+	 answerChecker.start();
 
 		gameBox = (TableLayout) findViewById(R.id.gameBoxTable);
 		newGameButton = (Button) findViewById(R.id.buttonNewGame);
@@ -83,6 +92,13 @@ public class BoxActivity extends Activity implements OnClickListener {
 					moveCountView.setText("" + moveCount);
 					swapButtons(comingX, comingY);
 					((Button) v).setVisibility(View.INVISIBLE);
+					
+					List<String>answer=prepareAnswer();
+//					System.out.println(answer);
+					infoView.setText(String.valueOf(answerChecker.isRightAnswer(answer)));
+					if(answerChecker.isRightAnswer(answer)){
+						showResultActivity();
+					}
 				}
 
 			}
@@ -104,8 +120,27 @@ public class BoxActivity extends Activity implements OnClickListener {
 
 	}
 
+	protected void showResultActivity() {
+		Intent intentResult=new Intent(BoxActivity.this,ResultActivity.class);
+		intentResult.putExtra("moveCount",moveCount);
+		intentResult.putExtra("time",timeWatch.getTime());
+		
+		startActivity(intentResult);
+	}
+
+	protected List<String> prepareAnswer() {
+		List<String> retList=new ArrayList<String>();
+		for(int y=0;y<Y;y++){
+			for(int x=0;x<X;x++){
+				retList.add((String) ((TextView) findViewById(CHIP_ID_PREXIX * 100 + y * 10 + x)).getText());
+			}
+		}
+		System.out.println(retList);
+		return retList;
+	}
+
 	private void startTimer() {
-		TimeWatch timeWatch = new TimeWatch();
+		timeWatch = new TimeWatch();
 		timeWatch.setBox(this);
 		Thread tw = new Thread(timeWatch);
 		tw.setDaemon(true);
@@ -246,16 +281,14 @@ public class BoxActivity extends Activity implements OnClickListener {
 		// builder.setTitle("Start new game?");
 		builder.setMessage("Start new game?");
 		builder.setCancelable(true);
-		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() { // Кнопка
-																					// ОК
+		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						cleanGameBox();
 						createGameBox();
 					}
 				});
-		builder.setNegativeButton("No", new DialogInterface.OnClickListener() { // Кнопка
-																				// ОК
+		builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
 					@Override
 					public void onClick(DialogInterface dialog, int which) {
 						dialog.dismiss();
