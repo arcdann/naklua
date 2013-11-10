@@ -1,4 +1,4 @@
-package com.daniloff.the15puzzle;
+package com.daniloff.chipspuzzle;
 
 public class TimeWatch implements Runnable {
 	private BoxActivity box;

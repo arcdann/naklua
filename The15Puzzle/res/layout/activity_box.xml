@@ -8,17 +8,10 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".BoxActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
     <TableLayout
         android:id="@+id/gameBoxTable"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
         android:layout_centerHorizontal="true" >
 
         <TableRow
@@ -51,12 +44,13 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="96dp"
         android:orientation="vertical" >
 
         <LinearLayout
-            android:baselineAligned="false"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" >
+            android:layout_height="wrap_content"
+            android:baselineAligned="false" >
 
             <LinearLayout
                 android:id="@+id/movesLayout"
@@ -74,7 +68,6 @@
                     android:id="@+id/movesCountView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
             </LinearLayout>
 
             <LinearLayout
@@ -93,9 +86,7 @@
                     android:id="@+id/timeView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
-
             </LinearLayout>
-
         </LinearLayout>
 
         <LinearLayout
@@ -115,9 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/buttonPause_text_Pause" />
-
         </LinearLayout>
-
     </LinearLayout>
 
 </RelativeLayout>

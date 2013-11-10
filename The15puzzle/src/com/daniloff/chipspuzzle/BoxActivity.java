@@ -1,7 +1,9 @@
-package com.daniloff.the15puzzle;
+package com.daniloff.chipspuzzle;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.daniloff.the15puzzle.R;
 
 import android.R.color;
 import android.app.Activity;
@@ -33,8 +35,6 @@ public class BoxActivity extends Activity implements OnClickListener {
 	private TextView moveCountView;
 	private TextView timeView;
 
-	private TextView infoView;
-
 	private OnClickListener listener;
 	private int moveCount;
 	private final String BLANC = "16";
@@ -65,8 +65,6 @@ public class BoxActivity extends Activity implements OnClickListener {
 		moveCountView = (TextView) findViewById(R.id.movesCountView);
 		timeView = (TextView) findViewById(R.id.timeView);
 
-		infoView = (TextView) findViewById(R.id.textView1);
-
 		listener = new OnClickListener() {
 
 			@Override
@@ -94,10 +92,8 @@ public class BoxActivity extends Activity implements OnClickListener {
 					((Button) v).setVisibility(View.INVISIBLE);
 					
 					List<String>answer=prepareAnswer();
-//					System.out.println(answer);
-					infoView.setText(String.valueOf(answerChecker.isRightAnswer(answer)));
 					if(answerChecker.isRightAnswer(answer)){
-						showResultActivity();
+						gameOver();
 					}
 				}
 
@@ -119,6 +115,10 @@ public class BoxActivity extends Activity implements OnClickListener {
 		createGameBox();
 
 	}
+	
+	private void gameOver(){
+		showResultActivity();
+	}
 
 	protected void showResultActivity() {
 		Intent intentResult=new Intent(BoxActivity.this,ResultActivity.class);
@@ -135,7 +135,7 @@ public class BoxActivity extends Activity implements OnClickListener {
 				retList.add((String) ((TextView) findViewById(CHIP_ID_PREXIX * 100 + y * 10 + x)).getText());
 			}
 		}
-		System.out.println(retList);
+//		System.out.println(retList);
 		return retList;
 	}
 
@@ -211,6 +211,7 @@ public class BoxActivity extends Activity implements OnClickListener {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private Button createChip(int x, int y) {
 		Button b = new Button(this);
 		b.setWidth(CHIP_SIZE);

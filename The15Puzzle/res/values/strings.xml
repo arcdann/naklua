@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">The15puzzle</string>
+    <string name="app_name">Chips Puzzle</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="buttonPause_text_Pause">Pause</string>
@@ -13,5 +13,13 @@
     <color name="buttonTextColor_paused">#88888888</color>
 
     <string name="title_activity_result">ResultActivity</string>
+
+    <string name="ButtonOK_txt">OK</string>
+
+    <string name="gameOver">Game over successfully!</string>
+
+    <string name="spent_text">Spent</string>
+
+    <string name="steps">steps</string>
 
 </resources>

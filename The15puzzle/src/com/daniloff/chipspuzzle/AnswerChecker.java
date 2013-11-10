@@ -1,4 +1,4 @@
-package com.daniloff.the15puzzle;
+package com.daniloff.chipspuzzle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +13,7 @@ public class AnswerChecker {
 		for (int i = 1; i <=answerSize; i++) {
 			rightAnswer.add(String.valueOf(i));
 		}
-		System.out.println(rightAnswer);
+//		System.out.println(rightAnswer);
 	}
 
 	public boolean isRightAnswer(List<String> answer) {
