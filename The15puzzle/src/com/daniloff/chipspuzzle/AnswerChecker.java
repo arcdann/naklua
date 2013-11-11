@@ -10,7 +10,7 @@ public class AnswerChecker {
 
 	public void start() {
 		int answerSize = 16;
-		for (int i = 1; i <=answerSize; i++) {
+		for (int i = answerSize; i >=1; i--) {
 			rightAnswer.add(String.valueOf(i));
 		}
 //		System.out.println(rightAnswer);
