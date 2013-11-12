@@ -37,7 +37,9 @@ public final class R {
         public static final int ic_launcher=0x7f020000;
         public static final int logo_at_about=0x7f020001;
         public static final int rect_button=0x7f020002;
-        public static final int splash_logo=0x7f020003;
+        public static final int rect_button_correct=0x7f020003;
+        public static final int rect_button_wrong=0x7f020004;
+        public static final int splash_logo=0x7f020005;
     }
     public static final class id {
         public static final int RelativeLayout1=0x7f0a001d;
@@ -130,7 +132,7 @@ public final class R {
     public static final class string {
         public static final int about_version_title=0x7f060024;
         public static final int action_settings=0x7f060001;
-        public static final int admob_publisher_id=0x7f060029;
+        public static final int admob_publisher_id=0x7f06002d;
         public static final int anagramLogo=0x7f060023;
         public static final int app_name=0x7f060000;
         public static final int attempt=0x7f06000f;
@@ -145,6 +147,7 @@ public final class R {
         public static final int button_txt_resumeGame=0x7f060008;
         public static final int button_txt_rules=0x7f060009;
         public static final int congratulation=0x7f060012;
+        public static final int correct=0x7f06002a;
         public static final int design_email=0x7f060021;
         public static final int design_name=0x7f060020;
         public static final int design_txt=0x7f060022;
@@ -152,6 +155,7 @@ public final class R {
         public static final int god_mode=0x7f060011;
         public static final int hello_world=0x7f060002;
         public static final int hint_magicWord=0x7f060026;
+        public static final int info_next_level=0x7f060029;
         public static final int input_answer=0x7f06000c;
         public static final int level=0x7f06000d;
         public static final int record=0x7f060010;
@@ -159,15 +163,17 @@ public final class R {
         public static final int score_info=0x7f06000b;
         public static final int selectEnglish=0x7f06001d;
         public static final int selectRussian=0x7f06001e;
-        public static final int splashlogo=0x7f060028;
+        public static final int splashlogo=0x7f06002c;
         public static final int step=0x7f06000e;
+        public static final int the_word=0x7f060028;
         public static final int title_activity_about=0x7f060019;
         public static final int title_activity_buttons_input=0x7f060025;
         public static final int title_activity_choice=0x7f060016;
         public static final int title_activity_entry=0x7f06001c;
         public static final int title_activity_finish=0x7f060015;
         public static final int title_activity_rules=0x7f060017;
-        public static final int title_activity_splash=0x7f060027;
+        public static final int title_activity_splash=0x7f06002b;
+        public static final int try_again=0x7f060027;
         public static final int you_finished=0x7f060013;
         public static final int your_score=0x7f060014;
     }

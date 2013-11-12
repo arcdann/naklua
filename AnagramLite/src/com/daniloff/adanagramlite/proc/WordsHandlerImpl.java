@@ -57,7 +57,7 @@ public class WordsHandlerImpl implements WordsHandler {
 		GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
 		wordsForLevel = FileUtils.receiveWords(context, params);
 
-		image.updateTextView(R.id.info_level, "level: " + level);
+		image.updateTextView(R.id.info_level, context.getString(R.string.level)+": " + level);
 		image.defineButtonsSize(params.getWordLength());
 		updateScoreInfo();
 
@@ -140,7 +140,7 @@ public class WordsHandlerImpl implements WordsHandler {
 	}
 
 	private void updateScoreInfo() {
-		image.updateTextView(R.id.view_score, "score: " + score);
+		image.updateTextView(R.id.view_score, context.getString(R.string.score_info)+": " + score);
 		image.updateScoreColors(score, record);
 	}
 
@@ -164,7 +164,7 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	private void onCorrectAnswer() {
 
-		image.toast("Correct!");
+		image.toast(context.getString(R.string.correct));
 
 		score = score + params.getWordPrice();
 		if (score > record) {
@@ -188,7 +188,7 @@ public class WordsHandlerImpl implements WordsHandler {
 
 			AdBuddiz.getInstance().showAd();
 
-			image.toast("you passed to level " + level);
+			image.toast(context.getString(R.string.info_next_level) +" "+ level);
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_LEVEL", level);
 			startLevel();
 		} else {
@@ -199,16 +199,16 @@ public class WordsHandlerImpl implements WordsHandler {
 
 	private void onMistake() {
 		attempt++;
-		image.updateTextView(R.id.info_attempt, "attempt: " + attempt + "/" + params.getAttemptLimit());
+		image.updateTextView(R.id.info_attempt, context.getString(R.string.attempt)+": " + attempt + "/" + params.getAttemptLimit());
 		if (attempt <= params.getAttemptLimit()) {
 			score = score - params.getAttemptPrice();
 			updateScoreInfo();
 			countStepCost(params.getAttemptPrice());
-			image.toast("Try again");
+			image.toast(context.getString(R.string.try_again));
 			image.showTask(wordShuffled);
 		} else {
 			penalty(params.getWordPrice());
-			image.toast("The word: " + word);
+			image.toast(context.getString(R.string.the_word)+": " + word);
 			newTask();
 		}
 	}
@@ -216,7 +216,7 @@ public class WordsHandlerImpl implements WordsHandler {
 	@Override
 	public void nextWord() {
 		penalty(params.getWordPrice());
-		image.toast("The word: " + word);
+		image.toast(context.getString(R.string.the_word)+": " + word);
 		newTask();
 	}
 

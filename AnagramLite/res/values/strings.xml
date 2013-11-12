@@ -18,8 +18,9 @@
     <color name="blue">#0000FF</color>
     <color name="brown_light">#C6A36A</color>
     <color name="brown_deep">#5F3A12</color>
+    <color name="dark_blue">#00008B</color>
 
-    <string name="score_info">score:</string>
+    <string name="score_info">score</string>
     <string name="input_answer">Input answer here</string>
     <string name="level">level</string>
     <string name="step">step</string>
@@ -47,8 +48,11 @@
     <string name="about_version_title">   version </string>
     <string name="title_activity_buttons_input">MainActivity</string>
     <string name="hint_magicWord">Input magic word here</string>
-
-    <color name="dark_blue">#00008B</color>
+    
+    <string name="try_again">Try again</string>
+    <string name="the_word">The word</string>
+    <string name="info_next_level">You passed to level</string>
+    <string name="correct">Correct!</string>
 
     <string name="title_activity_splash">SplashActivity</string>
 

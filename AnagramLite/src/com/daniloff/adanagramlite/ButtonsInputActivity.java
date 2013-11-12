@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.LinearLayout.LayoutParams;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -162,7 +161,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void applyNewTaskParams() {
 
 		hintRemain = wordsHandler.getParams().getHintLimit();
-		buttonHint.setText("Hint (" + hintRemain + ")");
+		buttonHint.setText(getString(R.string.button_txt_hint) + "  (" + hintRemain + ")");
 		buttonHint.setEnabled(true);
 	}
 
@@ -189,9 +188,9 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			taskLayout.addView(taskButton);
 		}
 
-		stepTxt.setText("step: " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
-		attemptTxt.setText("attempt: " + wordsHandler.getAttempt() + "/" + wordsHandler.getParams().getAttemptLimit());
-		recordTxt.setText("record: " + wordsHandler.getRecord());
+		stepTxt.setText(getString(R.string.step)+": " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
+		attemptTxt.setText(getString(R.string.attempt)+": " + wordsHandler.getAttempt() + "/" + wordsHandler.getParams().getAttemptLimit());
+		recordTxt.setText(getString(R.string.record)+": " + wordsHandler.getRecord());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -263,8 +262,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 				taskButtonsList.get(i).setVisibility(View.GONE);
 			}
 
-			ProgressBar progressBar = new ProgressBar(getApplicationContext());
-			taskLayout.addView(progressBar);
+			// ProgressBar progressBar = new
+			// ProgressBar(getApplicationContext());
+			// taskLayout.addView(progressBar);
+
 			answerDelayTimer.start();
 		}
 	}
@@ -374,7 +375,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			if (!wordsHandler.isMagicMode()) {
 				if (taskLettersList.size() > answerLettersList.size() + 1) {
 					hintRemain--;
-					buttonHint.setText("Hint (" + hintRemain + ")");
+					buttonHint.setText(getString(R.string.button_txt_hint) + "  (" + hintRemain + ")");
 
 					if (hintRemain < 1) {
 						buttonHint.setEnabled(false);
