@@ -126,7 +126,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		if (buttonSize > BUTTON_MAX_SIZE) {
 			buttonSize = BUTTON_MAX_SIZE;
 		}
-		System.out.println("buttonWidth: " + buttonSize);
+		// System.out.println("buttonWidth: " + buttonSize);
 		textSize = buttonSize / 2 - buttonPadding;
 	}
 
@@ -143,7 +143,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		buttonHint = (Button) findViewById(R.id.button_hint);
 		buttonHint.setOnClickListener(this);
-		// buttonHint.setOnLongClickListener(this);
 
 		buttonNext = (Button) findViewById(R.id.button_next);
 		buttonNext.setOnClickListener(this);
@@ -188,9 +187,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 			taskLayout.addView(taskButton);
 		}
 
-		stepTxt.setText(getString(R.string.step)+": " + wordsHandler.getStep() + "/" + wordsHandler.getParams().getStepsLimit());
-		attemptTxt.setText(getString(R.string.attempt)+": " + wordsHandler.getAttempt() + "/" + wordsHandler.getParams().getAttemptLimit());
-		recordTxt.setText(getString(R.string.record)+": " + wordsHandler.getRecord());
+		stepTxt.setText(getString(R.string.step) + ": " + wordsHandler.getStep() + "/"
+				+ wordsHandler.getParams().getStepsLimit());
+		attemptTxt.setText(getString(R.string.attempt) + ": " + wordsHandler.getAttempt() + "/"
+				+ wordsHandler.getParams().getAttemptLimit());
+		recordTxt.setText(getString(R.string.record) + ": " + wordsHandler.getRecord());
 	}
 
 	@SuppressWarnings("deprecation")
@@ -274,12 +275,12 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		int[] locTask = new int[2];
 		taskButtonsList.get(0).getLocationOnScreen(locTask);
 		int firstLetterLocatoinX = locTask[0];
-		System.out.println(locTask[0] + " " + locTask[1]);
+		// System.out.println(locTask[0] + " " + locTask[1]);
 
 		int[] locAnswer = new int[2];
 		answerLayout.getLocationOnScreen(locAnswer);
 		int answerLayoutLocation = locAnswer[0];
-		System.out.println(locAnswer[0] + " " + locAnswer[1]);
+		// System.out.println(locAnswer[0] + " " + locAnswer[1]);
 
 		int firstAnswerButtonOffset = firstLetterLocatoinX - BUTTON_MARGIN - answerLayoutLocation;
 		answerLayout.setPadding(firstAnswerButtonOffset, 0, 0, 0);
