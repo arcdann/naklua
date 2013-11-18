@@ -17,9 +17,12 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+
+import com.google.ads.*;
 
 public class BoxActivity extends Activity implements OnClickListener {
 
@@ -39,7 +42,7 @@ public class BoxActivity extends Activity implements OnClickListener {
 	private int moveCount;
 	private final String BLANC = "16";
 	private Button[][] chips;
-//	private int[][] cells;// ///////////////////////////////////
+	// private int[][] cells;// ///////////////////////////////////
 
 	private int emptyX;
 	private int emptyY;
@@ -49,21 +52,37 @@ public class BoxActivity extends Activity implements OnClickListener {
 	private AnswerChecker answerChecker;
 	TimeWatch timeWatch;
 
+	private AdView adView;
+	String AD_PUBLISHER_ID = "a15288bcc48c40b";
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_box);
-		
-	 answerChecker=new AnswerChecker();
-	 answerChecker.start();
 
+		answerChecker = new AnswerChecker();
+		answerChecker.start();
+
+		
+		
+		moveCountView = (TextView) findViewById(R.id.movesCountView);
+		timeView = (TextView) findViewById(R.id.timeView);
 		gameBox = (TableLayout) findViewById(R.id.gameBoxTable);
 		newGameButton = (Button) findViewById(R.id.buttonNewGame);
 		newGameButton.setOnClickListener(this);
 		pauseButton = (Button) findViewById(R.id.buttonPause);
 		pauseButton.setOnClickListener(this);
-		moveCountView = (TextView) findViewById(R.id.movesCountView);
-		timeView = (TextView) findViewById(R.id.timeView);
+
+		// /////////////////////////////////////////////////////////////////////////////////////////////
+		adView = new AdView(this, AdSize.BANNER, AD_PUBLISHER_ID);
+		LinearLayout adLayout = (LinearLayout) findViewById(R.id.adLayout);
+		adLayout.addView(adView);
+		AdRequest adRequest = new AdRequest();
+//		adRequest.setTesting(true);
+		// adRequest.addTestDevice(AdRequest.TEST_EMULATOR); /////
+		// adRequest.addTestDevice("0437C9653026785E37E70C70B9B94957");
+
+		adView.loadAd(adRequest);
 
 		listener = new OnClickListener() {
 
@@ -90,9 +109,9 @@ public class BoxActivity extends Activity implements OnClickListener {
 					moveCountView.setText("" + moveCount);
 					swapButtons(comingX, comingY);
 					((Button) v).setVisibility(View.INVISIBLE);
-					
-					List<String>answer=prepareAnswer();
-					if(answerChecker.isRightAnswer(answer)){
+
+					List<String> answer = prepareAnswer();
+					if (answerChecker.isRightAnswer(answer)) {
 						gameOver();
 					}
 				}
@@ -115,27 +134,27 @@ public class BoxActivity extends Activity implements OnClickListener {
 		createGameBox();
 
 	}
-	
-	private void gameOver(){
+
+	private void gameOver() {
 		showResultActivity();
 	}
 
 	protected void showResultActivity() {
-		Intent intentResult=new Intent(BoxActivity.this,ResultActivity.class);
-		intentResult.putExtra("moveCount",moveCount);
-		intentResult.putExtra("time",timeWatch.getTime());
-		
+		Intent intentResult = new Intent(BoxActivity.this, ResultActivity.class);
+		intentResult.putExtra("moveCount", moveCount);
+		intentResult.putExtra("time", timeWatch.getTime());
+
 		startActivity(intentResult);
 	}
 
 	protected List<String> prepareAnswer() {
-		List<String> retList=new ArrayList<String>();
-		for(int y=0;y<Y;y++){
-			for(int x=0;x<X;x++){
+		List<String> retList = new ArrayList<String>();
+		for (int y = 0; y < Y; y++) {
+			for (int x = 0; x < X; x++) {
 				retList.add((String) ((TextView) findViewById(CHIP_ID_PREXIX * 100 + y * 10 + x)).getText());
 			}
 		}
-//		System.out.println(retList);
+		// System.out.println(retList);
 		return retList;
 	}
 
@@ -283,18 +302,18 @@ public class BoxActivity extends Activity implements OnClickListener {
 		builder.setMessage("Start new game?");
 		builder.setCancelable(true);
 		builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						cleanGameBox();
-						createGameBox();
-					}
-				});
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				cleanGameBox();
+				createGameBox();
+			}
+		});
 		builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-					@Override
-					public void onClick(DialogInterface dialog, int which) {
-						dialog.dismiss();
-					}
-				});
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				dialog.dismiss();
+			}
+		});
 		AlertDialog dialog = builder.create();
 		dialog.show();
 	}
