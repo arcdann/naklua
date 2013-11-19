@@ -8,25 +8,24 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".WatchActivity" >
 
- 
     <TextView
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-      
         android:layout_marginTop="30dp"
-        android:text="Large Text"
+        android:background="@drawable/rect_button"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="60dp"
-        android:text="Large Text"
+        android:layout_marginTop="70dp"
+        android:background="@drawable/rect_button"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <LinearLayout
+        android:id="@+id/linearLayout1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/textView1"
@@ -49,5 +48,16 @@
             android:background="@drawable/right_button"
             android:text="Button" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/resetButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/linearLayout1"
+        android:layout_below="@+id/linearLayout1"
+        android:layout_marginLeft="31dp"
+        android:layout_marginTop="22dp"
+        android:background="@drawable/rect_button"
+        android:text="Reset" />
 
 </RelativeLayout>
