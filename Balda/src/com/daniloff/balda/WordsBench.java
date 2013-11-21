@@ -1,5 +1,6 @@
 package com.daniloff.balda;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -8,22 +9,29 @@ public class WordsBench {
 	MainActivity sheet;
 	String[][] letters;
 	Cell[][] matrix;
-	private final int X = 5;
-	private final int Y = 5;
+	private final int X = 10;
+	private final int Y = 6;
 	private Random rnd = new Random();
 	private List<String> playedWords;
+	private List<String>wordLetters;
+	
+	private boolean putLetter;
+	private boolean wordDeclare;
 
 	public void startGame() {
 		matrix = createMatrix(X, Y);
 		String initString = "укенгшвапролдсмитьб";
 		createTask(initString);
+		
+		putLetter=true;
+		wordDeclare=false;
 
 		// sheet.showTask();
 		// startRound();
 	}
 
 	private void startRound() {
-		// TODO Auto-generated method stub
+//	toDo
 
 	}
 
@@ -65,8 +73,34 @@ public class WordsBench {
 		if (y < Y && !matrix[xFilled][y].isFilled())
 			matrix[xFilled][y].setFillable(true);
 	}
+	
+	public void createWord(){
+		setPutLetter(false);
+		setWordDeclare(true);
+		wordLetters=new ArrayList<String>();
+	}
 
 	public void setSheet(MainActivity sheet) {
 		this.sheet = sheet;
+	}
+
+	public boolean isPutLetter() {
+		return putLetter;
+	}
+
+	public void setPutLetter(boolean putLetter) {
+		this.putLetter = putLetter;
+	}
+
+	public boolean isWordDeclare() {
+		return wordDeclare;
+	}
+
+	public void setWordDeclare(boolean wordDeclare) {
+		this.wordDeclare = wordDeclare;
+	}
+
+	public List<String> getWordLetters() {
+		return wordLetters;
 	}
 }

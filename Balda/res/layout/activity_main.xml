@@ -5,20 +5,6 @@
     android:layout_margin="0dp"
     tools:context=".MainActivity" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-
-    <LinearLayout
-        android:id="@+id/adLayout"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:layout_marginTop="21dp"
-        android:orientation="horizontal" >
-    </LinearLayout>
-
     <LinearLayout
         android:id="@+id/wordLayout"
         android:layout_width="match_parent"
@@ -27,6 +13,21 @@
         android:layout_below="@+id/adLayout"
         android:layout_marginTop="24dp"
         android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/wordView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="2.7"
+            android:text="Submit" />
+
     </LinearLayout>
 
     <TableLayout
@@ -94,6 +95,15 @@
 
         </LinearLayout>
 
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/adLayout"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal" >
     </LinearLayout>
 
 </RelativeLayout>

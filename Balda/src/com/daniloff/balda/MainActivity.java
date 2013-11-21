@@ -19,20 +19,18 @@ import com.google.ads.AdRequest;
 import com.google.ads.AdSize;
 import com.google.ads.AdView;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements OnClickListener {
 
 	private LinearLayout wordLayout;
 	private TableLayout tableLayout;
 	private LinearLayout keyboardLayout;
-	
+
 	private LinearLayout adLayout;
 	private AdView adView;
 	private final String AD_PUBLISHER_ID = "a15288bcc48c40b";
 
-	// private char[] initWord = new char[] { 'м', 'у', 'д', 'а', 'к' };
-
-	private final int X = 5;
-	private final int Y = 5;
+	private final int X = 10;
+	private final int Y = 6;
 	private final int ID_PREFIX = 2011;
 
 	private OnClickListener listener;
@@ -41,9 +39,12 @@ public class MainActivity extends Activity {
 	private WordsBench bench;
 	private Button[][] buttons;
 
-	private TextView infoView;
-	private int xInput = -1;
-	private int yInput = -1;
+	private TextView wordView;
+	private Button submitButton;
+	private int xInput;
+	private int yInput;
+	private int xPrev;
+	private int yPrev;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,9 @@ public class MainActivity extends Activity {
 		wordLayout = (LinearLayout) findViewById(R.id.wordLayout);
 		adLayout = (LinearLayout) findViewById(R.id.adLayout);
 		tableLayout = (TableLayout) findViewById(R.id.tableLayout);
-		infoView = (TextView) findViewById(R.id.textView1);
+		wordView = (TextView) findViewById(R.id.wordView);
+		submitButton = (Button) findViewById(R.id.submitButton);
+		submitButton.setOnClickListener(this);
 
 		adView = new AdView(this, AdSize.BANNER, AD_PUBLISHER_ID);
 		adLayout.addView(adView);
@@ -72,52 +75,70 @@ public class MainActivity extends Activity {
 				int id = v.getId();
 				int x = id % (id / 100);
 				int y = (id % (id / 100000) / 1000);
-				if (bench.matrix[x][y].isFillable()) {
-					
-					xInput=x;
-					yInput=y;
-					keyboardLayout.setVisibility(View.VISIBLE);
-
-	//				Button b = (Button) findViewById(v.getId());
-	//				b.setBackgroundColor(Color.GRAY);
-
-	//				bench.matrix[x][y].setLetter("X");
-//					bench.matrix[x][y].setFilled(true);
-//					bench.setFillabilityAround(x, y);
-//					b.setText(bench.matrix[x][y].getLetter());
+				Cell cell = bench.matrix[x][y];
+				if (bench.isPutLetter()) {
+					if (cell.isFillable()) {
+						xInput = x;
+						yInput = y;
+						keyboardLayout.setVisibility(View.VISIBLE);
+					}
+				}
+				if (bench.isWordDeclare()) {
+					boolean verified = verifyCell(x, y);
+					if (verified) {
+						bench.getWordLetters().add(cell.getLetter());
+						wordView.append(bench.getWordLetters().get(bench.getWordLetters().size() - 1));
+					}
 				}
 			}
 		};
-		
+
 		keyListener = new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Button key=(Button)v;
-				String keyText=key.getText().toString();
-				infoView.setText(keyText);
+				Button key = (Button) v;
+				String keyText = key.getText().toString();
 
-				Button b=(Button) findViewById(( ID_PREFIX * 1000 + 100 + yInput)* 1000 + 100 + xInput);
+				Button b = (Button) findViewById((ID_PREFIX * 1000 + 100 + yInput) * 1000 + 100 + xInput);
 				bench.matrix[xInput][yInput].setLetter(keyText);
-				//			b.setText(keyText);
+				// b.setText(keyText);
 				b.setText(bench.matrix[xInput][yInput].getLetter());
-				
+				b.setTextColor(Color.RED);
+
 				bench.matrix[xInput][yInput].setFilled(true);
 				bench.matrix[xInput][yInput].setFillable(false);
 				bench.setFillabilityAround(xInput, yInput);
-				
-				xInput=-1;
-				yInput=-1;
-				
+
+				bench.createWord();
+
 				keyboardLayout.setVisibility(View.GONE);
 
-				
-				
 			}
 		};
-		
+
 		createTable();
 		createKeyboard();
 
+	}
+
+	protected boolean verifyCell(int x, int y) {
+		boolean retBool = false;
+		if (bench.getWordLetters().size() == 0) {
+			retBool = true;
+			xPrev = x;
+			yPrev = y;
+		} else {
+			int diff = Math.abs(x - xPrev) + Math.abs(y - yPrev);
+			if (diff == 1) {
+				retBool = true;
+				xPrev = x;
+				yPrev = y;
+			}
+		}
+		if (!bench.matrix[x][y].isFilled()) {
+			retBool = false;
+		}
+		return retBool;
 	}
 
 	private void createKeyboard() {
@@ -145,7 +166,7 @@ public class MainActivity extends Activity {
 			key.setText(String.valueOf(lowRowLetters[i]));
 			lowKeysRowLayoyt.addView(key);
 		}
-		
+
 	}
 
 	private Button createKey() {
@@ -202,6 +223,19 @@ public class MainActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+
+	@Override
+	public void onClick(View v) {
+		switch (v.getId()) {
+		case R.id.submitButton:
+
+			break;
+
+		default:
+			break;
+		}
+
 	}
 
 }
