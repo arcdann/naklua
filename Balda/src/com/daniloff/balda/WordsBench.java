@@ -9,7 +9,7 @@ public class WordsBench {
 	MainActivity sheet;
 	String[][] letters;
 	Cell[][] matrix;
-	private final int X = 10;
+	private final int X = 8;
 	private final int Y = 6;
 	private Random rnd = new Random();
 	private List<String> playedWords;
@@ -20,7 +20,7 @@ public class WordsBench {
 
 	public void startGame() {
 		matrix = createMatrix(X, Y);
-		String initString = "укенгшвапролдсмитьб";
+		String initString = "укенгшвапролдсмитб";
 		createTask(initString);
 		
 		putLetter=true;
@@ -30,9 +30,18 @@ public class WordsBench {
 		// startRound();
 	}
 
-	private void startRound() {
-//	toDo
-
+	public void startRound() {
+		for(int y=0;y<Y;y++){
+			for(int x=0;x<X;x++){
+				matrix[x][y].setChosen(false);
+				matrix[x][y].setJustChosen(false);
+				matrix[x][y].setRequired(false);
+			}
+		}
+	
+		putLetter=true;
+		wordDeclare=false;
+		
 	}
 
 	private Cell[][] createMatrix(int X, int Y) {

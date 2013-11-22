@@ -29,7 +29,7 @@ public class MainActivity extends Activity implements OnClickListener {
 	private AdView adView;
 	private final String AD_PUBLISHER_ID = "a15288bcc48c40b";
 
-	private final int X = 10;
+	private final int X = 8;
 	private final int Y = 6;
 	private final int ID_PREFIX = 2011;
 
@@ -88,6 +88,8 @@ public class MainActivity extends Activity implements OnClickListener {
 					if (verified) {
 						bench.getWordLetters().add(cell.getLetter());
 						wordView.append(bench.getWordLetters().get(bench.getWordLetters().size() - 1));
+						bench.matrix[x][y].setChosen(true);
+//						bench.matrix[x][y].setJustChosen(true);
 					}
 				}
 			}
@@ -129,13 +131,16 @@ public class MainActivity extends Activity implements OnClickListener {
 			yPrev = y;
 		} else {
 			int diff = Math.abs(x - xPrev) + Math.abs(y - yPrev);
-			if (diff == 1) {
+			if (diff == 1&&bench.matrix[x][y].isFilled()) {
 				retBool = true;
 				xPrev = x;
 				yPrev = y;
 			}
 		}
 		if (!bench.matrix[x][y].isFilled()) {
+			retBool = false;
+		}
+		if (bench.matrix[x][y].isChosen()) {
 			retBool = false;
 		}
 		return retBool;
@@ -229,7 +234,9 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.submitButton:
-
+			String word=wordView.getText().toString();
+			wordView.setText("");
+			bench.startRound();
 			break;
 
 		default:
