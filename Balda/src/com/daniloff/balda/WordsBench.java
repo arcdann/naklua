@@ -8,7 +8,7 @@ public class WordsBench {
 
 	MainActivity sheet;
 	String[][] letters;
-	Cell[][] matrix;
+	Cell[][] cells;
 	private final int X = 8;
 	private final int Y = 6;
 	private Random rnd = new Random();
@@ -19,7 +19,7 @@ public class WordsBench {
 	private boolean wordDeclare;
 
 	public void startGame() {
-		matrix = createMatrix(X, Y);
+		cells = createMatrix(X, Y);
 		String initString = "укенгшвапролдсмитб";
 		createTask(initString);
 		
@@ -33,9 +33,9 @@ public class WordsBench {
 	public void startRound() {
 		for(int y=0;y<Y;y++){
 			for(int x=0;x<X;x++){
-				matrix[x][y].setChosen(false);
-				matrix[x][y].setJustChosen(false);
-				matrix[x][y].setRequired(false);
+				cells[x][y].setChosen(false);
+				cells[x][y].setJustChosen(false);
+				cells[x][y].setRequired(false);
 			}
 		}
 	
@@ -59,9 +59,9 @@ public class WordsBench {
 		for (int x = 0; x < X; x++) {
 			// matrix[x][y]=initStr.substring(x, x+1);
 			int i = rnd.nextInt(initStr.length());
-			matrix[x][y].setLetter(initStr.substring(i, i + 1));
-			matrix[x][y].setFilled(true);
-			matrix[x][y].setFillable(false);
+			cells[x][y].setLetter(initStr.substring(i, i + 1));
+			cells[x][y].setFilled(true);
+			cells[x][y].setFillable(false);
 			setFillabilityAround(x, y);
 		}
 
@@ -70,17 +70,17 @@ public class WordsBench {
 	public void setFillabilityAround(int xFilled, int yFilled) {
 		int x, y;
 		x = xFilled - 1;
-		if (x >= 0 && !matrix[x][yFilled].isFilled())
-			matrix[x][yFilled].setFillable(true);
+		if (x >= 0 && !cells[x][yFilled].isFilled())
+			cells[x][yFilled].setFillable(true);
 		x = xFilled + 1;
-		if (x < X && !matrix[x][yFilled].isFilled())
-			matrix[x][yFilled].setFillable(true);
+		if (x < X && !cells[x][yFilled].isFilled())
+			cells[x][yFilled].setFillable(true);
 		y = yFilled - 1;
-		if (y >= 0 && !matrix[xFilled][y].isFilled())
-			matrix[xFilled][y].setFillable(true);
+		if (y >= 0 && !cells[xFilled][y].isFilled())
+			cells[xFilled][y].setFillable(true);
 		y = yFilled + 1;
-		if (y < Y && !matrix[xFilled][y].isFilled())
-			matrix[xFilled][y].setFillable(true);
+		if (y < Y && !cells[xFilled][y].isFilled())
+			cells[xFilled][y].setFillable(true);
 	}
 	
 	public void createWord(){

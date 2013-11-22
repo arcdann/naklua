@@ -31,11 +31,12 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private final int X = 8;
 	private final int Y = 6;
-	private final int ID_PREFIX = 2011;
+//	private final int ID_PREFIX = 499;
 
 	private OnClickListener listener;
 	private OnClickListener keyListener;
 
+	private ConverterXYID conv;
 	private WordsBench bench;
 	private Button[][] buttons;
 
@@ -65,6 +66,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		adRequest.addTestDevice("0437C9653026785E37E70C70B9B94957");
 		adView.loadAd(adRequest);
 
+		conv = new ConverterXYID();
 		bench = new WordsBench();
 		bench.setSheet(this);
 		bench.startGame();
@@ -73,9 +75,9 @@ public class MainActivity extends Activity implements OnClickListener {
 			@Override
 			public void onClick(View v) {
 				int id = v.getId();
-				int x = id % (id / 100);
-				int y = (id % (id / 100000) / 1000);
-				Cell cell = bench.matrix[x][y];
+				int x = conv.convertToX(id);
+				int y = conv.convertToY(id);
+				Cell cell = bench.cells[x][y];
 				if (bench.isPutLetter()) {
 					if (cell.isFillable()) {
 						xInput = x;
@@ -88,8 +90,12 @@ public class MainActivity extends Activity implements OnClickListener {
 					if (verified) {
 						bench.getWordLetters().add(cell.getLetter());
 						wordView.append(bench.getWordLetters().get(bench.getWordLetters().size() - 1));
-						bench.matrix[x][y].setChosen(true);
-//						bench.matrix[x][y].setJustChosen(true);
+						bench.cells[x][y].setChosen(true);
+						// bench.matrix[x][y].setJustChosen(true);
+						Button b = (Button) v;
+						if (!bench.cells[x][y].isRequired()) {
+							b.setTextColor(Color.BLUE);
+						}
 					}
 				}
 			}
@@ -101,14 +107,15 @@ public class MainActivity extends Activity implements OnClickListener {
 				Button key = (Button) v;
 				String keyText = key.getText().toString();
 
-				Button b = (Button) findViewById((ID_PREFIX * 1000 + 100 + yInput) * 1000 + 100 + xInput);
-				bench.matrix[xInput][yInput].setLetter(keyText);
+				Button b = (Button) findViewById(conv.convertToID(xInput, yInput));
+				bench.cells[xInput][yInput].setLetter(keyText);
 				// b.setText(keyText);
-				b.setText(bench.matrix[xInput][yInput].getLetter());
+				b.setText(bench.cells[xInput][yInput].getLetter());
 				b.setTextColor(Color.RED);
 
-				bench.matrix[xInput][yInput].setFilled(true);
-				bench.matrix[xInput][yInput].setFillable(false);
+				bench.cells[xInput][yInput].setRequired(true);
+				bench.cells[xInput][yInput].setFilled(true);
+				bench.cells[xInput][yInput].setFillable(false);
 				bench.setFillabilityAround(xInput, yInput);
 
 				bench.createWord();
@@ -131,16 +138,16 @@ public class MainActivity extends Activity implements OnClickListener {
 			yPrev = y;
 		} else {
 			int diff = Math.abs(x - xPrev) + Math.abs(y - yPrev);
-			if (diff == 1&&bench.matrix[x][y].isFilled()) {
+			if (diff == 1 && bench.cells[x][y].isFilled()) {
 				retBool = true;
 				xPrev = x;
 				yPrev = y;
 			}
 		}
-		if (!bench.matrix[x][y].isFilled()) {
+		if (!bench.cells[x][y].isFilled()) {
 			retBool = false;
 		}
-		if (bench.matrix[x][y].isChosen()) {
+		if (bench.cells[x][y].isChosen()) {
 			retBool = false;
 		}
 		return retBool;
@@ -181,44 +188,33 @@ public class MainActivity extends Activity implements OnClickListener {
 	}
 
 	private void createTable() {
+		buttons = new Button[X][Y];
 		for (int y = 0; y < Y; y++) {
 			TableRow tr = new TableRow(this);
-			int trID = ID_PREFIX * 1000 + 100 + y;
-			tr.setId(trID);
+			tr.setId(conv.convertToTablerowID(y));
 			for (int x = 0; x < X; x++) {
-				Button b = createButton(trID, x);
-				// buttons[x][y]=b;
+				Button b = createButton(x, y);
+				buttons[x][y] = b;
 				tr.addView(b);
 			}
 			tableLayout.addView(tr);
 		}
-		// createTask();
 		showTask();
 	}
 
 	public void showTask() {
 		for (int x = 0; x < X; x++) {
 			for (int y = 0; y < Y; y++) {
-				Button b = (Button) findViewById((ID_PREFIX * 1000 + 100 + y) * 1000 + 100 + x);
-				b.setText(bench.matrix[x][y].getLetter());
+				Button b = (Button) findViewById(conv.convertToID(x, y));
+				b.setText(bench.cells[x][y].getLetter());
 			}
 		}
 
 	}
 
-	// private void createTask() {
-	// int y = Y / 2;
-	// for (int x = 0; x < X; x++) {
-	// Button b = (Button) findViewById((ID_PREFIX * 1000 + 100 + y) * 1000 +
-	// 100 + x);
-	// b.setText(String.valueOf(initWord[x]));
-	// }
-	//
-	// }
-
-	private Button createButton(int trID, int x) {
+	private Button createButton(int x, int y) {
 		Button retButton = new Button(this);
-		retButton.setId(trID * 1000 + 100 + x);
+		retButton.setId(conv.convertToID(x, y));
 		retButton.setOnClickListener(listener);
 		return retButton;
 	}
@@ -234,8 +230,14 @@ public class MainActivity extends Activity implements OnClickListener {
 	public void onClick(View v) {
 		switch (v.getId()) {
 		case R.id.submitButton:
-			String word=wordView.getText().toString();
+			String word = wordView.getText().toString();
 			wordView.setText("");
+			for (int y = 0; y < Y; y++) {
+				for (int x = 0; x < X; x++) {
+					Button b = (Button) findViewById(conv.convertToID(x, y));
+					b.setTextColor(Color.BLACK);
+				}
+			}
 			bench.startRound();
 			break;
 
