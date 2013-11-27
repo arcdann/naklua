@@ -2,7 +2,7 @@ package com.daniloff.balda;
 
 import java.util.List;
 
-public class Gamer {
+public class Player {
 	private String gamerName;
 	private int score;
 	private List<String>words;
