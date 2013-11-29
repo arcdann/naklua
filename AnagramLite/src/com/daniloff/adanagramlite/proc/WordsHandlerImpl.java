@@ -152,16 +152,7 @@ public class WordsHandlerImpl implements WordsHandler {
 		if (answer.equals(word)) {
 			onCorrectAnswer();
 		} else {
-			// if (answer.substring(1, 4).equalsIgnoreCase("$$$"))
-			// {/////////////////////////////
-			// toggleMagicMode();
-			// } else {
-			// if (answer.charAt(0) == '*') {
-			// image.closeMagicTextView();
-			// } else {
 			onMistake();
-			// }
-			// }
 		}
 	}
 

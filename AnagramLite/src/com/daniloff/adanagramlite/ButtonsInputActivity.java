@@ -29,11 +29,15 @@ import android.widget.Toast;
 import com.daniloff.adanagramlite.proc.StringUtils;
 import com.daniloff.adanagramlite.proc.WordsHandler;
 import com.daniloff.adanagramlite.proc.WordsHandlerImpl;
+import com.google.ads.AdRequest;
+import com.google.ads.AdSize;
+import com.google.ads.AdView;
 import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 
 @SuppressLint("DefaultLocale")
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
+	private static final String AD_PUBLISHER_ID = "a152751ca60f531";
 	private final long ANSWER_DELAY = 1000;
 	private final int BUTTON_MAX_SIZE = 72;
 	private int textSize;
@@ -41,8 +45,11 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private final int BUTTON_ID_PREFIX = 1216000;
 
 	private LinearLayout wrapLayout;
+	private LinearLayout gameLayout;
 	private LinearLayout taskLayout;
 	private LinearLayout answerLayout;
+
+	private LinearLayout adLayout;
 
 	private TextView stepTxt;
 	private TextView attemptTxt;
@@ -74,6 +81,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		setContentView(R.layout.activity_buttons_input);
 
 		AdBuddiz.getInstance().onStart(this);
+
+		startAdMob();
 
 		initializeViews();
 
@@ -130,11 +139,12 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		textSize = buttonSize / 2 - buttonPadding;
 	}
 
+	@SuppressWarnings("deprecation")
 	private void initializeViews() {
 
 		wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
-		wrapLayout.setBackgroundColor(getResources().getColor(R.color.brown_light));
-
+		// wrapLayout.setBackgroundColor(getResources().getColor(R.color.brown_light));
+		wrapLayout.setBackgroundDrawable(getResources().getDrawable(R.drawable.board));
 		taskLayout = (LinearLayout) findViewById(R.id.task_layout);
 		answerLayout = (LinearLayout) findViewById(R.id.answer_layout);
 
@@ -327,7 +337,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	@Override
 	public void toast(String message) {
 		Toast toast = Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT);
-		toast.setGravity(Gravity.TOP, 0, 48);
+		toast.setGravity(Gravity.TOP, 0, 192);
 		toast.show();
 	}
 
@@ -454,6 +464,16 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	@Override
 	public void showAd() {
 		// AdBuddiz.getInstance().onStart(this);
+	}
+	
+	private void startAdMob() {
+		adLayout=(LinearLayout) findViewById(R.id.adLayout);
+		AdView adView = new AdView(this, AdSize.BANNER, AD_PUBLISHER_ID);
+		adLayout.addView(adView);
+		AdRequest adRequest = new AdRequest();
+		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
+		adRequest.addTestDevice("0437C9653026785E37E70C70B9B94957");
+		adView.loadAd(adRequest);
 	}
 
 }

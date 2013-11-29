@@ -67,7 +67,7 @@ public abstract class MainActivity extends Activity implements OnClickListener, 
 
 	private void initializeViews() {
 
-		wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
+		wrapLayout = (LinearLayout) findViewById(R.id.game_layout);
 		wrapLayout.setBackgroundColor(getResources().getColor(R.color.brown_light));
 
 		buttonOK = (Button) findViewById(R.id.button_ok);
@@ -198,7 +198,7 @@ public abstract class MainActivity extends Activity implements OnClickListener, 
 	@Override
 	public void updateMode(boolean magicMode) {
 		if (magicMode) {
-			wrapLayout = (LinearLayout) findViewById(R.id.wrap_layout);
+			wrapLayout = (LinearLayout) findViewById(R.id.game_layout);
 			LayoutParams lpView = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 			magicModeTxt = new TextView(this);
 			magicModeTxt.setText("magic mode");
