@@ -38,7 +38,7 @@ import com.purplebrain.adbuddiz.sdk.AdBuddiz;
 public class ButtonsInputActivity extends Activity implements OnClickListener, OnLongClickListener, AnagramView {
 
 	private static final String AD_PUBLISHER_ID = "a152751ca60f531";
-	private final long ANSWER_DELAY = 1000;
+	private final long DELAY = 1000;
 	private final int BUTTON_MAX_SIZE = 72;
 	private int textSize;
 
@@ -72,6 +72,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private DisplayMetrics metrics;
 	private int buttonSize;
 	private CountDownTimer answerDelayTimer;
+	private CountDownTimer showAnswerDelayTimer;
+	private CountDownTimer correctAnswerDelayTimer;
 
 	private final int BUTTON_MARGIN = 2;
 
@@ -105,12 +107,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		answerButtonsList = new ArrayList<Button>();
 		answerLettersList = new ArrayList<String>();
 
-		answerDelayTimer = new CountDownTimer(ANSWER_DELAY, ANSWER_DELAY / 100) {
+		answerDelayTimer = new CountDownTimer(DELAY, DELAY) {
 			@Override
 			public void onTick(long millisUntilFinished) {
-
 			}
-
 			@Override
 			public void onFinish() {
 				submitAnswer();
@@ -269,10 +269,10 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		if (answerLettersList.size() >= taskLettersList.size()) {
 
-			for (int i = 0; i < taskButtonsList.size(); i++) {
-				taskButtonsList.get(i).setVisibility(View.GONE);
-			}
-
+			// for (int i = 0; i < taskButtonsList.size(); i++) {
+			// taskButtonsList.get(i).setVisibility(View.GONE);
+			// }
+			//
 			// ProgressBar progressBar = new
 			// ProgressBar(getApplicationContext());
 			// taskLayout.addView(progressBar);
@@ -465,9 +465,9 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	public void showAd() {
 		// AdBuddiz.getInstance().onStart(this);
 	}
-	
+
 	private void startAdMob() {
-		adLayout=(LinearLayout) findViewById(R.id.adLayout);
+		adLayout = (LinearLayout) findViewById(R.id.adLayout);
 		AdView adView = new AdView(this, AdSize.BANNER, AD_PUBLISHER_ID);
 		adLayout.addView(adView);
 		AdRequest adRequest = new AdRequest();
