@@ -88,6 +88,7 @@ public class MainActivity extends Activity implements OnClickListener {
 		conv = new ConverterXYID();
 		bench = new WordsBench();
 		bench.setSheet(this);
+		bench.prepareGame();
 		bench.startGame();
 
 		listener = new OnClickListener() {

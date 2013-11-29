@@ -17,7 +17,28 @@ public class WordsBench {
 	
 	private boolean putLetter;
 	private boolean wordDeclare;
+	private int playersNum=2;
+	private Player[] players;
+	private Player activePlayer;
+	private int activePlayerNumber;
 
+	public void prepareGame() {
+		for (int i=0; i<playersNum;i++){
+			Player p=players[i];
+			p=new Player();
+			p.setGamerName("Player_"+i);
+		}
+		activePlayer=players[activePlayerNumber];
+	}
+	
+	private void changePlayer(){
+		activePlayerNumber++;
+		if(activePlayerNumber==playersNum){
+			activePlayerNumber=0;
+		}
+		activePlayer=players[activePlayerNumber];
+	}
+	
 	public void startGame() {
 		cells = createMatrix(X, Y);
 		String initString = "укенгшвапролдсмитб";
@@ -31,6 +52,7 @@ public class WordsBench {
 	}
 
 	public void startRound() {
+		changePlayer();//////////////////////////
 		for(int y=0;y<Y;y++){
 			for(int x=0;x<X;x++){
 				cells[x][y].setChosen(false);
@@ -112,4 +134,6 @@ public class WordsBench {
 	public List<String> getWordLetters() {
 		return wordLetters;
 	}
+
+	
 }
