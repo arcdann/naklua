@@ -27,7 +27,11 @@ public interface AnagramView {
 	void applyNewTaskParams();
 
 	void defineButtonsSize(int wordLength);
+
+	void showResult();
 	
-	void submitAnswer();
+	void outlineByColor(char color);
+	
+	void showCorrectAnswer(String word);
 
 }

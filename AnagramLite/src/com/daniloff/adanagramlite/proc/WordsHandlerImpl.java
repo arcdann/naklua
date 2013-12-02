@@ -4,6 +4,7 @@ import java.util.Queue;
 import java.util.Random;
 
 import android.content.Context;
+import android.os.CountDownTimer;
 import android.util.Log;
 
 import com.daniloff.adanagramlite.AnagramView;
@@ -33,6 +34,8 @@ public class WordsHandlerImpl implements WordsHandler {
 	private boolean magicMode;
 	private boolean resumed;
 	private String lang;
+	private CountDownTimer delayTimer;
+	private int delayKey;
 
 	@Override
 	public void startLevel() {
@@ -60,6 +63,8 @@ public class WordsHandlerImpl implements WordsHandler {
 		image.updateTextView(R.id.info_level, context.getString(R.string.level) + ": " + level);
 		image.defineButtonsSize(params.getWordLength());
 		updateScoreInfo();
+		
+		createDelayTimer();
 
 		supplyTask();
 	}
@@ -157,8 +162,7 @@ public class WordsHandlerImpl implements WordsHandler {
 	}
 
 	private void onCorrectAnswer() {
-
-		image.toast(context.getString(R.string.correct));
+		image.showResult();
 
 		score = score + params.getWordPrice();
 		if (score > record) {
@@ -166,7 +170,10 @@ public class WordsHandlerImpl implements WordsHandler {
 			GlobalInvoke.paramsHandler.saveParamInt("PARAM_NAME_RECORD", record);
 		}
 		updateScoreInfo();
+	}
 
+	@Override
+	public void nextStep() {
 		step++;
 		if (step > params.getStepsLimit()) {
 			updateLevel();
@@ -199,20 +206,21 @@ public class WordsHandlerImpl implements WordsHandler {
 			score = score - params.getAttemptPrice();
 			updateScoreInfo();
 			countStepCost(params.getAttemptPrice());
-			image.toast(context.getString(R.string.try_again));
-			image.showTask(wordShuffled);
+			image.outlineByColor('r');
+			delayExec(1);
 		} else {
 			penalty(params.getWordPrice());
-			image.toast(context.getString(R.string.the_word) + ": " + word);
-			newTask();
+			image.outlineByColor('r');
+			delayExec(2);
 		}
 	}
 
 	@Override
 	public void nextWord() {
 		penalty(params.getWordPrice());
-		image.toast(context.getString(R.string.the_word) + ": " + word);
-		newTask();
+		
+		image.showCorrectAnswer(word);
+		delayExec(3);
 	}
 
 	private void countStepCost(int cost) {
@@ -228,6 +236,44 @@ public class WordsHandlerImpl implements WordsHandler {
 		}
 		score = score - penaltyScore;
 		updateScoreInfo();
+	}
+	
+	private void delayExec(int key){
+		delayKey=key;
+		delayTimer.start();
+	}
+	
+	private void continueExec(){
+		if(delayKey==1){
+			image.showTask(wordShuffled);
+			delayKey=0;
+		}
+		
+		if(delayKey==3){
+			delayKey=0;
+			newTask();
+		}
+		
+		if(delayKey==2){
+			image.showCorrectAnswer(word);
+			delayExec(3);
+		}
+	}
+	
+	private void createDelayTimer() {
+		delayTimer=new CountDownTimer(1000,1000) {
+			
+			@Override
+			public void onTick(long millisUntilFinished) {
+				
+			}
+			
+			@Override
+			public void onFinish() {
+				continueExec();
+			}
+		};
+		
 	}
 
 	@Override

@@ -40,5 +40,7 @@ public interface WordsHandler {
 	int getRecord();
 
 	void toggleMagicMode();
+	
+	void nextStep();
 
 }
