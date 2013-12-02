@@ -33,11 +33,9 @@
     
     <string name="author_txt">Автор:</string>
     <string name="author_name">Аркадий Данилов</string>
-
-    <string name="selectEnglish">Select English</string>
-
-    <string name="selectRussian">Выберите Русский</string>
-
+    <string name="selectLanguage">Выберите язык</string>
+    <string name="selectEnglish">English</string>
+    <string name="selectRussian">Русский</string>
     <string name="enrty_checkbox_txt">Показывать в следующий раз</string>
     <string name="design_name">Сергей Птаха</string>
     <string name="design_email">ptaha-dip@ya.ru</string>

@@ -46,7 +46,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private final int BUTTON_ID_PREFIX = 1216000;
 
 	private LinearLayout wrapLayout;
-	private LinearLayout gameLayout;
+	// private LinearLayout gameLayout;
 	private LinearLayout taskLayout;
 	private LinearLayout answerLayout;
 
@@ -74,7 +74,6 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 	private int buttonSize;
 	private CountDownTimer answerDelayTimer;
 	private CountDownTimer showAnswerDelayTimer;
-	private CountDownTimer correctAnswerDelayTimer;
 
 	private final int BUTTON_MARGIN = 2;
 
@@ -126,18 +125,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 			@Override
 			public void onFinish() {
-			wordsHandler.nextStep();
-			}
-		};
-		correctAnswerDelayTimer = new CountDownTimer(DELAY, DELAY) {
-			@Override
-			public void onTick(long millisUntilFinished) {
-				
-			}
-
-			@Override
-			public void onFinish() {
-				 
+				wordsHandler.nextStep();
 			}
 		};
 
@@ -309,6 +297,7 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 
 		int firstAnswerButtonOffset = firstLetterLocatoinX - BUTTON_MARGIN - answerLayoutLocation;
 		answerLayout.setPadding(firstAnswerButtonOffset, 0, 0, 0);
+		// System.out.println("Offset: "+firstAnswerButtonOffset);
 	}
 
 	private void submitAnswer() {
@@ -476,7 +465,8 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		magicText.setVisibility(View.GONE);
 	}
 
-	@Override	public void showAd() {
+	@Override
+	public void showAd() {
 		// AdBuddiz.getInstance().onStart(this);
 	}
 
@@ -485,41 +475,42 @@ public class ButtonsInputActivity extends Activity implements OnClickListener, O
 		AdView adView = new AdView(this, AdSize.BANNER, AD_PUBLISHER_ID);
 		adLayout.addView(adView);
 		AdRequest adRequest = new AdRequest();
-//		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);////////////////////////////////////////////////////////////////////////
+//		adRequest.addTestDevice(AdRequest.TEST_EMULATOR);
 //		adRequest.addTestDevice("0437C9653026785E37E70C70B9B94957");
 		adView.loadAd(adRequest);
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void showResult() {
-		for(int i=0; i<answerButtonsList.size();i++){
+		for (int i = 0; i < answerButtonsList.size(); i++) {
 			answerButtonsList.get(i).setBackgroundDrawable(getResources().getDrawable(R.drawable.rect_button_green));
 		}
 		showAnswerDelayTimer.start();
 	}
 
+	@SuppressWarnings("deprecation")
 	@Override
 	public void outlineByColor(char color) {
-		Drawable lineColor=getResources().getDrawable(R.drawable.rect_button);
-		if(color=='r'){
-			lineColor=getResources().getDrawable(R.drawable.rect_button_red);
+		Drawable lineColor = getResources().getDrawable(R.drawable.rect_button);
+		if (color == 'r') {
+			lineColor = getResources().getDrawable(R.drawable.rect_button_red);
 		}
-		if(color=='b'){
-			lineColor=getResources().getDrawable(R.drawable.rect_button_blue);
+		if (color == 'b') {
+			lineColor = getResources().getDrawable(R.drawable.rect_button_blue);
 		}
-		for(int i=0; i<answerButtonsList.size();i++){
-				answerButtonsList.get(i).setBackgroundDrawable(lineColor);
-			}
+		for (int i = 0; i < answerButtonsList.size(); i++) {
+			answerButtonsList.get(i).setBackgroundDrawable(lineColor);
+		}
 	}
 
 	@Override
 	public void showCorrectAnswer(String word) {
 		clearAnswerField();
-		locateAnswer();
-		
-		for(int i=0;i<word.length();i++){
+
+		for (int i = 0; i < word.length(); i++) {
 			Button answerButton = createButton();
-			answerButton.setText(word.substring(i, i+1).toUpperCase());
+			answerButton.setText(word.substring(i, i + 1).toUpperCase());
 			answerButton.setTypeface(null, Typeface.BOLD);
 			answerButtonsList.add(answerButton);
 			answerLayout.addView(answerButton);

@@ -1,5 +1,7 @@
 package com.daniloff.adanagramlite;
 
+import java.util.Locale;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -47,11 +49,20 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 	}
 
 	private void createAlertDialog() {
+		String locale = Locale.getDefault().getDisplayLanguage();
+		int defaultItem = 0;
+		if (locale.substring(0, 2).equalsIgnoreCase("RU")) {
+			defaultItem = 1;
+		}
 		new AlertDialog.Builder(getApplicationContext());
+		String title = getString(R.string.selectLanguage);
 		String buttonOkTitle = "OK";
-		String[] items = { "English", "Русский" };
+		String[] items = { getString(R.string.selectEnglish), getString(R.string.selectRussian) };
 
-		new AlertDialog.Builder(this).setSingleChoiceItems(items, 0, null)
+		AlertDialog.Builder ad = new AlertDialog.Builder(this);
+
+		ad.setTitle(title);
+		ad.setSingleChoiceItems(items, defaultItem, null)
 				.setPositiveButton(buttonOkTitle, new DialogInterface.OnClickListener() {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						dialog.dismiss();
@@ -69,7 +80,6 @@ public class ChoiceActivity extends Activity implements OnClickListener {
 						startActivity(intentNewGame);
 					}
 				}).show();
-
 	}
 
 	@Override
