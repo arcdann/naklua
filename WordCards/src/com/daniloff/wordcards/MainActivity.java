@@ -58,18 +58,15 @@ public class MainActivity extends Activity implements OnClickListener {
 
 	private void prepareTaskList() {
 
-		String fileAsString = FileUtils.readFile(getApplicationContext(), R.raw.words);
+		String fileAsString = FileUtils.readFile(getApplicationContext(), R.raw.verbs);
 		String[] sharpSeparatedWords = fileAsString.split("\\n");
 
 		List<Task> retList = new ArrayList<Task>();
 
 		for (String wordsCouple : sharpSeparatedWords) {
-			int separatorIndex = wordsCouple.indexOf('#');
-			String phrase = wordsCouple.substring(0, separatorIndex);
-			String meaning = wordsCouple.substring(separatorIndex + 1);
-
-			Task task = new Task(phrase, meaning);
+			Task task = new Task(wordsCouple);
 			retList.add(task);
+
 		}
 		taskList = retList;
 	}
